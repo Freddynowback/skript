@@ -1,0 +1,2093 @@
+Skript Documentation - 2.15.0-pre1
+----------------------------------
+
+### Allay Can Duplicate
+Type: Condition
+Patterns: %living entities% can (duplicate|clone) %living entities% (can't|cannot|can not) (duplicate|clone)
+Since: 2.11
+Patterns:
+- %living entities% can (duplicate|clone)
+- %living entities% (can't|cannot|can not) (duplicate|clone)
+Description:
+Checks to see if an allay is able to duplicate naturally.
+Examples:
+if last spawned allay can duplicate:    disallow last spawned to duplicate
+
+### Alphanumeric
+Type: Condition
+Patterns: %texts% (is|are) alphanumeric %texts% (isn't|is not|aren't|are not) alphanumeric
+Since: 2.4
+Patterns:
+- %texts% (is|are) alphanumeric
+- %texts% (isn't|is not|aren't|are not) alphanumeric
+Description:
+Checks if the given string is alphanumeric.
+Examples:
+if the argument is not alphanumeric:    send "Invalid name!"
+
+### Beehive Is Sedated
+Type: Condition
+Patterns: %blocks% (is|are) sedated %blocks% (isn't|is not|aren't|are not) sedated
+Since: 2.11
+Patterns:
+- %blocks% (is|are) sedated
+- %blocks% (isn't|is not|aren't|are not) sedated
+Description:
+Checks if a beehive is sedated from a nearby campfire.
+Examples:
+if {_beehive} is sedated:
+
+### Bell Is Resonating
+Type: Condition
+Patterns: %blocks% (is|are) resonating %blocks% (isn't|is not|aren't|are not) resonating
+Since: 2.9.0
+Patterns:
+- %blocks% (is|are) resonating
+- %blocks% (isn't|is not|aren't|are not) resonating
+Description:
+Checks to see if a bell is currently resonating.A bell will start resonating five game ticks after being rung, and will continue to resonate for 40 game ticks.
+Examples:
+target block is resonating
+
+### Bell Is Ringing
+Type: Condition
+Patterns: %blocks% (is|are) ringing %blocks% (isn't|is not|aren't|are not) ringing
+Since: 2.9.0
+Patterns:
+- %blocks% (is|are) ringing
+- %blocks% (isn't|is not|aren't|are not) ringing
+Description:
+Checks to see if a bell is currently ringing. A bell typically rings for 50 game ticks.
+Examples:
+target block is ringing
+
+### Brewing Will Consume Fuel
+Type: Condition
+Patterns: [the] brewing stand will consume [the] fuel [the] brewing stand (will not|won't) consume [the] fuel
+Since: 2.13
+Usable in events: Brewing Fuel
+Patterns:
+- [the] brewing stand will consume [the] fuel
+- [the] brewing stand (will not|won't) consume [the] fuel
+Description:
+Checks if the 'brewing fuel' event will consume fuel. Preventing the fuel from being consumed will keep the fuel item and still add to the fuel level of the brewing stand.
+Examples:
+on brewing fuel:    if the brewing stand will consume the fuel:        prevent the brewing stand from consuming the fuel
+
+### Camel Is Dashing
+Type: Condition
+Patterns: %living entities% (is|are) dashing %living entities% (isn't|is not|aren't|are not) dashing
+Since: 2.11
+Patterns:
+- %living entities% (is|are) dashing
+- %living entities% (isn't|is not|aren't|are not) dashing
+Description:
+Checks whether a camel is currently using its dash ability.
+Examples:
+if last spawned camel is dashing:    kill last spawned camel
+
+### Can Age
+Type: Condition
+Patterns: %living entities% can (age|grow (up|old[er])) %living entities% (can't|cannot|can not) (age|grow (up|old[er]))
+Since: 2.10
+Patterns:
+- %living entities% can (age|grow (up|old[er]))
+- %living entities% (can't|cannot|can not) (age|grow (up|old[er]))
+Description:
+Checks whether or not an entity will be able to age/grow up.
+Examples:
+on breeding:    entity can't age    broadcast "An immortal has been born!" to player
+
+### Can Breed
+Type: Condition
+Patterns: %living entities% can (breed|be bred) %living entities% (can't|cannot|can not) (breed|be bred)
+Since: 2.10
+Patterns:
+- %living entities% can (breed|be bred)
+- %living entities% (can't|cannot|can not) (breed|be bred)
+Description:
+Checks whether or not a living entity can be bred.
+Examples:
+on right click on living entity:    event-entity can't breed    send "Turns out %event-entity% is not breedable. Must be a Skript user!" to player
+
+### Can Build
+Type: Condition
+Patterns: %players% (can|(is|are) allowed to) build %directions% %locations% %players% (can('t|not)|(is|are)(n't| not) allowed to) build %directions% %locations%
+Since: 2.0
+Requirements: Supported regions plugin
+Patterns:
+- %players% (can|(is|are) allowed to) build %directions% %locations%
+- %players% (can('t|not)|(is|are)(n't| not) allowed to) build %directions% %locations%
+Description:
+Tests whether a player is allowed to build at a certain location.This condition requires a supported regions plugin to be installed.
+Examples:
+command /setblock <material>:    description: set the block at your crosshair to a different type    trigger:        player cannot build at the targeted block:            message "You do not have permission to change blocks there!"            stop        set the targeted block to argument
+
+### Can Despawn
+Type: Condition
+Patterns: %living entities% can despawn (on chunk unload|when far away) %living entities% (can't|cannot|can not) despawn (on chunk unload|when far away)
+Since: 2.11
+Patterns:
+- %living entities% can despawn (on chunk unload|when far away)
+- %living entities% (can't|cannot|can not) despawn (on chunk unload|when far away)
+Description:
+Check if an entity can despawn when the chunk they're located at is unloaded.More information on what and when entities despawn can be found at reference.
+Examples:
+if last spawned entity can despawn on chunk unload:    make last spawned entity not despawn on chunk unload
+
+### Can Fly
+Type: Condition
+Patterns: %players% can fly %players% (can't|cannot|can not) fly
+Since: 2.3
+Patterns:
+- %players% can fly
+- %players% (can't|cannot|can not) fly
+Description:
+Whether a player is allowed to fly.
+Examples:
+player can fly
+
+### Can Hold
+Type: Condition
+Patterns: %inventories% (can hold|ha(s|ve) [enough] space (for|to hold)) %item types% %inventories% (can(no|')t hold|(ha(s|ve) not|ha(s|ve)n't|do[es]n't have) [enough] space (for|to hold)) %item types%
+Since: 1.0
+Patterns:
+- %inventories% (can hold|ha(s|ve) [enough] space (for|to hold)) %item types%
+- %inventories% (can(no|')t hold|(ha(s|ve) not|ha(s|ve)n't|do[es]n't have) [enough] space (for|to hold)) %item types%
+Description:
+Tests whether a player or a chest can hold the given item.
+Examples:
+block can hold 200 cobblestoneplayer has enough space for 64 feathers
+
+### Can Pick Up Items
+Type: Condition
+Patterns: %living entities% can pick([ ]up items| items up) %living entities% (can't|cannot|can not) pick([ ]up items| items up)
+Since: 2.8.0
+Patterns:
+- %living entities% can pick([ ]up items| items up)
+- %living entities% (can't|cannot|can not) pick([ ]up items| items up)
+Description:
+Whether living entities are able to pick up items off the ground or not.
+Examples:
+if player can pick items up:    send "You can pick up items!" to playeron drop:    if player can't pick up items:        send "Be careful, you won't be able to pick that up!" to player
+
+### Can See
+Type: Condition
+Patterns: %entities% (is|are) [visible|invisible] for %players% %players% can see %entities% %entities% (is|are)(n't| not) [visible|invisible] for %players% %players% can('t| not) see %entities%
+Since: 2.3, 2.10 (entities)
+Requirements: Minecraft 1.19+ (entities)
+Patterns:
+- %entities% (is|are) [visible|invisible] for %players%
+- %players% can see %entities%
+- %entities% (is|are)(n't| not) [visible|invisible] for %players%
+- %players% can('t| not) see %entities%
+Description:
+Checks whether the given players can see the provided entities.
+Examples:
+if sender can't see the player-argument:    message "who dat?"if the player can see the last spawned entity:    message "hello there!"
+
+### Can See Chat Colors
+Type: Condition
+Patterns: %players% can see chat colo[u]r[s|ing] %players% (can't|cannot|can not) see chat colo[u]r[s|ing]
+Since: 2.10
+Patterns:
+- %players% can see chat colo[u]r[s|ing]
+- %players% (can't|cannot|can not) see chat colo[u]r[s|ing]
+Description:
+Checks whether a player can see chat colors.
+Examples:
+if player can see chat colors:    send "Find the red word in <red>this<reset> message."else:    send "You cannot partake in finding the colored word."
+
+### Can See Messages
+Type: Condition
+Patterns: %player% can see all messages [in chat] %player% can only see (commands|system messages) [in chat] %player% can('t|[ ]not) see any (command[s]|message[s]) [in chat] %player% can('t|[ ]not) see all messages [in chat] %player% can('t|[ ]not) only see (commands|system messages) [in chat]
+Since: 2.10
+Patterns:
+- %player% can see all messages [in chat]
+- %player% can only see (commands|system messages) [in chat]
+- %player% can('t|[ ]not) see any (command[s]|message[s]) [in chat]
+- %player% can('t|[ ]not) see all messages [in chat]
+- %player% can('t|[ ]not) only see (commands|system messages) [in chat]
+Description:
+Checks whether a player can see specific message types in chat.
+Examples:
+if player can see all messages:    send "You can see all messages."if player can only see commands:    send "This game doesn't work with commands-only chat."if player can't see any messages:    send action bar "Server shutting down in 5 minutes!"
+
+### Chance
+Type: Condition
+Patterns: chance of %number%[(\%)] [(fails|failed)]
+Since: 1.0, 2.14 (chance fails)
+Patterns:
+- chance of %number%[(\%)] [(fails|failed)]
+Description:
+A condition that randomly succeeds or fails. Valid values are between 0% and 100%, or if the percent sign is omitted, between 0 and 1.
+Examples:
+chance of 50%:    drop a diamond at location(100, 100, 100, "world')chance of {chance}% # {chance} between 0 and 100chance of {chance} # {chance} between 0 and 1if chance of 99% fails:    broadcast "Haha loser! *points and laughs*"
+
+### Comparison
+Type: Condition
+Patterns: [(neither)] %objects% ((is|are)[(n't| not| neither)] ((greater|more|higher|bigger|larger) than|above)|>) %objects% [(neither)] %objects% ((is|are)[(n't| not| neither)] (greater|more|higher|bigger|larger|above) [than] or (equal to|the same as)|>=) %objects% [(neither)] %objects% ((is|are)[(n't| not| neither)] ((less|smaller|lower) than|below)|<) %objects% [(neither)] %objects% ((is|are)[(n't| not| neither)] (less|smaller|lower|below) [than] or (equal to|the same as)|<=) %objects% [(neither)] %objects% ((is|are) (not|neither)|isn't|aren't|!=) [equal to] %objects% [(neither)] %objects% (is|are|=) [(equal to|the same as)] %objects% [(neither)] %objects% (is|are) between %objects% and %objects% [(neither)] %objects% (is not|are not|isn't|aren't) between %objects% and %objects% [(neither)] %objects% (was|were)[(n't| not| neither)] ((greater|more|higher|bigger|larger) than|above) %objects% [(neither)] %objects% (was|were)[(n't| not| neither)] (greater|more|higher|bigger|larger|above) [than] or (equal to|the same as) %objects% [(neither)] %objects% (was|were)[(n't| not| neither)] ((less|smaller|lower) than|below) %objects% [(neither)] %objects% (was|were)[(n't| not| neither)] (less|smaller|lower|below) [than] or (equal to|the same as) %objects% [(neither)] %objects% ((was|were) (not|neither)|wasn't|weren't) [equal to] %objects% [(neither)] %objects% (was|were) [(equal to|the same as)] %objects% [(neither)] %objects% (was|were) between %objects% and %objects% [(neither)] %objects% (was not|were not|wasn't|weren't) between %objects% and %objects% [(neither)] %objects% (will be|(will (not|neither) be|won't be)) ((greater|more|higher|bigger|larger) than|above) %objects% [(neither)] %objects% (will be|(will (not|neither) be|won't be)) (greater|more|higher|bigger|larger|above) [than] or (equal to|the same as) %objects% [(neither)] %objects% (will be|(will (not|neither) be|won't be)) ((less|smaller|lower) than|below) %objects% [(neither)] %objects% (will be|(will (not|neither) be|won't be)) (less|smaller|lower|below) [than] or (equal to|the same as) %objects% [(neither)] %objects% ((will (not|neither) be|won't be)|(isn't|aren't|is not|are not) (turning|changing) [in]to) [equal to] %objects% [(neither)] %objects% (will be [(equal to|the same as)]|(is|are) (turning|changing) [in]to) %objects% [(neither)] %objects% will be between %objects% and %objects% [(neither)] %objects% (will not be|won't be) between %objects% and %objects%
+Since: 1.0
+Patterns:
+- [(neither)] %objects% ((is|are)[(n't| not| neither)] ((greater|more|higher|bigger|larger) than|above)|>) %objects%
+- [(neither)] %objects% ((is|are)[(n't| not| neither)] (greater|more|higher|bigger|larger|above) [than] or (equal to|the same as)|>=) %objects%
+- [(neither)] %objects% ((is|are)[(n't| not| neither)] ((less|smaller|lower) than|below)|<) %objects%
+- [(neither)] %objects% ((is|are)[(n't| not| neither)] (less|smaller|lower|below) [than] or (equal to|the same as)|<=) %objects%
+- [(neither)] %objects% ((is|are) (not|neither)|isn't|aren't|!=) [equal to] %objects%
+- [(neither)] %objects% (is|are|=) [(equal to|the same as)] %objects%
+- [(neither)] %objects% (is|are) between %objects% and %objects%
+- [(neither)] %objects% (is not|are not|isn't|aren't) between %objects% and %objects%
+- [(neither)] %objects% (was|were)[(n't| not| neither)] ((greater|more|higher|bigger|larger) than|above) %objects%
+- [(neither)] %objects% (was|were)[(n't| not| neither)] (greater|more|higher|bigger|larger|above) [than] or (equal to|the same as) %objects%
+- [(neither)] %objects% (was|were)[(n't| not| neither)] ((less|smaller|lower) than|below) %objects%
+- [(neither)] %objects% (was|were)[(n't| not| neither)] (less|smaller|lower|below) [than] or (equal to|the same as) %objects%
+- [(neither)] %objects% ((was|were) (not|neither)|wasn't|weren't) [equal to] %objects%
+- [(neither)] %objects% (was|were) [(equal to|the same as)] %objects%
+- [(neither)] %objects% (was|were) between %objects% and %objects%
+- [(neither)] %objects% (was not|were not|wasn't|weren't) between %objects% and %objects%
+- [(neither)] %objects% (will be|(will (not|neither) be|won't be)) ((greater|more|higher|bigger|larger) than|above) %objects%
+- [(neither)] %objects% (will be|(will (not|neither) be|won't be)) (greater|more|higher|bigger|larger|above) [than] or (equal to|the same as) %objects%
+- [(neither)] %objects% (will be|(will (not|neither) be|won't be)) ((less|smaller|lower) than|below) %objects%
+- [(neither)] %objects% (will be|(will (not|neither) be|won't be)) (less|smaller|lower|below) [than] or (equal to|the same as) %objects%
+- [(neither)] %objects% ((will (not|neither) be|won't be)|(isn't|aren't|is not|are not) (turning|changing) [in]to) [equal to] %objects%
+- [(neither)] %objects% (will be [(equal to|the same as)]|(is|are) (turning|changing) [in]to) %objects%
+- [(neither)] %objects% will be between %objects% and %objects%
+- [(neither)] %objects% (will not be|won't be) between %objects% and %objects%
+Description:
+A very general condition, it simply compares two values. Usually you can only compare for equality (e.g. block is/isn't of <type>), but some values can also be compared using greater than/less than. In that case you can also test for whether an object is between two others.Note: This is the only element where not all patterns are shown. It has actually another two sets of similar patters, but with (was|were) or will be instead of (is|are) respectively, which check different time states of the first expression.
+Examples:
+the clicked block is a stone slab or a double stone slabtime in the player's world is greater than 8:00the creature is not an enderman or an ender dragon
+
+### Contains (Property)
+Type: Condition
+Patterns: %objects% contain[s] %objects% %objects% (doesn't|does not|do not|don't) contain %objects% contents of %objects% contain %objects% contents of %objects% (do not|don't) contain %objects% %inventories% (has|have) %item types% [in [(the[ir]|his|her|its)] inventory] %inventories% (doesn't|does not|do not|don't) have %item types% [in [(the[ir]|his|her|its)] inventory]
+Since: Unknown
+Patterns:
+- %objects% contain[s] %objects%
+- %objects% (doesn't|does not|do not|don't) contain %objects%
+- contents of %objects% contain %objects%
+- contents of %objects% (do not|don't) contain %objects%
+- %inventories% (has|have) %item types% [in [(the[ir]|his|her|its)] inventory]
+- %inventories% (doesn't|does not|do not|don't) have %item types% [in [(the[ir]|his|her|its)] inventory]
+Description:
+Checks whether a type or list contains certain elements. When checking if a list contains a specific element, use '{list::*} contains {x}'. When checking if a single type contains something, use `player's inventory contains {x}`. When checking if many types contain something, use '{inventories::*} contain {x}` or `contents of {inventories::*} contain {x}`.
+Examples:
+block contains 20 cobblestoneplayer has 4 flint and 2 iron ingots{list::*} contains 5names of {list::*} contain "prefix"contents of the inventories of all players contain 1 stick
+
+### Damage Cause
+Type: Condition
+Patterns: [the] damage (was|is|has)[n('|o)t] [been] (caused|done|made) by %damage cause%
+Since: 2.0
+Patterns:
+- [the] damage (was|is|has)[n('|o)t] [been] (caused|done|made) by %damage cause%
+Description:
+Tests what kind of damage caused a damage event. Refer to the Damage Cause type for a list of all possible causes.
+Examples:
+# make players use their potions of fire resistance whenever they take any kind of fire damageon damage:    damage was caused by lava, fire or burning    victim is a player    victim has a potion of fire resistance    cancel event    apply fire resistance to the victim for 30 seconds    remove 1 potion of fire resistance from the victim# prevent mobs from dropping items under certain circumstanceson death:    entity is not a player    damage wasn't caused by a block explosion, an attack, a projectile, a potion, fire, burning, thorns or poison    clear drops
+
+### Damage Source - Does Scale With Difficulty
+Type: Condition
+Patterns: %damage sources% ((does|do) scale|scales) damage with difficulty %damage sources% (do not|don't|does not|doesn't) scale damage with difficulty %damage sources%'[s] damage ((does|do) scale|scales) with difficulty %damage sources%'[s] damage (do not|don't|does not|doesn't) scale with difficulty
+Since: 2.12
+Patterns:
+- %damage sources% ((does|do) scale|scales) damage with difficulty
+- %damage sources% (do not|don't|does not|doesn't) scale damage with difficulty
+- %damage sources%'[s] damage ((does|do) scale|scales) with difficulty
+- %damage sources%'[s] damage (do not|don't|does not|doesn't) scale with difficulty
+Description:
+Whether the damage from a damage source scales with the difficulty of the server.
+Examples:
+on death:    if event-damage source scales damage with difficulty:
+
+### Damage Source - Was Indirectly Caused
+Type: Condition
+Patterns: %damage sources% (was|were) ([in]directly caused|caused [in]directly) %damage sources% (was not|wasn't|were not|weren't) ([in]directly caused|caused [in]directly)
+Since: 2.12
+Patterns:
+- %damage sources% (was|were) ([in]directly caused|caused [in]directly)
+- %damage sources% (was not|wasn't|were not|weren't) ([in]directly caused|caused [in]directly)
+Description:
+Whether the damage from a damage source was indirectly caused.Vanilla damage sources are considered indirect if the 'causing entity' and the 'direct entity' are not the same. For example, taking damage from an arrow that was shot by an entity.
+Examples:
+on damage:    if event-damage source was indirectly caused:
+
+### Do Respawn Anchors Work
+Type: Condition
+Patterns: respawn anchors [do[(n't| not)]] work in %worlds%
+Since: 2.7
+Requirements: Minecraft 1.16+
+Patterns:
+- respawn anchors [do[(n't| not)]] work in %worlds%
+Description:
+Checks whether or not respawn anchors work in a world.
+Examples:
+respawn anchors work in world "world_nether"
+
+### Egg Will Hatch
+Type: Condition
+Patterns: [the] egg (will|will not|won't) hatch
+Since: 2.7
+Usable in events: Egg Throw
+Patterns:
+- [the] egg (will|will not|won't) hatch
+Description:
+Whether the egg will hatch in a Player Egg Throw event.
+Examples:
+on player egg throw:    if an entity won't hatch:        send "Better luck next time!" to the player
+
+### Enderman Has Been Stared At
+Type: Condition
+Patterns: %living entities% (has|have) been stared at %living entities% (doesn't|does not|do not|don't) have been stared at
+Since: 2.11
+Patterns:
+- %living entities% (has|have) been stared at
+- %living entities% (doesn't|does not|do not|don't) have been stared at
+Description:
+Checks to see if an enderman has been stared at.This will return true as long as the entity that stared at the enderman is still alive.
+Examples:
+if last spawned enderman has been stared at:
+
+### Entity Is Sheared
+Type: Condition
+Patterns: %living entities% (is|are) (sheared|shorn) %living entities% (isn't|is not|aren't|are not) (sheared|shorn)
+Since: 2.8.0
+Patterns:
+- %living entities% (is|are) (sheared|shorn)
+- %living entities% (isn't|is not|aren't|are not) (sheared|shorn)
+Description:
+Checks whether entities are sheared.
+Examples:
+if targeted entity of player is sheared:    send "This entity has nothing left to shear!" to player
+
+### Entity Storage Is Full
+Type: Condition
+Patterns: [the] entity storage of %blocks% (is|are) full %blocks%'[s] entity storage (is|are) full [the] entity storage of %blocks% (isn't|is not|aren't|are not) full %blocks%'[s] entity storage (isn't|is not|aren't|are not) full
+Since: 2.11
+Patterns:
+- [the] entity storage of %blocks% (is|are) full
+- %blocks%'[s] entity storage (is|are) full
+- [the] entity storage of %blocks% (isn't|is not|aren't|are not) full
+- %blocks%'[s] entity storage (isn't|is not|aren't|are not) full
+Description:
+Checks to see if the an entity block storage (i.e beehive) is full.
+Examples:
+if the entity storage of {_beehive} is full:    release the entity storage of {_beehive}
+
+### Entity is Wet
+Type: Condition
+Patterns: %entities% (is|are) wet %entities% (isn't|is not|aren't|are not) wet
+Since: 2.6.1
+Patterns:
+- %entities% (is|are) wet
+- %entities% (isn't|is not|aren't|are not) wet
+Description:
+Checks whether an entity is wet or not (in water, rain or a bubble column).
+Examples:
+if player is wet:
+
+### Entity is in Liquid
+Type: Condition
+Patterns: %entities% (is|are) in (water|lava|[a] bubble[ ]column|rain) %entities% (isn't|is not|aren't|are not) in (water|lava|[a] bubble[ ]column|rain)
+Since: 2.6.1
+Patterns:
+- %entities% (is|are) in (water|lava|[a] bubble[ ]column|rain)
+- %entities% (isn't|is not|aren't|are not) in (water|lava|[a] bubble[ ]column|rain)
+Description:
+Checks whether an entity is in rain, lava, water or a bubble column.
+Examples:
+if player is in rain:if player is in water:player is in lava:player is in bubble column
+
+### Equippable Component - Can Be Dispensed
+Type: Condition
+Patterns: %equippable components% can be dispensed %equippable components% (can't|cannot|can not) be dispensed %equippable components% (is|are) (able to be dispensed|dispensable) %equippable components% (isn't|is not|aren't|are not) (able to be dispensed|dispensable)
+Since: 2.13
+Requirements: Minecraft 1.21.2+
+Patterns:
+- %equippable components% can be dispensed
+- %equippable components% (can't|cannot|can not) be dispensed
+- %equippable components% (is|are) (able to be dispensed|dispensable)
+- %equippable components% (isn't|is not|aren't|are not) (able to be dispensed|dispensable)
+Description:
+Whether an item can be dispensed by a dispenser. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+if {_item} can be dispensed:    add "Dispensable" to lore of {_item}set {_component} to the equippable component of {_item}if {_component} is not able to be dispensed:    allow {_component} to be dispensed
+
+### Equippable Component - Can Be Sheared Off
+Type: Condition
+Patterns: %equippable components% can be sheared off [of entities] %equippable components% (can't|cannot|can not) be sheared off [of entities]
+Since: 2.13
+Requirements: Minecraft 1.21.6+
+Patterns:
+- %equippable components% can be sheared off [of entities]
+- %equippable components% (can't|cannot|can not) be sheared off [of entities]
+Description:
+Whether an item can be sheared off of an entity. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+if {_item} can be sheared off:    add "Shearable" to lore of {_item}set {_component} to the equippable component of {_item}if {_component} can not be sheared off:    allow {_component} to be sheared off
+
+### Equippable Component - Can Equip On Entities
+Type: Condition
+Patterns: %equippable components% can be (equipped|put) on[to] entities %equippable components% (can't|cannot|can not) be (equipped|put) on[to] entities
+Since: 2.13
+Requirements: Minecraft 1.21.5+
+Patterns:
+- %equippable components% can be (equipped|put) on[to] entities
+- %equippable components% (can't|cannot|can not) be (equipped|put) on[to] entities
+Description:
+Whether an entity should equip the item when right clicking on the entity with the item. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+if {_item} can be equipped on entities:
+
+### Equippable Component - Can Swap Equipment
+Type: Condition
+Patterns: %equippable components% can swap equipment [on right click|when right clicked] %equippable components% (can't|cannot|can not) swap equipment [on right click|when right clicked]
+Since: 2.13
+Requirements: Minecraft 1.21.2+
+Patterns:
+- %equippable components% can swap equipment [on right click|when right clicked]
+- %equippable components% (can't|cannot|can not) swap equipment [on right click|when right clicked]
+Description:
+Whether an item can swap equipment by right clicking with it in your hand. The item will swap places of the set 'equipment slot' of the item. If an equipment slot is not set, defaults to helmet. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work aas intended.
+Examples:
+if {_item} can swap equipment:    add "Swappable" to lore of {_item}set {_component} to the equippable component of {_item}if {_component} can not be equipped when right clicked:    make {_component} swappable
+
+### Equippable Component - Will Lose Durability
+Type: Condition
+Patterns: %equippable components% will (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged)) %equippable components% (will not|won't) (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged))
+Since: 2.13
+Requirements: Minecraft 1.21.2+
+Patterns:
+- %equippable components% will (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged))
+- %equippable components% (will not|won't) (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged))
+Description:
+Whether an item will be damaged when the wearer gets injured. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+if {_item} will lose durability when hurt:    add "Damageable on injury" to lore of {_item}set {_component} to the equippable component of {_item}if {_component} won't lose durability on injury:    make {_component} lose durability when injured
+
+### Event Cancelled
+Type: Condition
+Patterns: [the] event is cancel[l]ed [the] event (is not|isn't) cancel[l]ed
+Since: 2.2-dev36
+Patterns:
+- [the] event is cancel[l]ed
+- [the] event (is not|isn't) cancel[l]ed
+Description:
+Checks whether or not the event is cancelled.
+Examples:
+on click:    if event is cancelled:        broadcast "no clicks allowed!"
+
+### Exists/Is Set
+Type: Condition
+Patterns: %~objects% (exist[s]|(is|are) set) %~objects% (do[es](n't| not) exist|(is|are)(n't| not) set)
+Since: 1.2
+Patterns:
+- %~objects% (exist[s]|(is|are) set)
+- %~objects% (do[es](n't| not) exist|(is|are)(n't| not) set)
+Description:
+Checks whether a given expression or variable is set.
+Examples:
+{teams::%player's uuid%::preferred-team} is not seton damage:    projectile exists    broadcast "%attacker% used a %projectile% to attack %victim%!"
+
+### Fishing Lure Applied
+Type: Condition
+Patterns: lure enchantment bonus is (applied|active) lure enchantment bonus is(n't| not) (applied|active)
+Since: 2.10
+Usable in events: Fishing
+Patterns:
+- lure enchantment bonus is (applied|active)
+- lure enchantment bonus is(n't| not) (applied|active)
+Description:
+Checks if the lure enchantment is applied to the current fishing event.
+Examples:
+on fishing line cast:    if lure enchantment bonus is applied:        cancel event
+
+### Goat Has Horns
+Type: Condition
+Patterns: %living entities% (has|have) ((any|a) horn|[a] left horn[s]|[a] right horn[s]|both horns) %living entities% (doesn't|does not|do not|don't) have ((any|a) horn|[a] left horn[s]|[a] right horn[s]|both horns)
+Since: 2.11
+Patterns:
+- %living entities% (has|have) ((any|a) horn|[a] left horn[s]|[a] right horn[s]|both horns)
+- %living entities% (doesn't|does not|do not|don't) have ((any|a) horn|[a] left horn[s]|[a] right horn[s]|both horns)
+Description:
+Checks to see if a goat has or does not have a left, right, or both horns.
+Examples:
+    if last spawned goat does not have both horns:        make last spawned goat have both horns    if {_goat} has a right horn:        force {_goat} to not have a right horn
+
+### Has AI
+Type: Condition
+Patterns: %living entities% (has|have) (ai|artificial intelligence) %living entities% (doesn't|does not|do not|don't) have (ai|artificial intelligence)
+Since: 2.5
+Patterns:
+- %living entities% (has|have) (ai|artificial intelligence)
+- %living entities% (doesn't|does not|do not|don't) have (ai|artificial intelligence)
+Description:
+Checks whether an entity has AI.
+Examples:
+target entity has ai
+
+### Has Chat Filtering
+Type: Condition
+Patterns: %players% (has|have) (chat|text) filtering (on|enabled) %players% (doesn't|does not|do not|don't) have (chat|text) filtering (on|enabled)
+Since: 2.10
+Patterns:
+- %players% (has|have) (chat|text) filtering (on|enabled)
+- %players% (doesn't|does not|do not|don't) have (chat|text) filtering (on|enabled)
+Description:
+Checks whether a player has chat filtering enabled.
+Examples:
+if player doesn't have chat filtering enabled:    send "<gray>This server may contain mature chat messages. You have been warned!" to player
+
+### Has Client Weather
+Type: Condition
+Patterns: %players% (has|have) [a] (client|custom) weather [set] %players% (doesn't|does not|do not|don't) have [a] (client|custom) weather [set]
+Since: 2.3
+Patterns:
+- %players% (has|have) [a] (client|custom) weather [set]
+- %players% (doesn't|does not|do not|don't) have [a] (client|custom) weather [set]
+Description:
+Checks whether the given players have a custom client weather
+Examples:
+if the player has custom weather:    message "Your custom weather is %player's weather%"
+
+### Has Custom Model Data
+Type: Condition
+Patterns: %item types% (has|have) [custom] model data [floats|flags|strings|colo[u]rs] %item types% (doesn't|does not|do not|don't) have [custom] model data [floats|flags|strings|colo[u]rs]
+Since: 2.5, 2.12 (expanded data types)
+Requirements: Minecraft 1.21.4+ (floats/flags/strings/colours)
+Patterns:
+- %item types% (has|have) [custom] model data [floats|flags|strings|colo[u]rs]
+- %item types% (doesn't|does not|do not|don't) have [custom] model data [floats|flags|strings|colo[u]rs]
+Description:
+Check if an item has a custom model data tag
+Examples:
+player's tool has custom model dataif player's tool has custom model data flags:    loop custom model data flags of player's tool:        send "Flag %loop-index%: %loop-value%"set {_coloured} to whether player's tool has model data colours
+
+### Has Glowing Text
+Type: Condition
+Patterns: %blocks/item types% (has|have) glowing text %blocks/item types% (doesn't|does not|do not|don't) have glowing text
+Since: 2.8.0
+Patterns:
+- %blocks/item types% (has|have) glowing text
+- %blocks/item types% (doesn't|does not|do not|don't) have glowing text
+Description:
+Checks whether a sign (either a block or an item) has glowing text
+Examples:
+if target block has glowing text
+
+### Has Item Cooldown
+Type: Condition
+Patterns: %players% (has|have) [([an] item|a)] cooldown (on|for) %item types% %players% (has|have) %item types% on [(item|a)] cooldown %players% (doesn't|does not|do not|don't) have [([an] item|a)] cooldown (on|for) %item types% %players% (doesn't|does not|do not|don't) have %item types% on [(item|a)] cooldown
+Since: 2.8.02.12 (cooldown group)
+Requirements: MC 1.21.2 (cooldown group)
+Patterns:
+- %players% (has|have) [([an] item|a)] cooldown (on|for) %item types%
+- %players% (has|have) %item types% on [(item|a)] cooldown
+- %players% (doesn't|does not|do not|don't) have [([an] item|a)] cooldown (on|for) %item types%
+- %players% (doesn't|does not|do not|don't) have %item types% on [(item|a)] cooldown
+Description:
+Checks whether a cooldown is active on the specified item for a specific player. If the provided item has a cooldown group component specified, the cooldown group will take priority. Otherwise, the cooldown of the item material will be used.
+Examples:
+if player has player's tool on cooldown:    send "You can't use this item right now. Wait %item cooldown of player's tool for player%"
+
+### Has Item Tooltips
+Type: Condition
+Patterns: [the] [entire|additional] tool[ ]tip[s] of %item types% (is|are) (shown|hidden) [the] [entire|additional] tool[ ]tip[s] of %item types% (isn't|is not|aren't|are not) (shown|hidden) %item types%'[s] [entire|additional] tool[ ]tip[s] (is|are) (shown|hidden) %item types%'[s] [entire|additional] tool[ ]tip[s] (isn't|is not|aren't|are not) (shown|hidden)
+Since: 2.9.0
+Requirements: Spigot 1.20.5+
+Patterns:
+- [the] [entire|additional] tool[ ]tip[s] of %item types% (is|are) (shown|hidden)
+- [the] [entire|additional] tool[ ]tip[s] of %item types% (isn't|is not|aren't|are not) (shown|hidden)
+- %item types%'[s] [entire|additional] tool[ ]tip[s] (is|are) (shown|hidden)
+- %item types%'[s] [entire|additional] tool[ ]tip[s] (isn't|is not|aren't|are not) (shown|hidden)
+Description:
+Whether the entire or additional tooltip of an item is shown or hidden.The 'entire tooltip' is what shows to the player when they hover an item (i.e. name, lore, etc.).The 'additional tooltip' hides certain information from certain items (potions, maps, books, fireworks, and banners).
+Examples:
+send true if entire tooltip of player's tool is shownif additional tooltip of {_item} is hidden:
+
+### Has Line of Sight
+Type: Condition
+Patterns: %living entities% (has|have) [a] [direct] line of sight to %entities/locations% %living entities% does(n't| not) have [a] [direct] line of sight to %entities/locations% %living entities% (has|have) no [direct] line of sight to %entities/locations%
+Since: 2.8.0
+Patterns:
+- %living entities% (has|have) [a] [direct] line of sight to %entities/locations%
+- %living entities% does(n't| not) have [a] [direct] line of sight to %entities/locations%
+- %living entities% (has|have) no [direct] line of sight to %entities/locations%
+Description:
+Checks whether living entities have an unobstructed line of sight to other entities or locations.
+Examples:
+player has direct line of sight to location 5 blocks to the right of playervictim has line of sight to attackerplayer has no line of sight to location 100 blocks in front of player
+
+### Has Loot Table
+Type: Condition
+Patterns: %blocks/entities% (has|have) [a] loot[ ]table %blocks/entities% (doesn't|does not|do not|don't) have [a] loot[ ]table
+Since: 2.10
+Patterns:
+- %blocks/entities% (has|have) [a] loot[ ]table
+- %blocks/entities% (doesn't|does not|do not|don't) have [a] loot[ ]table
+Description:
+Checks whether an entity or block has a loot table. The loot tables of chests will be deleted when the chest is opened or broken.
+Examples:
+set event-block to chestif event-block has a loot table:    # this will never happen, because it doesn't have a loot table.set loot table of event-block to "minecraft:chests/simple_dungeon"if event-block has a loot table:    # this will happen, because it now has a loot table.
+
+### Has Metadata
+Type: Condition
+Patterns: %metadata holders% (has|have) metadata [(value|tag)[s]] %texts% %metadata holders% (doesn't|does not|do not|don't) have metadata [(value|tag)[s]] %texts%
+Since: 2.2-dev36
+Patterns:
+- %metadata holders% (has|have) metadata [(value|tag)[s]] %texts%
+- %metadata holders% (doesn't|does not|do not|don't) have metadata [(value|tag)[s]] %texts%
+Description:
+Checks whether a metadata holder has a metadata tag.
+Examples:
+if player has metadata value "healer":
+
+### Has Permission
+Type: Condition
+Patterns: %command senders% (has|have) [the] permission[s] %texts% %command senders% (doesn't|does not|do not|don't) have [the] permission[s] %texts%
+Since: 1.0
+Patterns:
+- %command senders% (has|have) [the] permission[s] %texts%
+- %command senders% (doesn't|does not|do not|don't) have [the] permission[s] %texts%
+Description:
+Test whether a player has a certain permission.
+Examples:
+player has permission "skript.tree"victim has the permission "admin":    send "You're attacking an admin!" to attacker
+
+### Has Played Before
+Type: Condition
+Patterns: %offline players% [(has|have|did)] [already] play[ed] [on (this|the) server] (before|already) %offline players% (has not|hasn't|have not|haven't|did not|didn't) [(already|yet)] play[ed] [on (this|the) server] (before|already|yet)
+Since: 1.4, 2.7 (multiple players)
+Patterns:
+- %offline players% [(has|have|did)] [already] play[ed] [on (this|the) server] (before|already)
+- %offline players% (has not|hasn't|have not|haven't|did not|didn't) [(already|yet)] play[ed] [on (this|the) server] (before|already|yet)
+Description:
+Checks whether a player has played on this server before. You can also use on first join if you want to make triggers for new players.
+Examples:
+player has played on this server beforeplayer hasn't played before
+
+### Has Potion Effect
+Type: Condition
+Patterns: %living entities% (has|have) ([any|a[n]] [active] potion effect[s]|[any|a] potion effect[s] active) %living entities% (doesn't|does not|do not|don't) have ([any|a[n]] [active] potion effect[s]|[any|a] potion effect[s] active) %living entities% (has|have) %skriptpotioneffects% [active] %living entities% (doesn't|does not|do not|don't) have %skriptpotioneffects% [active]
+Since: 2.6.12.14 (support for potion effects)
+Patterns:
+- %living entities% (has|have) ([any|a[n]] [active] potion effect[s]|[any|a] potion effect[s] active)
+- %living entities% (doesn't|does not|do not|don't) have ([any|a[n]] [active] potion effect[s]|[any|a] potion effect[s] active)
+- %living entities% (has|have) %skriptpotioneffects% [active]
+- %living entities% (doesn't|does not|do not|don't) have %skriptpotioneffects% [active]
+Description:
+Checks whether an entity has a potion effect with certain properties.An entity is considered having a potion effect if it has a potion effect with at least the specified properties.For example, if an entity has an 'ambient speed 5' effect, they would be considered as having 'speed 5'.For exact comparisons, consider using the Potion Effect of Entity/Item expression in an 'is' comparison.
+Examples:
+if the player has a potion effect of speed:    message "You are sonic!"if all players have speed and haste active:    broadcast "This server is ready to mine!"
+
+### Has Resource Pack
+Type: Condition
+Patterns: %players% (has|have) [a] resource pack [(loaded|installed)] %players% (doesn't|does not|do not|don't) have [a] resource pack [(loaded|installed)]
+Since: 2.4
+Patterns:
+- %players% (has|have) [a] resource pack [(loaded|installed)]
+- %players% (doesn't|does not|do not|don't) have [a] resource pack [(loaded|installed)]
+Description:
+Checks whether the given players have a server resource pack loaded. Please note that this can't detect player's own resource pack, only the resource pack that sent by the server.
+Examples:
+if the player has a resource pack loaded:
+
+### Has Scoreboard Tag
+Type: Condition
+Patterns: %entities% (has|have) [the] score[ ]board tag[s] %texts% %entities% (doesn't|does not|do not|don't) have [the] score[ ]board tag[s] %texts%
+Since: 2.3
+Patterns:
+- %entities% (has|have) [the] score[ ]board tag[s] %texts%
+- %entities% (doesn't|does not|do not|don't) have [the] score[ ]board tag[s] %texts%
+Description:
+Checks whether the given entities has the given scoreboard tags.
+Examples:
+if the targeted armor stand has the scoreboard tag "test tag":
+
+### Ignition Process
+Type: Condition
+Patterns: [creeper[s]] %living entities% ((is|are)|(isn't|is not|aren't|are not)) going to explode [creeper[s]] %living entities% ((is|are)|(isn't|is not|aren't|are not)) in the (ignition|explosion) process creeper[s] %living entities% ((is|are)|(isn't|is not|aren't|are not)) ignited
+Since: 2.5
+Patterns:
+- [creeper[s]] %living entities% ((is|are)|(isn't|is not|aren't|are not)) going to explode
+- [creeper[s]] %living entities% ((is|are)|(isn't|is not|aren't|are not)) in the (ignition|explosion) process
+- creeper[s] %living entities% ((is|are)|(isn't|is not|aren't|are not)) ignited
+Description:
+Checks if a creeper is going to explode.
+Examples:
+if the last spawned creeper is going to explode:    loop all players in radius 3 of the last spawned creeper        send "RUN!!!" to the loop-player
+
+### In The Past/Future
+Type: Condition
+Patterns: %dates% (is|are)[(n't| not)] in the (past|future) %dates% ha(s|ve)[(n't| not)] passed
+Since: 2.10
+Patterns:
+- %dates% (is|are)[(n't| not)] in the (past|future)
+- %dates% ha(s|ve)[(n't| not)] passed
+Description:
+Checks whether a date is in the past or future.Note that using the 'now' expression will not be in the past or future when used directly in the condition.
+Examples:
+set {_date} to nowwait 5 secondsif {_date} is in the past:    # this will be trueif now is in the future:    # this will be falseset {_dates::*} to 1 day from now, 12 days from now, and 1 year from nowif {_dates::*} are in the future:    # this will be trueif {_dates::*} have passed:    # this will be false
+
+### Is Adult
+Type: Condition
+Patterns: %living entities% (is|are) [an] adult %living entities% (isn't|is not|aren't|are not) [an] adult
+Since: 2.10
+Patterns:
+- %living entities% (is|are) [an] adult
+- %living entities% (isn't|is not|aren't|are not) [an] adult
+Description:
+Checks whether or not a living entity is an adult.
+Examples:
+on drink:    event-entity is not an adult    kill event-entity
+
+### Is Alive
+Type: Condition
+Patterns: %entities% (is|are) (alive|dead) %entities% (isn't|is not|aren't|are not) (alive|dead)
+Since: 2.0, 2.4-alpha4 (non-living entity support)
+Patterns:
+- %entities% (is|are) (alive|dead)
+- %entities% (isn't|is not|aren't|are not) (alive|dead)
+Description:
+Checks whether an entity is alive. Works for non-living entities too.
+Examples:
+if {villager-buddy::%player's uuid%} is not dead:on shoot:    while the projectile is alive:
+
+### Is Baby
+Type: Condition
+Patterns: %living entities% (is|are) a (child|baby) %living entities% (isn't|is not|aren't|are not) a (child|baby)
+Since: 2.10
+Patterns:
+- %living entities% (is|are) a (child|baby)
+- %living entities% (isn't|is not|aren't|are not) a (child|baby)
+Description:
+Checks whether or not a living entity is a baby.
+Examples:
+on drink:    event-entity is a baby    kill event-entity
+
+### Is Banned
+Type: Condition
+Patterns: %offline players/texts% (is|are) banned %players/texts% (is|are) IP[(-| )]banned %offline players/texts% (isn't|is not|aren't|are not) banned %players/texts% (isn't|is not|aren't|are not) IP[(-| )]banned
+Since: 1.4
+Patterns:
+- %offline players/texts% (is|are) banned
+- %players/texts% (is|are) IP[(-| )]banned
+- %offline players/texts% (isn't|is not|aren't|are not) banned
+- %players/texts% (isn't|is not|aren't|are not) IP[(-| )]banned
+Description:
+Checks whether a player or IP is banned.
+Examples:
+player is bannedvictim is not IP-banned"127.0.0.1" is banned
+
+### Is Bed/Anchor Spawn
+Type: Condition
+Patterns: [the] respawn location (was|is)[(n'| no)t] [a] (bed|respawn anchor)
+Since: 2.7
+Usable in events: respawn
+Requirements: Minecraft 1.16+
+Patterns:
+- [the] respawn location (was|is)[(n'| no)t] [a] (bed|respawn anchor)
+Description:
+Checks what the respawn location of a player in the respawn event is.
+Examples:
+on respawn:    the respawn location is a bed    broadcast "%player% is respawning in their bed! So cozy!"
+
+### Is Block
+Type: Condition
+Patterns: %item types% (is|are) ([a] block|blocks) %item types% (isn't|is not|aren't|are not) ([a] block|blocks)
+Since: 2.4
+Patterns:
+- %item types% (is|are) ([a] block|blocks)
+- %item types% (isn't|is not|aren't|are not) ([a] block|blocks)
+Description:
+Checks whether an item is a block.
+Examples:
+player's held item is a block{list::*} are blocks
+
+### Is Block Redstone Powered
+Type: Condition
+Patterns: %blocks% (is|are) redstone powered %blocks% (is|are) indirectly redstone powered %blocks% (is|are)(n't| not) redstone powered %blocks% (is|are)(n't| not) indirectly redstone powered
+Since: 2.5
+Patterns:
+- %blocks% (is|are) redstone powered
+- %blocks% (is|are) indirectly redstone powered
+- %blocks% (is|are)(n't| not) redstone powered
+- %blocks% (is|are)(n't| not) indirectly redstone powered
+Description:
+Checks if a block is indirectly or directly powered by redstone
+Examples:
+if clicked block is redstone powered:    send "This block is well-powered by redstone!"if clicked block is indirectly redstone powered:    send "This block is indirectly redstone powered."
+
+### Is Blocking
+Type: Condition
+Patterns: %players% (is|are) (blocking|defending) [with [a] shield] %players% (isn't|is not|aren't|are not) (blocking|defending) [with [a] shield]
+Since: unknown (before 2.1)
+Patterns:
+- %players% (is|are) (blocking|defending) [with [a] shield]
+- %players% (isn't|is not|aren't|are not) (blocking|defending) [with [a] shield]
+Description:
+Checks whether a player is blocking with their shield.
+Examples:
+on damage of player:    victim is blocking    damage attacker by 0.5 hearts
+
+### Is Burning
+Type: Condition
+Patterns: %entities% (is|are) (burning|ignited|on fire) %entities% (isn't|is not|aren't|are not) (burning|ignited|on fire)
+Since: 1.4.4
+Patterns:
+- %entities% (is|are) (burning|ignited|on fire)
+- %entities% (isn't|is not|aren't|are not) (burning|ignited|on fire)
+Description:
+Checks whether an entity is on fire, e.g. a zombie due to being in sunlight, or any entity after falling into lava.
+Examples:
+# increased attack against burning targetsvictim is burning:    increase damage by 2
+
+### Is Charged
+Type: Condition
+Patterns: %entities% (is|are) (charged|powered) %entities% (isn't|is not|aren't|are not) (charged|powered)
+Since: 2.5, 2.10 (withers, wither skulls)
+Patterns:
+- %entities% (is|are) (charged|powered)
+- %entities% (isn't|is not|aren't|are not) (charged|powered)
+Description:
+Checks if a creeper, wither, or wither skull is charged (powered).
+Examples:
+if the last spawned creeper is charged:    broadcast "A charged creeper is at %location of last spawned creeper%"
+
+### Is Charging Fireball
+Type: Condition
+Patterns: %living entities% (is|are) charging [a] fireball %living entities% (isn't|is not|aren't|are not) charging [a] fireball
+Since: 2.11
+Patterns:
+- %living entities% (is|are) charging [a] fireball
+- %living entities% (isn't|is not|aren't|are not) charging [a] fireball
+Description:
+Check whether a ghast is charging a fireball.
+Examples:
+if last spawned ghast is charging fireball:    kill last spawned ghast
+
+### Is Climbing
+Type: Condition
+Patterns: %living entities% (is|are) climbing %living entities% (isn't|is not|aren't|are not) climbing
+Since: 2.8.0
+Requirements: Minecraft 1.17+
+Patterns:
+- %living entities% (is|are) climbing
+- %living entities% (isn't|is not|aren't|are not) climbing
+Description:
+Whether a living entity is climbing, such as a spider up a wall or a player on a ladder.
+Examples:
+spawn a spider at location of spawnwait a secondif the last spawned spider is climbing:    message "The spider is now climbing!"
+
+### Is Conditional
+Type: Condition
+Patterns: %blocks% (is|are) [un]conditional %blocks% (isn't|is not|aren't|are not) [un]conditional
+Since: 2.10
+Patterns:
+- %blocks% (is|are) [un]conditional
+- %blocks% (isn't|is not|aren't|are not) [un]conditional
+Description:
+Checks whether a command block is conditional or not.
+Examples:
+if {_block} is conditional:    make {_block} unconditional
+
+### Is Custom Name Visible
+Type: Condition
+Patterns: %entities%'[s] custom name[s] (is|are) visible %entities%'[s] custom name[s] (isn't|is not|are not|aren't) visible custom name of %entities% (is|are) visible custom name of %entities% (isn't|is not|are not|aren't) visible
+Since: 2.10
+Patterns:
+- %entities%'[s] custom name[s] (is|are) visible
+- %entities%'[s] custom name[s] (isn't|is not|are not|aren't) visible
+- custom name of %entities% (is|are) visible
+- custom name of %entities% (isn't|is not|are not|aren't) visible
+Description:
+Checks if an entity's custom name is visible.
+Examples:
+send true if target's custom name is visible
+
+### Is Dancing
+Type: Condition
+Patterns: %living entities% (is|are) dancing %living entities% (isn't|is not|aren't|are not) dancing
+Since: 2.11
+Patterns:
+- %living entities% (is|are) dancing
+- %living entities% (isn't|is not|aren't|are not) dancing
+Description:
+Checks to see if an entity is dancing, such as allays, parrots, or piglins.
+Examples:
+if last spawned allay is dancing:    broadcast "Dance Party!"
+
+### Is Eating
+Type: Condition
+Patterns: %living entities% (is|are) eating %living entities% (isn't|is not|aren't|are not) eating
+Since: 2.11
+Patterns:
+- %living entities% (is|are) eating
+- %living entities% (isn't|is not|aren't|are not) eating
+Description:
+Whether a panda or horse type (horse, camel, donkey, llama, mule) is eating.
+Examples:
+if last spawned panda is eating:    force last spawned panda to stop eating
+
+### Is Edible
+Type: Condition
+Patterns: %item types% (is|are) edible %item types% (isn't|is not|aren't|are not) edible
+Since: 2.2-dev36
+Patterns:
+- %item types% (is|are) edible
+- %item types% (isn't|is not|aren't|are not) edible
+Description:
+Checks whether an item is edible.
+Examples:
+cooked beef is edibleplayer's tool is edible
+
+### Is Empty
+Type: Condition
+Patterns: %objects% (is|are) empty %objects% (isn't|is not|aren't|are not) empty
+Since: unknown (before 2.1)
+Patterns:
+- %objects% (is|are) empty
+- %objects% (isn't|is not|aren't|are not) empty
+Description:
+Checks whether something is empty.
+Examples:
+player's inventory is empty
+
+### Is Enchanted
+Type: Condition
+Patterns: %item types% (is|are) enchanted [with %enchantment types% [or ((better|greater|higher|above)|(worse|lesser|lower|below))]] %item types% (isn't|is not|aren't|are not) enchanted [with %enchantment types% [or ((better|greater|higher|above)|(worse|lesser|lower|below))]]
+Since: 1.4.6, 2.12 ('or better')
+Patterns:
+- %item types% (is|are) enchanted [with %enchantment types% [or ((better|greater|higher|above)|(worse|lesser|lower|below))]]
+- %item types% (isn't|is not|aren't|are not) enchanted [with %enchantment types% [or ((better|greater|higher|above)|(worse|lesser|lower|below))]]
+Description:
+Checks whether an item is enchanted. Enchants must match the exact level by default, unless 'or better' or 'or worse' are used.
+Examples:
+tool of the player is enchanted with efficiency 2if player's helmet or player's boots are enchanted with protection 3 or better:if player's chestplate is enchanted with protection
+
+### Is Evenly Divisible By
+Type: Condition
+Patterns: %numbers% (is|are) evenly divisible by %number% [with [a] tolerance [of] %number%] %numbers% (isn't|is not|aren't|are not) evenly divisible by %number% [with [a] tolerance [of] %number%] %numbers% can be evenly divided by %number% [with [a] tolerance [of] %number%] %numbers% (can't|can[ ]not) be evenly divided by %number% [with [a] tolerance [of] %number%]
+Since: 2.10, 2.12 (tolerance)
+Patterns:
+- %numbers% (is|are) evenly divisible by %number% [with [a] tolerance [of] %number%]
+- %numbers% (isn't|is not|aren't|are not) evenly divisible by %number% [with [a] tolerance [of] %number%]
+- %numbers% can be evenly divided by %number% [with [a] tolerance [of] %number%]
+- %numbers% (can't|can[ ]not) be evenly divided by %number% [with [a] tolerance [of] %number%]
+Description:
+Checks if a number is evenly divisible by another number. An optional tolerance can be provided to counteract floating point error. The default tolerance is 1e-10. Any input smaller than the tolerance is considered to be 0. This means divisors that are too small will always return false, and dividends that are too small will always return true.
+Examples:
+if 5 is evenly divisible by 5:if 11 cannot be evenly divided by 10:if 0.3 can be evenly divided by 0.1 with a tolerance of 0.0000001:
+
+### Is Fire Resistant
+Type: Condition
+Patterns: %item types% (is|are) (fire resistant|resistant to fire) %item types% (isn't|is not|aren't|are not) (fire resistant|resistant to fire)
+Since: 2.9.0
+Requirements: Spigot 1.20.5+
+Patterns:
+- %item types% (is|are) (fire resistant|resistant to fire)
+- %item types% (isn't|is not|aren't|are not) (fire resistant|resistant to fire)
+Description:
+Checks whether an item is fire resistant.
+Examples:
+if player's tool is fire resistant:if {_items::*} aren't resistant to fire:
+
+### Is Fish Hook in Open Water
+Type: Condition
+Patterns: %entities% (is|are) in open water[s] %entities% (isn't|is not|aren't|are not) in open water[s]
+Since: 2.10
+Usable in events: Fishing
+Patterns:
+- %entities% (is|are) in open water[s]
+- %entities% (isn't|is not|aren't|are not) in open water[s]
+Description:
+Checks whether the fish hook is in open water.Open water is defined by a 5x4x5 area of water, air and lily pads. If in open water, treasure items may be caught.
+Examples:
+on fish catch:    if fish hook is in open water:        send "You will catch a shark soon!"
+
+### Is Flammable
+Type: Condition
+Patterns: %item types% (is|are) flammable %item types% (isn't|is not|aren't|are not) flammable
+Since: 2.2-dev36
+Patterns:
+- %item types% (is|are) flammable
+- %item types% (isn't|is not|aren't|are not) flammable
+Description:
+Checks whether an item is flammable.
+Examples:
+send whether the tag contents of minecraft tag "planks" are flammableplayer's tool is flammable
+
+### Is Flying
+Type: Condition
+Patterns: %players% (is|are) flying %players% (isn't|is not|aren't|are not) flying
+Since: 1.4.4
+Patterns:
+- %players% (is|are) flying
+- %players% (isn't|is not|aren't|are not) flying
+Description:
+Checks whether a player is flying.
+Examples:
+player is not flying
+
+### Is From A Mob Spawner
+Type: Condition
+Patterns: %entities% (is|are) from a [mob] spawner %entities% (isn't|aren't|is not|are not) from a [mob] spawner %entities% (was|were) spawned (from|by) a [mob] spawner %entities% (wasn't|weren't|was not|were not) spawned (from|by) a [mob] spawner
+Since: 2.10
+Patterns:
+- %entities% (is|are) from a [mob] spawner
+- %entities% (isn't|aren't|is not|are not) from a [mob] spawner
+- %entities% (was|were) spawned (from|by) a [mob] spawner
+- %entities% (wasn't|weren't|was not|were not) spawned (from|by) a [mob] spawner
+Description:
+Checks if an entity was spawned from a mob spawner.
+Examples:
+send whether target is from a mob spawner
+
+### Is Frozen
+Type: Condition
+Patterns: %entities% (is|are) frozen %entities% (isn't|is not|aren't|are not) frozen
+Since: 2.7
+Patterns:
+- %entities% (is|are) frozen
+- %entities% (isn't|is not|aren't|are not) frozen
+Description:
+Checks whether an entity is frozen.
+Examples:
+if player is frozen:    kill player
+
+### Is Fuel
+Type: Condition
+Patterns: %item types% (is|are) [furnace] fuel %item types% (isn't|is not|aren't|are not) [furnace] fuel
+Since: 2.5.1
+Patterns:
+- %item types% (is|are) [furnace] fuel
+- %item types% (isn't|is not|aren't|are not) [furnace] fuel
+Description:
+Checks whether an item can be used as fuel in a furnace.
+Examples:
+on right click on furnace:    if player's tool is not fuel:        send "Please hold a valid fuel item in your hand"        cancel event
+
+### Is Gliding
+Type: Condition
+Patterns: %living entities% (is|are) gliding %living entities% (isn't|is not|aren't|are not) gliding
+Since: 2.7
+Patterns:
+- %living entities% (is|are) gliding
+- %living entities% (isn't|is not|aren't|are not) gliding
+Description:
+Checks whether a living entity is gliding.
+Examples:
+if player is gliding
+
+### Is Hand Raised
+Type: Condition
+Patterns: %living entities%'[s] [main] hand[s] (is|are) raised %living entities%'[s] [main] hand[s] (isn't|is not|aren't|are not) raised [main] hand[s] of %living entities% (is|are) raised [main] hand[s] of %living entities% (isn't|is not|aren't|are not) raised %living entities%'[s] off[ |-]hand[s] (is|are) raised %living entities%'[s] off[ |-]hand[s] (isn't|is not|aren't|are not) raised off[ |-]hand[s] of %living entities% (is|are) raised off[ |-]hand[s] of %living entities% (isn't|is not|aren't|are not) raised
+Since: 2.8.0
+Patterns:
+- %living entities%'[s] [main] hand[s] (is|are) raised
+- %living entities%'[s] [main] hand[s] (isn't|is not|aren't|are not) raised
+- [main] hand[s] of %living entities% (is|are) raised
+- [main] hand[s] of %living entities% (isn't|is not|aren't|are not) raised
+- %living entities%'[s] off[ |-]hand[s] (is|are) raised
+- %living entities%'[s] off[ |-]hand[s] (isn't|is not|aren't|are not) raised
+- off[ |-]hand[s] of %living entities% (is|are) raised
+- off[ |-]hand[s] of %living entities% (isn't|is not|aren't|are not) raised
+Description:
+Checks whether an entity has one or both of their hands raised.Hands are raised when an entity is using an item (eg: blocking, drawing a bow, eating).
+Examples:
+on damage of player:    if victim's main hand is raised:        drop player's tool at player        set player's tool to air
+
+### Is Holding
+Type: Condition
+Patterns: [%living entities%] ha(s|ve) %item types% in [main] hand [%living entities%] (is|are) holding %item types% [in main hand] [%living entities%] ha(s|ve) %item types% in off[(-| )]hand [%living entities%] (is|are) holding %item types% in off[(-| )]hand [%living entities%] (ha(s|ve) not|do[es]n't have) %item types% in [main] hand [%living entities%] (is not|isn't) holding %item types% [in main hand] [%living entities%] (ha(s|ve) not|do[es]n't have) %item types% in off[(-| )]hand [%living entities%] (is not|isn't) holding %item types% in off[(-| )]hand
+Since: 1.0
+Patterns:
+- [%living entities%] ha(s|ve) %item types% in [main] hand
+- [%living entities%] (is|are) holding %item types% [in main hand]
+- [%living entities%] ha(s|ve) %item types% in off[(-| )]hand
+- [%living entities%] (is|are) holding %item types% in off[(-| )]hand
+- [%living entities%] (ha(s|ve) not|do[es]n't have) %item types% in [main] hand
+- [%living entities%] (is not|isn't) holding %item types% [in main hand]
+- [%living entities%] (ha(s|ve) not|do[es]n't have) %item types% in off[(-| )]hand
+- [%living entities%] (is not|isn't) holding %item types% in off[(-| )]hand
+Description:
+Checks whether a player is holding a specific item. Cannot be used with endermen, use 'entity is [not] an enderman holding <item type>' instead.
+Examples:
+player is holding a stickvictim isn't holding a diamond sword of sharpness
+
+### Is In Love
+Type: Condition
+Patterns: %living entities% (is|are) in lov(e|ing) [state|mode] %living entities% (isn't|is not|aren't|are not) in lov(e|ing) [state|mode]
+Since: 2.10
+Patterns:
+- %living entities% (is|are) in lov(e|ing) [state|mode]
+- %living entities% (isn't|is not|aren't|are not) in lov(e|ing) [state|mode]
+Description:
+Checks whether or not a living entity is in love.
+Examples:
+on spawn of living entity:    if entity is in love:        broadcast "That was quick!"
+
+### Is Incendiary
+Type: Condition
+Patterns: %entities% ((is|are) incendiary|cause[s] a[n] (incendiary|fiery) explosion) %entities% ((is not|are not|isn't|aren't) incendiary|(does not|do not|doesn't|don't) cause[s] a[n] (incendiary|fiery) explosion) the [event(-| )]explosion (is|(is not|isn't)) (incendiary|fiery)
+Since: 2.5
+Patterns:
+- %entities% ((is|are) incendiary|cause[s] a[n] (incendiary|fiery) explosion)
+- %entities% ((is not|are not|isn't|aren't) incendiary|(does not|do not|doesn't|don't) cause[s] a[n] (incendiary|fiery) explosion)
+- the [event(-| )]explosion (is|(is not|isn't)) (incendiary|fiery)
+Description:
+Checks if an entity will create fire when it explodes. This condition is also usable in an explosion prime event.
+Examples:
+on explosion prime:    if the explosion is fiery:        broadcast "A fiery explosive has been ignited!"
+
+### Is Infinite
+Type: Condition
+Patterns: %potion effects/time spans% (is|are) infinite %potion effects/time spans% (isn't|is not|aren't|are not) infinite
+Since: 2.7
+Patterns:
+- %potion effects/time spans% (is|are) infinite
+- %potion effects/time spans% (isn't|is not|aren't|are not) infinite
+Description:
+Checks whether potion effects or timespans are infinite.
+Examples:
+all of the active potion effects of the player are infiniteif timespan argument is infinite:
+
+### Is Interactable
+Type: Condition
+Patterns: %item types% (is|are) interactable %item types% (isn't|is not|aren't|are not) interactable
+Since: 2.5.2
+Patterns:
+- %item types% (is|are) interactable
+- %item types% (isn't|is not|aren't|are not) interactable
+Description:
+Checks wether or not a block is interactable.
+Examples:
+on block break:    if event-block is interactable:        cancel event        send "You cannot break interactable blocks!"
+
+### Is Invisible
+Type: Condition
+Patterns: %living entities% (is|are) (invisible|visible) %living entities% (isn't|is not|aren't|are not) (invisible|visible)
+Since: 2.7
+Patterns:
+- %living entities% (is|are) (invisible|visible)
+- %living entities% (isn't|is not|aren't|are not) (invisible|visible)
+Description:
+Checks whether a living entity is invisible.
+Examples:
+target entity is invisible
+
+### Is Invulnerable
+Type: Condition
+Patterns: %entities/gamemodes% (is|are) (invulnerable|invincible) %entities/gamemodes% (isn't|is not|aren't|are not) (invulnerable|invincible)
+Since: 2.5, 2.10 (gamemode)
+Patterns:
+- %entities/gamemodes% (is|are) (invulnerable|invincible)
+- %entities/gamemodes% (isn't|is not|aren't|are not) (invulnerable|invincible)
+Description:
+Checks whether an entity or a gamemode is invulnerable. For gamemodes, Paper and Minecraft 1.20.6 are required
+Examples:
+target entity is invulnerableloop all gamemodes:    if loop-value is not invulnerable:        broadcast "the gamemode %loop-value% is vulnerable!"
+
+### Is Jumping
+Type: Condition
+Patterns: %living entities% (is|are) jumping %living entities% (isn't|is not|aren't|are not) jumping
+Since: 2.8.0
+Patterns:
+- %living entities% (is|are) jumping
+- %living entities% (isn't|is not|aren't|are not) jumping
+Description:
+Checks whether a living entity is jumping. This condition does not work on players.
+Examples:
+on spawn of zombie:    while event-entity is not jumping:        wait 5 ticks    push event-entity upwards
+
+### Is Leashed
+Type: Condition
+Patterns: %living entities% (is|are) leashed %living entities% (isn't|is not|aren't|are not) leashed
+Since: 2.5
+Patterns:
+- %living entities% (is|are) leashed
+- %living entities% (isn't|is not|aren't|are not) leashed
+Description:
+Checks to see if an entity is currently leashed.
+Examples:
+target entity is leashed
+
+### Is Loaded
+Type: Condition
+Patterns: chunk[s] %directions% [%locations%] (is|are)[((n't| not))] loaded chunk [at] %number%, %number% (in|of) [world] %world% is[((n't| not))] loaded %scripts/worlds% (is|are)[(n't| not)] loaded script[s] %scripts% (is|are)[(n't| not)] loaded world[s] %worlds% (is|are)[(n't| not)] loaded
+Since: 2.3, 2.5 (revamp with chunk at location/coords), 2.10 (Scripts)
+Patterns:
+- chunk[s] %directions% [%locations%] (is|are)[((n't| not))] loaded
+- chunk [at] %number%, %number% (in|of) [world] %world% is[((n't| not))] loaded
+- %scripts/worlds% (is|are)[(n't| not)] loaded
+- script[s] %scripts% (is|are)[(n't| not)] loaded
+- world[s] %worlds% (is|are)[(n't| not)] loaded
+Description:
+Checks whether a world, chunk or script is loaded.'chunk at 1, 1' uses chunk coordinates, which are location coords divided by 16.
+Examples:
+if chunk at {home::%player's uuid%} is loaded:if chunk 1, 10 in world "world" is loaded:if world("lobby") is loaded:if script named "MyScript.sk" is loaded:
+
+### Is Lootable
+Type: Condition
+Patterns: %blocks/entities% (is|are) lootable %blocks/entities% (isn't|is not|aren't|are not) lootable
+Since: 2.10
+Patterns:
+- %blocks/entities% (is|are) lootable
+- %blocks/entities% (isn't|is not|aren't|are not) lootable
+Description:
+Checks whether an entity or block is lootable. Lootables are entities or blocks that can have a loot table.
+Examples:
+spawn a pig at event-locationset {_pig} to last spawned entityif {_pig} is lootable:    set loot table of {_pig} to "minecraft:entities/cow"    # the pig will now drop the loot of a cow when killed, because it is indeed a lootable entity.set block at event-location to chestif block at event-location is lootable:    set loot table of block at event-location to "minecraft:chests/simple_dungeon"    # the chest will now generate the loot of a simple dungeon when opened, because it is indeed a lootable block.set block at event-location to white woolif block at event-location is lootable:    # uh oh, nothing will happen because a wool is not a lootable block.
+
+### Is Member/Owner of Region
+Type: Condition
+Patterns: %offline players% (is|are) ([a] member|[(the|an)] owner) of [[the] region] %regions% %offline players% (is|are)(n't| not) ([a] member|[(the|an)] owner) of [[the] region] %regions%
+Since: 2.1
+Requirements: Supported regions plugin
+Patterns:
+- %offline players% (is|are) ([a] member|[(the|an)] owner) of [[the] region] %regions%
+- %offline players% (is|are)(n't| not) ([a] member|[(the|an)] owner) of [[the] region] %regions%
+Description:
+Checks whether a player is a member or owner of a particular region.This condition requires a supported regions plugin to be installed.
+Examples:
+on region enter:    player is the owner of the region    message "Welcome back to %region%!"    send "%player% just entered %region%!" to all members of the region
+
+### Is Normalized
+Type: Condition
+Patterns: %vectors% (is|are) normalized %vectors% (isn't|is not|aren't|are not) normalized
+Since: 2.5.1
+Patterns:
+- %vectors% (is|are) normalized
+- %vectors% (isn't|is not|aren't|are not) normalized
+Description:
+Checks whether a vector is normalized i.e. length of 1
+Examples:
+vector of player's location is normalized
+
+### Is Occluding
+Type: Condition
+Patterns: %item types% (is|are) occluding %item types% (isn't|is not|aren't|are not) occluding
+Since: 2.5.1
+Patterns:
+- %item types% (is|are) occluding
+- %item types% (isn't|is not|aren't|are not) occluding
+Description:
+Checks whether an item is a block and completely blocks vision.
+Examples:
+player's tool is occluding
+
+### Is Online
+Type: Condition
+Patterns: %offline players% (is|are) (online|offline|connected) %offline players% (isn't|is not|aren't|are not) (online|offline|connected)
+Since: 1.4
+Patterns:
+- %offline players% (is|are) (online|offline|connected)
+- %offline players% (isn't|is not|aren't|are not) (online|offline|connected)
+Description:
+Checks whether a player is online. The 'connected' pattern will return false once this player leaves the server, even if they rejoin. Be aware that using the 'connected' pattern with a variable will not have this special behavior. Use the direct event-player or other non-variable expression for best results.
+Examples:
+player is onlineplayer-argument is offlinewhile player is connected:    wait 60 seconds    send "hello!" to player# The following will act like `{_player} is online`.# Using variables with `is connected` will not behave the same as with non-variables.while {_player} is connected:    broadcast "online!"    wait 1 tick
+
+### Is Operator
+Type: Condition
+Patterns: %offline players% (is|are) [[a] server|an] op[erator][s] %offline players% (isn't|is not|aren't|are not) [[a] server|an] op[erator][s]
+Since: 2.7
+Patterns:
+- %offline players% (is|are) [[a] server|an] op[erator][s]
+- %offline players% (isn't|is not|aren't|are not) [[a] server|an] op[erator][s]
+Description:
+Checks whether a player is a server operator.
+Examples:
+player is an operator
+
+### Is Passable
+Type: Condition
+Patterns: %blocks% (is|are) passable %blocks% (isn't|is not|aren't|are not) passable
+Since: 2.5.1
+Patterns:
+- %blocks% (is|are) passable
+- %blocks% (isn't|is not|aren't|are not) passable
+Description:
+Checks whether a block is passable.A block is passable if it has no colliding parts that would prevent players from moving through it.Blocks like tall grass, flowers, signs, etc. are passable, but open doors, fence gates, trap doors, etc. are not because they still have parts that can be collided with.
+Examples:
+if player's targeted block is passable
+
+### Is Pathfinding
+Type: Condition
+Patterns: %living entities% (is|are) pathfinding [to[wards] %living entity/location%] %living entities% (isn't|is not|aren't|are not) pathfinding [to[wards] %living entity/location%]
+Since: 2.9.0
+Patterns:
+- %living entities% (is|are) pathfinding [to[wards] %living entity/location%]
+- %living entities% (isn't|is not|aren't|are not) pathfinding [to[wards] %living entity/location%]
+Description:
+Checks whether living entities are pathfinding.Can only be a living entity that is a Mob.
+Examples:
+make {_entity} pathfind to {_location} at speed 2while {_entity} is pathfinding    wait a secondlaunch flickering trailing burst firework colored red at location of {_entity}subtract 10 from {defence::tower::health}clear entity within {_entity}
+
+### Is Persistent
+Type: Condition
+Patterns: %entities/blocks% (is|are) persistent %entities/blocks% (isn't|is not|aren't|are not) persistent
+Since: 2.11
+Patterns:
+- %entities/blocks% (is|are) persistent
+- %entities/blocks% (isn't|is not|aren't|are not) persistent
+Description:
+Whether entities, players, or leaves are persistent.Persistence of entities is whether they are retained through server restarts.Persistence of leaves is whether they should decay when not connected to a log block within 6 meters.Persistence of players is if the player's playerdata should be saved when they leave the server. Players' persistence is reset back to 'true' when they join the server.Passengers inherit the persistence of their vehicle, meaning a persistent zombie put on a non-persistent chicken will become non-persistent. This does not apply to players.By default, all entities are persistent.
+Examples:
+on spawn:    if event-entity is persistent:        make event-entity not persistent
+
+### Is Playing Dead
+Type: Condition
+Patterns: %living entities% (is|are) playing dead %living entities% (isn't|is not|aren't|are not) playing dead
+Since: 2.11
+Patterns:
+- %living entities% (is|are) playing dead
+- %living entities% (isn't|is not|aren't|are not) playing dead
+Description:
+Checks to see if an axolotl is playing dead.
+Examples:
+if last spawned axolotl is playing dead:    make last spawned axolotl stop playing dead
+
+### Is Plugin Enabled
+Type: Condition
+Patterns: plugin[s] %texts% (is|are) enabled plugin[s] %texts% (is|are)(n't| not) enabled plugin[s] %texts% (is|are) disabled
+Since: 2.6
+Patterns:
+- plugin[s] %texts% (is|are) enabled
+- plugin[s] %texts% (is|are)(n't| not) enabled
+- plugin[s] %texts% (is|are) disabled
+Description:
+Check if a plugin is enabled/disabled on the server.Plugin names can be found in the plugin's 'plugin.yml' file or by using the '/plugins' command, they are NOT the name of the plugin's jar file.When checking if a plugin is not enabled, this will return true if the plugin is either disabled or not on the server. When checking if a plugin is disabled, this will return true if the plugin is on the server and is disabled.
+Examples:
+if plugin "Vault" is enabled:if plugin "WorldGuard" is not enabled:if plugins "Essentials" and "Vault" are enabled:if plugin "MyBrokenPlugin" is disabled:
+
+### Is Poisoned
+Type: Condition
+Patterns: %living entities% (is|are) poisoned %living entities% (isn't|is not|aren't|are not) poisoned
+Since: 1.4.4
+Patterns:
+- %living entities% (is|are) poisoned
+- %living entities% (isn't|is not|aren't|are not) poisoned
+Description:
+Checks whether an entity is poisoned.
+Examples:
+if the player is poisoned:    cure the player from poison    message "You have been cured!" to the player
+
+### Is Preferred Tool
+Type: Condition
+Patterns: %item types% (is|are) %blocks/block datas%'s preferred tool[s] %item types% (is|are) [the|a] preferred tool[s] (for|of) %blocks/block datas% %item types% (is|are)(n't| not) %blocks/block datas%'s preferred tool[s] %item types% (is|are)(n't| not) [the|a] preferred tool[s] (for|of) %blocks/block datas%
+Since: 2.7
+Requirements: 1.16.5+, Paper 1.19.2+ (blockdata)
+Patterns:
+- %item types% (is|are) %blocks/block datas%'s preferred tool[s]
+- %item types% (is|are) [the|a] preferred tool[s] (for|of) %blocks/block datas%
+- %item types% (is|are)(n't| not) %blocks/block datas%'s preferred tool[s]
+- %item types% (is|are)(n't| not) [the|a] preferred tool[s] (for|of) %blocks/block datas%
+Description:
+Checks whether an item is the preferred tool for a block. A preferred tool is one that will drop the block's item when used. For example, a wooden pickaxe is a preferred tool for grass and stone blocks, but not for iron ore.
+Examples:
+on left click:    event-block is set    if player's tool is the preferred tool for event-block:        break event-block naturally using player's tool    else:        cancel event
+
+### Is Pressing Key
+Type: Condition
+Patterns: %players% (is|are) pressing %input keys% %players% (isn't|is not|aren't|are not) pressing %input keys% %players% (was|were) pressing %input keys% %players% (wasn't|was not|weren't|were not) pressing %input keys%
+Since: 2.10
+Requirements: Minecraft 1.21.2+
+Patterns:
+- %players% (is|are) pressing %input keys%
+- %players% (isn't|is not|aren't|are not) pressing %input keys%
+- %players% (was|were) pressing %input keys%
+- %players% (wasn't|was not|weren't|were not) pressing %input keys%
+Description:
+Checks if a player is pressing a certain input key.
+Examples:
+on player input:    if player is pressing forward movement key:        send "You are moving forward!"
+
+### Is Responsive
+Type: Condition
+Patterns: %entities% (is|are) (responsive|unresponsive) %entities% (isn't|is not|aren't|are not) (responsive|unresponsive)
+Since: 2.14
+Patterns:
+- %entities% (is|are) (responsive|unresponsive)
+- %entities% (isn't|is not|aren't|are not) (responsive|unresponsive)
+Description:
+Checks whether an interaction is responsive or not. Responsiveness determines whether clicking the entity will cause the clicker's arm to swing.
+Examples:
+if last spawned interaction is responsive:if last spawned interaction is unresponsive:
+
+### Is Riding
+Type: Condition
+Patterns: %entities% (is|are) riding [%entity types/entities%] %entities% (isn't|is not|aren't|are not) riding [%entity types/entities%]
+Since: 2.0, 2.11 (entities)
+Patterns:
+- %entities% (is|are) riding [%entity types/entities%]
+- %entities% (isn't|is not|aren't|are not) riding [%entity types/entities%]
+Description:
+Tests whether an entity is riding any entity, a specific entity type, or a specific entity.
+Examples:
+if player is riding:if player is riding an entity:if player is riding a saddled pig:if player is riding last spawned horse:
+
+### Is Riptiding
+Type: Condition
+Patterns: %living entities% (is|are) riptiding %living entities% (isn't|is not|aren't|are not) riptiding
+Since: 2.5
+Patterns:
+- %living entities% (is|are) riptiding
+- %living entities% (isn't|is not|aren't|are not) riptiding
+Description:
+Checks to see if an entity is currently using the Riptide enchantment.
+Examples:
+target entity is riptiding
+
+### Is Saddled
+Type: Condition
+Patterns: %living entities% (is|are) [properly] saddled %living entities% (isn't|is not|aren't|are not) [properly] saddled
+Since: 2.10
+Patterns:
+- %living entities% (is|are) [properly] saddled
+- %living entities% (isn't|is not|aren't|are not) [properly] saddled
+Description:
+Checks whether a given entity (horse or steerable) is saddled.If 'properly' is used, this will only return true if the entity is wearing specifically a saddle item.
+Examples:
+send whether {_horse} is saddled
+
+### Is Screaming
+Type: Condition
+Patterns: %living entities% (is|are) screaming %living entities% (isn't|is not|aren't|are not) screaming
+Since: 2.11
+Patterns:
+- %living entities% (is|are) screaming
+- %living entities% (isn't|is not|aren't|are not) screaming
+Description:
+Check whether a goat or enderman is screaming.
+Examples:
+    if last spawned goat is not screaming:        make last spawned goat scream    if {_enderman} is screaming:        force {_enderman} to stop screaming
+
+### Is Script Loaded
+Type: Condition
+Patterns: script[s] [%texts%] (is|are) loaded script[s] [%texts%] (isn't|is not|aren't|are not) loaded
+Since: 2.2-dev31
+Patterns:
+- script[s] [%texts%] (is|are) loaded
+- script[s] [%texts%] (isn't|is not|aren't|are not) loaded
+Description:
+Check if the current script, or another script, is currently loaded.
+Examples:
+script is loadedscript "example.sk" is loaded
+
+### Is Silent
+Type: Condition
+Patterns: %entities% (is|are) silent %entities% (isn't|is not|aren't|are not) silent
+Since: 2.5
+Patterns:
+- %entities% (is|are) silent
+- %entities% (isn't|is not|aren't|are not) silent
+Description:
+Checks whether an entity is silent i.e. its sounds are disabled.
+Examples:
+target entity is silent
+
+### Is Sleeping
+Type: Condition
+Patterns: %living entities% (is|are) sleeping %living entities% (isn't|is not|aren't|are not) sleeping
+Since: 1.4.4, 2.11 (living entities)
+Patterns:
+- %living entities% (is|are) sleeping
+- %living entities% (isn't|is not|aren't|are not) sleeping
+Description:
+Checks whether an entity is sleeping.
+Examples:
+if player is sleeping:    make player wake up without spawn location updateif last spawned fox is sleeping:    make last spawned fox stop sleeping
+
+### Is Slime Chunk
+Type: Condition
+Patterns: %chunk% (is|are) ([a] slime chunk|slime chunks|slimey) %chunk% (isn't|is not|aren't|are not) ([a] slime chunk|slime chunks|slimey)
+Since: 2.3
+Patterns:
+- %chunk% (is|are) ([a] slime chunk|slime chunks|slimey)
+- %chunk% (isn't|is not|aren't|are not) ([a] slime chunk|slime chunks|slimey)
+Description:
+Tests whether a chunk is a so-called slime chunk.Slimes can generally spawn in the swamp biome and in slime chunks.For more info, see the Minecraft wiki.
+Examples:
+command /slimey:    trigger:        if chunk at player is a slime chunk:            send "Yeah, it is!"        else:            send "Nope, it isn't"
+
+### Is Sneaking
+Type: Condition
+Patterns: %players% (is|are) sneaking %players% (isn't|is not|aren't|are not) sneaking
+Since: 1.4.4
+Patterns:
+- %players% (is|are) sneaking
+- %players% (isn't|is not|aren't|are not) sneaking
+Description:
+Checks whether a player is sneaking.
+Examples:
+# prevent mobs from seeing sneaking players if they are at least 4 meters aparton target:    target is sneaking    distance of target and the entity is bigger than 4    cancel the event
+
+### Is Solid
+Type: Condition
+Patterns: %item types% (is|are) solid %item types% (isn't|is not|aren't|are not) solid
+Since: 2.2-dev36
+Patterns:
+- %item types% (is|are) solid
+- %item types% (isn't|is not|aren't|are not) solid
+Description:
+Checks whether an item is solid.
+Examples:
+grass block is solidplayer's tool isn't solid
+
+### Is Spawnable
+Type: Condition
+Patterns: %entity types% is spawnable [in [the [world]] %world%] %entity types% can be spawned [in [the [world]] %world%] %entity types% (isn't|is not) spawnable [in [the [world]] %world%] %entity types% (can't|can not) be spawned [in [the [world]] %world%]
+Since: 2.13
+Patterns:
+- %entity types% is spawnable [in [the [world]] %world%]
+- %entity types% can be spawned [in [the [world]] %world%]
+- %entity types% (isn't|is not) spawnable [in [the [world]] %world%]
+- %entity types% (can't|can not) be spawned [in [the [world]] %world%]
+Description:
+Whether an entity type can be spawned in a world. Any general types such as 'monster, mob, entity, living entity' etc. will never be spawnable.
+Examples:
+if a pig is spawnable in world "world": # trueif a monster can be spawned in {_world}: # false
+
+### Is Sprinting
+Type: Condition
+Patterns: %players% (is|are) sprinting %players% (isn't|is not|aren't|are not) sprinting
+Since: 1.4.4
+Patterns:
+- %players% (is|are) sprinting
+- %players% (isn't|is not|aren't|are not) sprinting
+Description:
+Checks whether a player is sprinting.
+Examples:
+player is not sprinting
+
+### Is Stackable
+Type: Condition
+Patterns: %item stacks% (is|are) stackable %item stacks% (isn't|is not|aren't|are not) stackable
+Since: 2.7
+Patterns:
+- %item stacks% (is|are) stackable
+- %item stacks% (isn't|is not|aren't|are not) stackable
+Description:
+Checks whether an item is stackable.
+Examples:
+diamond axe is stackablebirch wood is stackabletorch is stackable
+
+### Is Swimming
+Type: Condition
+Patterns: %living entities% (is|are) swimming %living entities% (isn't|is not|aren't|are not) swimming
+Since: 2.3
+Patterns:
+- %living entities% (is|are) swimming
+- %living entities% (isn't|is not|aren't|are not) swimming
+Description:
+Checks whether a living entity is swimming.
+Examples:
+player is swimming
+
+### Is Tagged
+Type: Condition
+Patterns: %item types/entities/entity types% (is|are) tagged (as|with) %minecraft tags% %item types/entities/entity types% (isn't|is not|aren't|are not) tagged (as|with) %minecraft tags%
+Since: 2.10
+Patterns:
+- %item types/entities/entity types% (is|are) tagged (as|with) %minecraft tags%
+- %item types/entities/entity types% (isn't|is not|aren't|are not) tagged (as|with) %minecraft tags%
+Description:
+Checks whether an item, block, entity, or entitydata is tagged with the given tag.
+Examples:
+if player's tool is tagged with minecraft tag "enchantable/sharp_weapon":    enchant player's tool with sharpness 1if all logs are tagged with tag "minecraft:logs"
+
+### Is Tameable
+Type: Condition
+Patterns: %living entities% (is|are) tameable %living entities% (isn't|is not|aren't|are not) tameable
+Since: 2.5
+Patterns:
+- %living entities% (is|are) tameable
+- %living entities% (isn't|is not|aren't|are not) tameable
+Description:
+Check if an entity is tameable.
+Examples:
+on damage:    if victim is tameable:        cancel event
+
+### Is Tamed
+Type: Condition
+Patterns: %entities% (is|are) (tamed|domesticated) %entities% (isn't|is not|aren't|are not) (tamed|domesticated)
+Since: 2.10
+Patterns:
+- %entities% (is|are) (tamed|domesticated)
+- %entities% (isn't|is not|aren't|are not) (tamed|domesticated)
+Description:
+Check if a tameable entity is tamed (horse, parrot, cat, etc.).
+Examples:
+send true if {_horse} is tamedtame {_horse} if {_horse} is untamed
+
+### Is Ticking
+Type: Condition
+Patterns: %entities% (is|are) ticking %entities% (isn't|is not|aren't|are not) ticking
+Since: 2.10
+Patterns:
+- %entities% (is|are) ticking
+- %entities% (isn't|is not|aren't|are not) ticking
+Description:
+Checks if an entity is ticking.
+Examples:
+send true if target is ticking
+
+### Is Transparent
+Type: Condition
+Patterns: %item types% (is|are) transparent %item types% (isn't|is not|aren't|are not) transparent
+Since: 2.2-dev36
+Patterns:
+- %item types% (is|are) transparent
+- %item types% (isn't|is not|aren't|are not) transparent
+Description:
+Checks whether an item is transparent. Note that this condition may not work for all blocks, due to the transparency list used by Spigot not being completely accurate.
+Examples:
+player's tool is transparent.
+
+### Is Unbreakable
+Type: Condition
+Patterns: %item types% (is|are) [un]breakable %item types% (isn't|is not|aren't|are not) [un]breakable
+Since: 2.5.1, 2.9.0 (breakable)
+Patterns:
+- %item types% (is|are) [un]breakable
+- %item types% (isn't|is not|aren't|are not) [un]breakable
+Description:
+Checks whether an item is unbreakable.
+Examples:
+if event-item is unbreakable:    send "This item is unbreakable!" to playerif tool of {_p} is breakable:    send "Your tool is breakable!" to {_p}
+
+### Is Using Experimental Feature
+Type: Condition
+Patterns: %script% is using %texts% %scripts% are using %texts% %script% is(n't| not) using %texts% %scripts% are(n't| not) using %texts%
+Since: 2.9.0
+Patterns:
+- %script% is using %texts%
+- %scripts% are using %texts%
+- %script% is(n't| not) using %texts%
+- %scripts% are(n't| not) using %texts%
+Description:
+Checks whether a script is using an experimental feature by name.
+Examples:
+the script is using "example feature"on load:    if the script is using "example feature":        broadcast "You're using an experimental feature!"
+
+### Is Valid
+Type: Condition
+Patterns: %entities/scripts% (is|are) valid %entities/scripts% (isn't|is not|aren't|are not) valid
+Since: 2.7, 2.10 (Scripts & Configs)
+Patterns:
+- %entities/scripts% (is|are) valid
+- %entities/scripts% (isn't|is not|aren't|are not) valid
+Description:
+Checks whether something (an entity, a script, a config, etc.) is valid.An invalid entity may have died or de-spawned for some other reason.An invalid script reference may have been reloaded, moved or disabled since.
+Examples:
+if event-entity is valid
+
+### Is Wearing
+Type: Condition
+Patterns: %living entities% (is|are) wearing %item types% %living entities% (isn't|is not|aren't|are not) wearing %item types%
+Since: 1.0
+Patterns:
+- %living entities% (is|are) wearing %item types%
+- %living entities% (isn't|is not|aren't|are not) wearing %item types%
+Description:
+Checks whether an entity is wearing some items (usually armor).
+Examples:
+player is wearing an iron chestplate and iron leggingstarget is wearing wolf armor
+
+### Is Whitelisted
+Type: Condition
+Patterns: [the] server (is|(isn't|is not)) (in white[ ]list mode|white[ ]listed) %offline players% (is|are|(isn't|is not|aren't|are not)) white[ ]listed [the] server white[ ]list (is|(isn't|is not)) enforced
+Since: 2.5.2, 2.9.0 (enforce, offline players)
+Requirements: MC 1.17+ (enforce)
+Patterns:
+- [the] server (is|(isn't|is not)) (in white[ ]list mode|white[ ]listed)
+- %offline players% (is|are|(isn't|is not|aren't|are not)) white[ ]listed
+- [the] server white[ ]list (is|(isn't|is not)) enforced
+Description:
+Whether or not the server or a player is whitelisted, or the server is whitelist enforced.
+Examples:
+if the player is whitelisted:if the server is whitelisted:if the server whitelist is enforced:
+
+### Is Within
+Type: Condition
+Patterns: %locations% (is|are) within %location% and %location% %locations% (isn't|is not|aren't|are not) within %location% and %location% %locations% (is|are) (within|in[side [of]]) %entities/chunks/worlds/worldborders/blocks% %locations% (isn't|is not|aren't|are not) (within|in[side [of]]) %entities/chunks/worlds/worldborders/blocks%
+Since: 2.7, 2.11 (world borders)
+Requirements: MC 1.17+ (within block)
+Patterns:
+- %locations% (is|are) within %location% and %location%
+- %locations% (isn't|is not|aren't|are not) within %location% and %location%
+- %locations% (is|are) (within|in[side [of]]) %entities/chunks/worlds/worldborders/blocks%
+- %locations% (isn't|is not|aren't|are not) (within|in[side [of]]) %entities/chunks/worlds/worldborders/blocks%
+Description:
+Whether a location is within something else. The "something" can be a block, an entity, a chunk, a world, or a cuboid formed by two other locations.Note that using the is between condition will refer to a straight line between locations, while this condition will refer to the cuboid between locations.
+Examples:
+if player's location is within {_loc1} and {_loc2}:    send "You are in a PvP zone!" to playerif player is in world("world"):    send "You are in the overworld!" to playerif attacker's location is inside of victim:    cancel event    send "Back up!" to attacker and victimif player is in world "world1" or world "world2":    kill playerif player is in world "world" and chunk at location(0, 0, 0):    give player 1 diamond
+
+### Is Within Radius
+Type: Condition
+Patterns: %locations% (is|are) within %number% (block|metre|meter)[s] (around|of) %locations% %locations% (isn't|is not|aren't|are not) within %number% (block|metre|meter)[s] (around|of) %locations%
+Since: 2.7
+Patterns:
+- %locations% (is|are) within %number% (block|metre|meter)[s] (around|of) %locations%
+- %locations% (isn't|is not|aren't|are not) within %number% (block|metre|meter)[s] (around|of) %locations%
+Description:
+Checks whether a location is within a certain radius of another location.
+Examples:
+on damage:    if attacker's location is within 10 blocks around {_spawn}:        cancel event        send "You can't PVP in spawn."
+
+### Is a Skript command
+Type: Condition
+Patterns: %text% (is|are) [a] s(k|c)ript (command|cmd) %text% (isn't|is not|aren't|are not) [a] s(k|c)ript (command|cmd)
+Since: 2.6
+Patterns:
+- %text% (is|are) [a] s(k|c)ript (command|cmd)
+- %text% (isn't|is not|aren't|are not) [a] s(k|c)ript (command|cmd)
+Description:
+Checks whether a command/string is a custom Skript command.
+Examples:
+on command:    command is a skript command
+
+### Is of Type
+Type: Condition
+Patterns: %item stacks/entities% (is|are) of type[s] %item types/entity types% %item stacks/entities% (isn't|is not|aren't|are not) of type[s] %item types/entity types%
+Since: 1.4
+Patterns:
+- %item stacks/entities% (is|are) of type[s] %item types/entity types%
+- %item stacks/entities% (isn't|is not|aren't|are not) of type[s] %item types/entity types%
+Description:
+Checks whether an item or an entity is of the given type. This is mostly useful for variables, as you can use the general 'is' condition otherwise (e.g. 'victim is a creeper').
+Examples:
+tool is of type {selected type}victim is of type {villager type}
+
+### Is on Ground
+Type: Condition
+Patterns: %entities% (is|are) on [the] ground %entities% (isn't|is not|aren't|are not) on [the] ground
+Since: 2.2-dev26
+Patterns:
+- %entities% (is|are) on [the] ground
+- %entities% (isn't|is not|aren't|are not) on [the] ground
+Description:
+Checks whether an entity is on ground.
+Examples:
+player is not on ground
+
+### Item Has Enchantment Glint Override
+Type: Condition
+Patterns: %item types% (has|have) enchantment glint overrid(den|e) %item types% (doesn't|does not|do not|don't) have enchantment glint overrid(den|e)
+Since: 2.10
+Requirements: Spigot 1.20.5+
+Patterns:
+- %item types% (has|have) enchantment glint overrid(den|e)
+- %item types% (doesn't|does not|do not|don't) have enchantment glint overrid(den|e)
+Description:
+Checks whether an item has the enchantment glint overridden, or is forced to glint or not.
+Examples:
+if the player's tool has the enchantment glint override    send "Your tool has the enchantment glint override." to playerif {_item} is forced to glint:    send "This item is forced to glint." to playerelse if {_item} is forced to not glint:    send "This item is forced to not glint." to playerelse:    send "This item does not have any glint override." to player
+
+### Item Has Enchantment Glint Override
+Type: Condition
+Patterns: %item types% (is|are) forced to [not] glint %item types% (isn't|is not|aren't|are not) forced to [not] glint
+Since: 2.10
+Requirements: Spigot 1.20.5+
+Patterns:
+- %item types% (is|are) forced to [not] glint
+- %item types% (isn't|is not|aren't|are not) forced to [not] glint
+Description:
+Checks whether an item has the enchantment glint overridden, or is forced to glint or not.
+Examples:
+if the player's tool has the enchantment glint override    send "Your tool has the enchantment glint override." to playerif {_item} is forced to glint:    send "This item is forced to glint." to playerelse if {_item} is forced to not glint:    send "This item is forced to not glint." to playerelse:    send "This item does not have any glint override." to player
+
+### Leash Will Drop
+Type: Condition
+Patterns: [the] (lead|leash) [item] (will|(won't|will not)) (drop|be dropped)
+Since: 2.10
+Usable in events: Leash / Unleash
+Patterns:
+- [the] (lead|leash) [item] (will|(won't|will not)) (drop|be dropped)
+Description:
+Checks whether the leash item will drop during the leash detaching in an unleash event.
+Examples:
+on unleash:    if the leash will drop:        prevent the leash from dropping    else:        allow the leash to drop
+
+### Left Handed
+Type: Condition
+Patterns: %living entities% (is|are) (left|right)( |-)handed %living entities% (isn't|is not|aren't|are not) (left|right)( |-)handed
+Since: 2.8.0
+Patterns:
+- %living entities% (is|are) (left|right)( |-)handed
+- %living entities% (isn't|is not|aren't|are not) (left|right)( |-)handed
+Description:
+Checks if living entities or players are left or right-handed. Armor stands are neither right nor left-handed.
+Examples:
+on damage of player:    if victim is left handed:        cancel event
+
+### Lid Is Open/Closed
+Type: Condition
+Patterns: [the] lid[s] of %blocks% (is|are) (open[ed]|close[d]) [the] lid[s] of %blocks% (isn't|is not|aren't|are not) (open[ed]|close[d]) %blocks%'[s] lid[s] (is|are) (open[ed]|close[d]) %blocks%'[s] lid[s] (isn't|is not|aren't|are not) (open[ed]|close[d])
+Since: 2.10
+Patterns:
+- [the] lid[s] of %blocks% (is|are) (open[ed]|close[d])
+- [the] lid[s] of %blocks% (isn't|is not|aren't|are not) (open[ed]|close[d])
+- %blocks%'[s] lid[s] (is|are) (open[ed]|close[d])
+- %blocks%'[s] lid[s] (isn't|is not|aren't|are not) (open[ed]|close[d])
+Description:
+Check to see whether lidded blocks (chests, shulkers, etc.) are open or closed.
+Examples:
+if the lid of {_chest} is closed:    open the lid of {_block}
+
+### Matches
+Type: Condition
+Patterns: %texts% (match[es]|do[es](n't| not) match) %texts% %texts% (partially match[es]|do[es](n't| not) partially match) %texts%
+Since: 2.5.2
+Patterns:
+- %texts% (match[es]|do[es](n't| not) match) %texts%
+- %texts% (partially match[es]|do[es](n't| not) partially match) %texts%
+Description:
+Checks whether the defined strings match the input regexes (Regular expressions).
+Examples:
+on chat:    if message partially matches "\d":        send "Message contains a digit!"    if message doesn't match "[A-Za-z]+":        send "Message doesn't only contain letters!"
+
+### Panda Is On Its Back
+Type: Condition
+Patterns: %living entities% (is|are) on (its|their) back[s] %living entities% (isn't|is not|aren't|are not) on (its|their) back[s]
+Since: 2.11
+Patterns:
+- %living entities% (is|are) on (its|their) back[s]
+- %living entities% (isn't|is not|aren't|are not) on (its|their) back[s]
+Description:
+Whether a panda is on its back.
+Examples:
+if last spawned panda is on its back:    make last spawned panda get off its back
+
+### Panda Is Rolling
+Type: Condition
+Patterns: %living entities% (is|are) rolling %living entities% (isn't|is not|aren't|are not) rolling
+Since: 2.11
+Patterns:
+- %living entities% (is|are) rolling
+- %living entities% (isn't|is not|aren't|are not) rolling
+Description:
+Whether a panda is rolling.
+Examples:
+if last spawned panda is rolling:    make last spawned panda stop rolling
+
+### Panda Is Scared
+Type: Condition
+Patterns: %living entities% (is|are) scared %living entities% (isn't|is not|aren't|are not) scared
+Since: 2.11
+Patterns:
+- %living entities% (is|are) scared
+- %living entities% (isn't|is not|aren't|are not) scared
+Description:
+Whether a panda is scared.
+Examples:
+if last spawned panda is scared:
+
+### Panda Is Sneezing
+Type: Condition
+Patterns: %living entities% (is|are) sneezing %living entities% (isn't|is not|aren't|are not) sneezing
+Since: 2.11
+Patterns:
+- %living entities% (is|are) sneezing
+- %living entities% (isn't|is not|aren't|are not) sneezing
+Description:
+Whether a panda is sneezing.
+Examples:
+if last spawned panda is sneezing:    make last spawned panda stop sneezing
+
+### Potion Effect - Has Icon
+Type: Condition
+Patterns: %skriptpotioneffects% (has|have) ([an] icon|icons) %skriptpotioneffects% (doesn't|does not|do not|don't) have ([an] icon|icons)
+Since: 2.14
+Patterns:
+- %skriptpotioneffects% (has|have) ([an] icon|icons)
+- %skriptpotioneffects% (doesn't|does not|do not|don't) have ([an] icon|icons)
+Description:
+Checks whether a potion effect has an icon.
+Examples:
+on entity potion effect modification:    if the potion effect has an icon:        hide the icon of event-potioneffecttype for event-entity
+
+### Potion Effect - Has Particles
+Type: Condition
+Patterns: %skriptpotioneffects% (has|have) particles %skriptpotioneffects% (doesn't|does not|do not|don't) have particles
+Since: 2.14
+Patterns:
+- %skriptpotioneffects% (has|have) particles
+- %skriptpotioneffects% (doesn't|does not|do not|don't) have particles
+Description:
+Checks whether a potion effect has particles.
+Examples:
+on entity potion effect modification:    if the potion effect has particles:         hide the particles of event-potioneffecttype for event-entity
+
+### Potion Effect - Is Ambient
+Type: Condition
+Patterns: %skriptpotioneffects% (is|are) ambient %skriptpotioneffects% (isn't|is not|aren't|are not) ambient
+Since: 2.14
+Patterns:
+- %skriptpotioneffects% (is|are) ambient
+- %skriptpotioneffects% (isn't|is not|aren't|are not) ambient
+Description:
+Checks whether a potion effect is ambient.That is, whether the potion effect produces more, translucent, particles.
+Examples:
+on entity potion effect modification:    if the potion effect is ambient:        message "It's particle time!"
+
+### Potion Effect Type - Is Instant
+Type: Condition
+Patterns: %potion effect types% (is|are) instant %potion effect types% (isn't|is not|aren't|are not) instant
+Since: 2.14
+Patterns:
+- %potion effect types% (is|are) instant
+- %potion effect types% (isn't|is not|aren't|are not) instant
+Description:
+Checks whether a potion effect type is instant.That is, whether the effect happens once/immediately.
+Examples:
+if any of the potion effects of the player's tool are instant:    message "Use your tool for immediate benefits!"
+
+### PvP
+Type: Condition
+Patterns: (is PvP|PvP is) enabled [in %worlds%] (is PvP|PvP is) disabled [in %worlds%]
+Since: 1.3.4
+Patterns:
+- (is PvP|PvP is) enabled [in %worlds%]
+- (is PvP|PvP is) disabled [in %worlds%]
+Description:
+Checks the PvP state of a world.
+Examples:
+PvP is enabledPvP is disabled in "world"
+
+### Region Contains
+Type: Condition
+Patterns: [[the] region] %regions% contain[s] %directions% %locations% %locations% (is|are) ([contained] in|part of) [[the] region] %regions% [[the] region] %regions% (do|does)(n't| not) contain %directions% %locations% %locations% (is|are)(n't| not) (contained in|part of) [[the] region] %regions%
+Since: 2.1
+Requirements: Supported regions plugin
+Patterns:
+- [[the] region] %regions% contain[s] %directions% %locations%
+- %locations% (is|are) ([contained] in|part of) [[the] region] %regions%
+- [[the] region] %regions% (do|does)(n't| not) contain %directions% %locations%
+- %locations% (is|are)(n't| not) (contained in|part of) [[the] region] %regions%
+Description:
+Checks whether a location is contained in a particular region.This condition requires a supported regions plugin to be installed.
+Examples:
+player is in the region {regions::3}on region enter:    region contains {flags.%world%.red}    message "The red flag is near!"
+
+### Resource Pack
+Type: Condition
+Patterns: [the] resource pack (was|is|has) [been] %resource pack state% [the] resource pack (was|is|has)(n't| not) [been] %resource pack state%
+Since: 2.4
+Usable in events: resource pack request response
+Patterns:
+- [the] resource pack (was|is|has) [been] %resource pack state%
+- [the] resource pack (was|is|has)(n't| not) [been] %resource pack state%
+Description:
+Checks state of the resource pack in a resource pack request response event.
+Examples:
+on resource pack response:    if the resource pack wasn't accepted:        kick the player due to "You have to install the resource pack to play in this server!"
+
+### Running Minecraft
+Type: Condition
+Patterns: running [below] minecraft %text%
+Since: 2.5
+Patterns:
+- running [below] minecraft %text%
+Description:
+Checks if current Minecraft version is given version or newer.
+Examples:
+running minecraft "1.14"
+
+### Starts/Ends With
+Type: Condition
+Patterns: %texts% (start|end)[s] with %texts% %texts% (doesn't|does not|do not|don't) (start|end) with %texts%
+Since: 2.2-dev36, 2.5.1 (multiple strings support)
+Patterns:
+- %texts% (start|end)[s] with %texts%
+- %texts% (doesn't|does not|do not|don't) (start|end) with %texts%
+Description:
+Checks if a text starts or ends with another.
+Examples:
+if the argument starts with "test" or "debug":    send "Stop!"
+
+### Strider Is Shivering
+Type: Condition
+Patterns: %living entities% (is|are) shivering %living entities% (isn't|is not|aren't|are not) shivering
+Since: 2.12
+Patterns:
+- %living entities% (is|are) shivering
+- %living entities% (isn't|is not|aren't|are not) shivering
+Description:
+Whether a strider is shivering.
+Examples:
+if last spawned strider is shivering:    make last spawned strider stop shivering
+
+### Text Display Has Drop Shadow
+Type: Condition
+Patterns: [[the] text of] %displays% (has|have) [a] (drop|text) shadow %displays%'[s] text (has|have) [a] (drop|text) shadow [[the] text of] %displays% (doesn't|does not|do not|don't) have [a] (drop|text) shadow %displays%'[s] text (doesn't|does not|do not|don't) have [a] (drop|text) shadow
+Since: 2.10
+Patterns:
+- [[the] text of] %displays% (has|have) [a] (drop|text) shadow
+- %displays%'[s] text (has|have) [a] (drop|text) shadow
+- [[the] text of] %displays% (doesn't|does not|do not|don't) have [a] (drop|text) shadow
+- %displays%'[s] text (doesn't|does not|do not|don't) have [a] (drop|text) shadow
+Description:
+Returns whether the text of a display has drop shadow applied.
+Examples:
+if {_display} has drop shadow:    remove drop shadow from the text of {_display}
+
+### Text Display Visible Through Blocks
+Type: Condition
+Patterns: %displays% (is|are) visible through (blocks|walls) %displays% (isn't|is not|aren't|are not) visible through (blocks|walls)
+Since: 2.10
+Patterns:
+- %displays% (is|are) visible through (blocks|walls)
+- %displays% (isn't|is not|aren't|are not) visible through (blocks|walls)
+Description:
+Returns whether text displays can be seen through blocks or not.
+Examples:
+if last spawned text display is visible through walls:    prevent last spawned text display from being visible through walls
+
+### Time
+Type: Condition
+Patterns: %date% (was|were)( more|(n't| not) less) than %time span% [ago] %date% (was|were)((n't| not) more| less) than %time span% [ago]
+Since: 2.0
+Patterns:
+- %date% (was|were)( more|(n't| not) less) than %time span% [ago]
+- %date% (was|were)((n't| not) more| less) than %time span% [ago]
+Description:
+Tests whether a given real time was more or less than some time span ago.
+Examples:
+command /command-with-cooldown:    trigger:        {command::%player's uuid%::last-usage} was less than a minute ago:            message "Please wait a minute between uses of this command."            stop        set {command::%player's uuid%::last-usage} to now        # ... actual command trigger here ...
+
+### Will Consume Boosting Firework
+Type: Condition
+Patterns: [the] (boosting|used) firework will be consumed [the] (boosting|used) firework (will not|won't) be consumed
+Since: 2.10
+Patterns:
+- [the] (boosting|used) firework will be consumed
+- [the] (boosting|used) firework (will not|won't) be consumed
+Description:
+Checks to see if the firework used in an 'elytra boost' event will be consumed.
+Examples:
+on elytra boost:    if the used firework will be consumed:        prevent the used firework from being consumed
+
+### Will Despawn
+Type: Condition
+Patterns: %itementities% will (despawn naturally|naturally despawn) %itementities% (will (not|neither)|won't) (despawn naturally|naturally despawn)
+Since: 2.11
+Patterns:
+- %itementities% will (despawn naturally|naturally despawn)
+- %itementities% (will (not|neither)|won't) (despawn naturally|naturally despawn)
+Description:
+Checks if the dropped item will be despawned naturally through Minecraft's timer.
+Examples:
+if all dropped items can despawn naturally:    prevent all dropped items from naturally despawning
+
+### Will Despawn
+Type: Condition
+Patterns: %itementities% can (despawn naturally|naturally despawn) %itementities% (can't|cannot|can not) (despawn naturally|naturally despawn)
+Since: 2.11
+Patterns:
+- %itementities% can (despawn naturally|naturally despawn)
+- %itementities% (can't|cannot|can not) (despawn naturally|naturally despawn)
+Description:
+Checks if the dropped item will be despawned naturally through Minecraft's timer.
+Examples:
+if all dropped items can despawn naturally:    prevent all dropped items from naturally despawning

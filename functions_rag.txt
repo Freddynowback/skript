@@ -1,0 +1,531 @@
+Skript Documentation - 2.15.0-pre1
+----------------------------------
+
+### abs
+Type: Function
+Patterns: abs(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- abs(n: number)
+Description:
+Returns the absolute value of the argument, i.e. makes the argument positive.
+Examples:
+abs(3) = 3 abs(-2) = 2
+
+### acos
+Type: Function
+Patterns: acos(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- acos(n: number)
+Description:
+The inverse of the cosine, also called arccos. Returns result in degrees, not radians. Only returns values from 0 to 180.
+Examples:
+acos(0) = 90 acos(1) = 0 acos(0.5) = 30
+
+### asin
+Type: Function
+Patterns: asin(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- asin(n: number)
+Description:
+The inverse of the sine, also called arcsin. Returns result in degrees, not radians. Only returns values from -90 to 90.
+Examples:
+asin(0) = 0 asin(1) = 90 asin(0.5) = 30
+
+### atan
+Type: Function
+Patterns: atan(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- atan(n: number)
+Description:
+The inverse of the tangent, also called arctan. Returns result in degrees, not radians. Only returns values from -90 to 90.
+Examples:
+atan(0) = 0 atan(1) = 45 atan(10000) = 89.9943
+
+### atan2
+Type: Function
+Patterns: atan2(x: number, y: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- atan2(x: number, y: number)
+Description:
+Similar to atan, but requires two coordinates and returns values from -180 to 180.The returned angle is measured counterclockwise in a standard mathematical coordinate system (x to the right, y to the top).
+Examples:
+atan2(0, 1) = 0 atan2(10, 0) = 90 atan2(-10, 5) = -63.4349
+
+### axisAngle
+Type: Function
+Patterns: axisAngle(angle: number, axis: vector)
+Since: 2.10
+Return Type:: Quaternion
+Patterns:
+- axisAngle(angle: number, axis: vector)
+Description:
+Returns a quaternion from the given angle (in degrees) and axis (as a vector). This represents a rotation around the given axis by the given angle.
+Examples:
+axisangle(90, (vector from player's facing))
+
+### calcExperience
+Type: Function
+Patterns: calcExperience(level: long)
+Since: 2.2-dev32
+Return Type:: long
+Patterns:
+- calcExperience(level: long)
+Description:
+Calculates the total amount of experience needed to achieve given level from scratch in Minecraft.
+Examples:
+Missing examples.
+
+### ceil
+Type: Function
+Patterns: ceil(n: number)
+Since: 2.2
+Return Type:: long
+Patterns:
+- ceil(n: number)
+Description:
+Rounds a number up, i.e. returns the closest integer larger than or equal to the argument.
+Examples:
+ceil(2.34) = 3 ceil(2) = 2 ceil(2.99) = 3
+
+### ceiling
+Type: Function
+Patterns: ceiling(n: number)
+Since: 2.2
+Return Type:: long
+Patterns:
+- ceiling(n: number)
+Description:
+Alias of ceil.
+Examples:
+ceiling(2.34) = 3 ceiling(2) = 2 ceiling(2.99) = 3
+
+### clamp
+Type: Function
+Patterns: clamp(values: numbers, min: number, max: number)
+Since: 2.8.0
+Return Type:: Number
+Patterns:
+- clamp(values: numbers, min: number, max: number)
+Description:
+Clamps one or more values between two numbers.This function retains indices
+Examples:
+clamp(5, 0, 10) = 5 clamp(5.5, 0, 5) = 5 clamp(0.25, 0, 0.5) = 0.25 clamp(5, 7, 10) = 7 clamp((5, 0, 10, 9, 13), 7, 10) = (7, 7, 10, 9, 10) set {_clamped::*} to clamp({_values::*}, 0, 10)
+
+### combinations
+Type: Function
+Patterns: combinations(options: number, selected: number)
+Since: 2.11
+Return Type:: Number
+Patterns:
+- combinations(options: number, selected: number)
+Description:
+Get the number of possible sets from 1 to 'options' with each set having a size equal to 'selected'For example, a combination with 3 options and a set size of 1, returns 3: (1), (2), (3)A combination of 3 options with a set size of 2 returns 3: (1, 2), (1, 3), (2, 3)Note that the bigger the 'options' and lower the 'selected' may result in approximations or even infinity values.Combinations differ from permutations in that combinations focus on unique sets, ignoring the order of elements, whereas permutations account for the arrangement of elements within the set.Example: (1, 2) and (2, 1) represent a single combination since order doesn't matter in combinations, but they are two distinct permutations because permutations consider the order.
+Examples:
+combinations(10, 8) = 45 combinations(5, 3) = 10 combinations(size of {some list::*}, 2)
+
+### concat
+Type: Function
+Patterns: concat(texts: objects)
+Since: 2.9.0
+Return Type:: Text
+Patterns:
+- concat(texts: objects)
+Description:
+Joins the provided texts (and other things) into a single text.
+Examples:
+concat("hello ", "there") # hello there concat("foo ", 100, " bar") # foo 100 bar
+
+### cos
+Type: Function
+Patterns: cos(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- cos(n: number)
+Description:
+The cosine function. This is basically the sine shifted by 90°, i.e. cos(a) = sin(a + 90°), for any number a. Uses degrees, not radians.
+Examples:
+cos(0) = 1 cos(90) = 0
+
+### date
+Type: Function
+Patterns: date(year: number, month: number, day: number, hour: number = 0, minute: number = 0, second: number = 0, millisecond: number = 0, zone_offset: number = NaN, dst_offset: number = NaN)
+Since: 2.2
+Return Type:: Date
+Patterns:
+- date(year: number, month: number, day: number, hour: number = 0, minute: number = 0, second: number = 0, millisecond: number = 0, zone_offset: number = NaN, dst_offset: number = NaN)
+Description:
+Creates a date from a year, month, and day, and optionally also from hour, minute, second and millisecond.A time zone and DST offset can be specified as well (in minutes), if they are left out the server's time zone and DST offset are used (the created date will not retain this information).
+Examples:
+date(2014, 10, 1) # 0:00, 1st October 2014 date(1990, 3, 5, 14, 30) # 14:30, 5th May 1990 date(1999, 12, 31, 23, 59, 59, 999, -3*60, 0) # almost year 2000 in parts of Brazil (-3 hours offset, no DST)
+
+### exp
+Type: Function
+Patterns: exp(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- exp(n: number)
+Description:
+The exponential function. You probably don't need this if you don't know what this is.
+Examples:
+exp(0) = 1 exp(1) = 2.7183
+
+### factorial
+Type: Function
+Patterns: factorial(number: number)
+Since: 2.11
+Return Type:: Number
+Patterns:
+- factorial(number: number)
+Description:
+Get the factorial of a number.Getting the factorial of any number above 21 will return an approximation, not an exact value.Any number after 170 will always return Infinity.Should not be used to calculate permutations or combinations manually.
+Examples:
+factorial(0) = 1 factorial(3) = 3*2*1 = 6 factorial(5) = 5*4*3*2*1 = 120 factorial(171) = Infinity
+
+### floor
+Type: Function
+Patterns: floor(n: number)
+Since: 2.2
+Return Type:: long
+Patterns:
+- floor(n: number)
+Description:
+Rounds a number down, i.e. returns the closest integer smaller than or equal to the argument.
+Examples:
+floor(2.34) = 2 floor(2) = 2 floor(2.99) = 2
+
+### formatNumber
+Type: Function
+Patterns: formatNumber(number: number, format: string = )
+Since: 2.10
+Return Type:: Text
+Patterns:
+- formatNumber(number: number, format: string = )
+Description:
+Converts numbers to human-readable format. By default, '###,###' (e.g. '123,456,789') will be used for whole numbers and '###,###.##' (e.g. '123,456,789.00) will be used for decimal numbers. A hashtag '#' represents a digit, a comma ',' is used to separate numbers, and a period '.' is used for decimals. Will return none if the format is invalid.For further reference, see this article.
+Examples:
+command /balance:     aliases: bal     executable by: players     trigger:         set {_money} to formatNumber({money::%sender's uuid%})         send "Your balance: %{_money}%" to sender
+
+### fromBase
+Type: Function
+Patterns: fromBase(string value: objects, base: integer between 2 and 36)
+Since: 2.14
+Return Type:: long
+Patterns:
+- fromBase(string value: objects, base: integer between 2 and 36)
+Description:
+Turns a text version of a number in a specific base (decimal, hexadecimal, octal) into an actual number. For example, converting "20" in hexadecimal (base 16) would be 'fromBase("20", 16)', which would return 32. You can use any base between 2 and 36.
+Examples:
+# /binaryText 01110011 01101011 01110010 01101001 01110000 01110100 00100001 # sends "skript!" command binaryText <text>:     trigger:     set {_characters::*} to argument split at " " without trailing empty string         transform {_characters::*} with fromBase(input, 2) # convert to codepoints         transform {_characters::*} with character from codepoint input # convert to characters         send join {_characters::*}
+
+### isNaN
+Type: Function
+Patterns: isNaN(n: number)
+Since: 2.8.0
+Return Type:: Boolean
+Patterns:
+- isNaN(n: number)
+Description:
+Returns true if the input is NaN (not a number).
+Examples:
+isNaN(0) # false isNaN(0/0) # true isNaN(sqrt(-1)) # true
+
+### ln
+Type: Function
+Patterns: ln(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- ln(n: number)
+Description:
+The natural logarithm. You probably don't need this if you don't know what this is.Returns NaN (not a number) if the argument is negative.
+Examples:
+ln(1) = 0 ln(exp(5)) = 5 ln(2) = 0.6931
+
+### location
+Type: Function
+Patterns: location(x: number, y: number, z: number, world: optional world, yaw: optional number, pitch: optional number)
+Since: 2.2
+Return Type:: Location
+Patterns:
+- location(x: number, y: number, z: number, world: optional world, yaw: optional number, pitch: optional number)
+Description:
+Creates a location from a world and 3 coordinates, with an optional yaw and pitch.If for whatever reason the world is not found, it will fallback to the server's main world.
+Examples:
+# TELEPORTING teleport player to location(1,1,1, world "world") teleport player to location(1,1,1, world "world", 100, 0) teleport player to location(1,1,1, world "world", yaw of player, pitch of player) teleport player to location(1,1,1, world of player) teleport player to location(1,1,1, world("world")) teleport player to location({_x}, {_y}, {_z}, {_w}, {_yaw}, {_pitch}) # SETTING BLOCKS set block at location(1,1,1, world "world") to stone set block at location(1,1,1, world "world", 100, 0) to stone set block at location(1,1,1, world of player) to stone set block at location(1,1,1, world("world")) to stone set block at location({_x}, {_y}, {_z}, {_w}) to stone # USING VARIABLES set {_l1} to location(1,1,1) set {_l2} to location(10,10,10) set blocks within {_l1} and {_l2} to stone if player is within {_l1} and {_l2}: # OTHER kill all entities in radius 50 around location(1,65,1, world "world") delete all entities in radius 25 around location(50,50,50, world "world_nether") ignite all entities in radius 25 around location(1,1,1, world of player)
+
+### log
+Type: Function
+Patterns: log(n: number, base: number = 10)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- log(n: number, base: number = 10)
+Description:
+A logarithm, with base 10 if none is specified. This is the inverse operation to exponentiation (for positive bases only), i.e. log(base ^ exponent, base) = exponent for any positive number 'base' and any number 'exponent'.Another useful equation is base ^ log(a, base) = a for any numbers 'base' and 'a'.Please note that due to how numbers are represented in computers, these equations do not hold for all numbers, as the computed values may slightly differ from the correct value.Returns NaN (not a number) if any of the arguments are negative.
+Examples:
+log(100) = 2 # 10^2 = 100 log(16, 2) = 4 # 2^4 = 16
+
+### max
+Type: Function
+Patterns: max(ns: numbers)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- max(ns: numbers)
+Description:
+Returns the maximum number from a list of numbers.
+Examples:
+max(1) = 1 max(1, 2, 3, 4) = 4 max({some list variable::*})
+
+### mean
+Type: Function
+Patterns: mean(numbers: numbers)
+Since: 2.11
+Return Type:: Number
+Patterns:
+- mean(numbers: numbers)
+Description:
+Get the mean (average) of a list of numbers.You cannot get the mean of a set of numbers that includes infinity or NaN.
+Examples:
+mean(1, 2, 3) = 2 mean(0, 5, 10) = 5 mean(13, 97, 376, 709) = 298.75
+
+### median
+Type: Function
+Patterns: median(numbers: numbers)
+Since: 2.11
+Return Type:: Number
+Patterns:
+- median(numbers: numbers)
+Description:
+Get the middle value of a sorted list of numbers. If the list has an even number of values, the median is the average of the two middle numbers.You cannot get the median of a set of numbers that includes NaN.
+Examples:
+median(1, 2, 3, 4, 5) = 3 median(1, 2, 3, 4, 5, 6) = 3.5 median(0, 123, 456, 789) = 289.5
+
+### min
+Type: Function
+Patterns: min(ns: numbers)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- min(ns: numbers)
+Description:
+Returns the minimum number from a list of numbers.
+Examples:
+min(1) = 1 min(1, 2, 3, 4) = 1 min({some list variable::*})
+
+### mod
+Type: Function
+Patterns: mod(d: number, m: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- mod(d: number, m: number)
+Description:
+Returns the modulo of the given arguments, i.e. the remainder of the division d/m, where d and m are the arguments of this function.The returned value is always positive. Returns NaN (not a number) if the second argument is zero.
+Examples:
+mod(3, 2) = 1 mod(256436, 100) = 36 mod(-1, 10) = 9
+
+### offlineplayer
+Type: Function
+Patterns: offlineplayer(nameOrUUID: string, allowLookups: boolean = true)
+Since: 2.8.0, 2.9.0 (prevent lookups)
+Return Type:: Offline Player
+Patterns:
+- offlineplayer(nameOrUUID: string, allowLookups: boolean = true)
+Description:
+Returns a offline player from their name or UUID. This function will still return the player if they're online. If Paper 1.16.5+ is used, the 'allowLookup' parameter can be set to false to prevent this function from doing a web lookup for players who have not joined before. Lookups can cause lag spikes of up to multiple seconds, so use offline players with caution.
+Examples:
+set {_p} to offlineplayer("Notch") set {_p} to offlineplayer("069a79f4-44e9-4726-a5be-fca90e38aaf5") set {_p} to offlineplayer("Notch", false)
+
+### permutations
+Type: Function
+Patterns: permutations(options: number, selected: number)
+Since: 2.11
+Return Type:: Number
+Patterns:
+- permutations(options: number, selected: number)
+Description:
+Get the number of possible ordered arrangements from 1 to 'options' with each arrangement having a size equal to 'selected'For example, permutations with 3 options and an arrangement size of 1, returns 3: (1), (2), (3)Permutations with 3 options and an arrangement size of 2 returns 6: (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)Note that the bigger the 'options' and lower the 'selected' may result in approximations or even infinity values.Permutations differ from combinations in that permutations account for the arrangement of elements within the set, whereas combinations focus on unique sets and ignore the order of elements.Example: (1, 2) and (2, 1) are two distinct permutations because the positions of '1' and '2' are different, but they represent a single combination since order doesn't matter in combinations.
+Examples:
+permutations(10, 2) = 90 permutations(10, 4) = 5040 permutations(size of {some list::*}, 2)
+
+### player
+Type: Function
+Patterns: player(nameOrUUID: text, getExactPlayer: optional boolean (yes/no))
+Since: 2.8.0
+Return Type:: Player
+Patterns:
+- player(nameOrUUID: text, getExactPlayer: optional boolean (yes/no))
+Description:
+Returns an online player from their name or UUID, if player is offline function will return nothing.Setting 'getExactPlayer' parameter to true will return the player whose name is exactly equal to the provided name instead of returning a player that their name starts with the provided name.
+Examples:
+set {_p} to player("Notch") # will return an online player whose name is or starts with 'Notch' set {_p} to player("Notch", true) # will return the only online player whose name is 'Notch' set {_p} to player("069a79f4-44e9-4726-a5be-fca90e38aaf5") # <none> if player is offline
+
+### product
+Type: Function
+Patterns: product(ns: numbers)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- product(ns: numbers)
+Description:
+Calculates the product of a list of numbers.
+Examples:
+product(1) = 1 product(2, 3, 4) = 24 product({some list variable::*}) product(2, {_v::*}, and the player's y-coordinate)
+
+### quaternion
+Type: Function
+Patterns: quaternion(w: number, x: number, y: number, z: number)
+Since: 2.10
+Return Type:: Quaternion
+Patterns:
+- quaternion(w: number, x: number, y: number, z: number)
+Description:
+Returns a quaternion from the given W, X, Y and Z parameters.
+Examples:
+quaternion(1, 5.6, 45.21, 10)
+
+### rgb
+Type: Function
+Patterns: rgb(red: long, green: long, blue: long, alpha: long = 255)
+Since: 2.5, 2.10 (alpha)
+Return Type:: Color
+Patterns:
+- rgb(red: long, green: long, blue: long, alpha: long = 255)
+Description:
+Returns a RGB color from the given red, green and blue parameters. Alpha values can be added optionally, but these only take affect in certain situations, like text display backgrounds.
+Examples:
+dye player's leggings rgb(120, 30, 45) set the colour of a text display to rgb(10, 50, 100, 50)
+
+### root
+Type: Function
+Patterns: root(n: number, number: number)
+Since: 2.11
+Return Type:: Number
+Patterns:
+- root(n: number, number: number)
+Description:
+Calculates the nth root of a number.
+Examples:
+root(2, 4) = 2 # same as sqrt(4) root(4, 16) = 2 root(-4, 16) = 0.5 # same as 16^(-1/4)
+
+### round
+Type: Function
+Patterns: round(n: number, d: number = 0)
+Since: 2.2, 2.7 (decimal placement)
+Return Type:: Number
+Patterns:
+- round(n: number, d: number = 0)
+Description:
+Rounds a number, i.e. returns the closest integer to the argument. Place a second argument to define the decimal placement.
+Examples:
+round(2.34) = 2 round(2) = 2 round(2.99) = 3 round(2.5) = 3
+
+### sin
+Type: Function
+Patterns: sin(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- sin(n: number)
+Description:
+The sine function. It starts at 0° with a value of 0, goes to 1 at 90°, back to 0 at 180°, to -1 at 270° and then repeats every 360°. Uses degrees, not radians.
+Examples:
+sin(90) = 1 sin(60) = 0.866
+
+### sqrt
+Type: Function
+Patterns: sqrt(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- sqrt(n: number)
+Description:
+The square root, which is the inverse operation to squaring a number (for positive numbers only). This is the same as (argument) ^ (1/2) – other roots can be calculated via number ^ (1/root), e.g. set {_l} to {_volume}^(1/3).Returns NaN (not a number) if the argument is negative.
+Examples:
+sqrt(4) = 2 sqrt(2) = 1.4142 sqrt(-1) = NaN
+
+### sum
+Type: Function
+Patterns: sum(ns: numbers)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- sum(ns: numbers)
+Description:
+Sums a list of numbers.
+Examples:
+sum(1) = 1 sum(2, 3, 4) = 9 sum({some list variable::*}) sum(2, {_v::*}, and the player's y-coordinate)
+
+### tan
+Type: Function
+Patterns: tan(n: number)
+Since: 2.2
+Return Type:: Number
+Patterns:
+- tan(n: number)
+Description:
+The tangent function. This is basically sin(arg)/cos(arg). Uses degrees, not radians.
+Examples:
+tan(0) = 0 tan(45) = 1 tan(89.99) = 5729.5779
+
+### toBase
+Type: Function
+Patterns: toBase(n: objects, base: integer between 2 and 36)
+Since: 2.14
+Return Type:: Text
+Patterns:
+- toBase(n: objects, base: integer between 2 and 36)
+Description:
+Turns a number in a string using a specific base (decimal, hexadecimal, octal). For example, converting 32 to hexadecimal (base 16) would be 'toBase(32, 16)', which would return "20". You can use any base between 2 and 36.
+Examples:
+send "Decode this binary number for a prize! %toBase({_guess}, 2)%"
+
+### uuid
+Type: Function
+Patterns: uuid(uuid: string)
+Since: 2.11
+Return Type:: UUID
+Patterns:
+- uuid(uuid: string)
+Description:
+Returns a UUID from the given string. The string must be in the format of a UUID.
+Examples:
+uuid("069a79f4-44e9-4726-a5be-fca90e38aaf5")
+
+### vector
+Type: Function
+Note: New
+Patterns: vector(n: number)
+Since: 2.15
+Return Type:: Vector
+Patterns:
+- vector(n: number)
+Description:
+Creates a vector from a single argument. Equivalent to vector(n, n, n).
+Examples:
+vector(1) # = vector(1, 1, 1)
+
+### world
+Type: Function
+Patterns: world(name: string)
+Since: 2.2
+Return Type:: World
+Patterns:
+- world(name: string)
+Description:
+Gets a world from its name.
+Examples:
+set {_nether} to world("%{_world}%_nether")

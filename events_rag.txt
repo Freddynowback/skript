@@ -1,0 +1,2077 @@
+Skript Documentation - 2.15.0-pre1
+----------------------------------
+
+### At Time
+Type: Event
+Patterns: [on] at %time% [in %worlds%]
+Since: 1.3.4
+Patterns:
+- [on] at %time% [in %worlds%]
+Description:
+An event that occurs at a given minecraft time in every world or only in specific worlds.
+Examples:
+at 18:00 at 7am in "world"
+
+### On Anvil Damage
+Type: Event
+Patterns: [on] anvil damag(e|ing)
+Since: 2.7
+Patterns:
+- [on] anvil damag(e|ing)
+Description:
+Called when an anvil is damaged/broken from being used to repair/rename items.Note: this does not include anvil damage from falling.
+Examples:
+on anvil damage:     cancel the event
+
+### On Anvil Prepare
+Type: Event
+Patterns: [on] anvil prepar(e|ing)
+Since: 2.7
+Patterns:
+- [on] anvil prepar(e|ing)
+Description:
+Called when an item is put in a slot for repair by an anvil. Please note that this event is called multiple times in a single item slot move.
+Examples:
+on anvil prepare:     event-item is set # result item     chance of 5%:         set repair cost to repair cost * 50%         send "You're LUCKY! You got 50% discount." to player
+
+### On AoE Cloud Effect
+Type: Event
+Patterns: [on] (area|AoE) [cloud] effect
+Since: 2.2-dev21
+Patterns:
+- [on] (area|AoE) [cloud] effect
+Description:
+Called when area effect cloud applies its potion effect. This happens every 5 ticks by default.
+Examples:
+on area cloud effect:
+
+### On Arm Swing
+Type: Event
+Patterns: [on] [player] arm swing
+Since: 2.5.1
+Patterns:
+- [on] [player] arm swing
+Description:
+Called when a player swings their arm.
+Examples:
+on arm swing:     send "You swung your arm!"
+
+### On Armor Change
+Type: Event
+Patterns: [on] [player] armo[u]r change[d] [on] [player] %equipment slot% change[d]
+Since: 2.5, 2.11 (equipment slots)
+Patterns:
+- [on] [player] armo[u]r change[d]
+- [on] [player] %equipment slot% change[d]
+Description:
+Called when armor pieces of a player are changed.
+Examples:
+on armor change:     broadcast the old armor item on helmet change:
+
+### On Attempt Attack
+Type: Event
+Note: New
+Patterns: [on] attack attempt [on] attempt[ing] to attack %entity types%
+Since: 2.15
+Patterns:
+- [on] attack attempt
+- [on] attempt[ing] to attack %entity types%
+Description:
+Called when a player attempts to attack an entity. The event will be cancelled as soon as it is fired for non-living entities. Cancelling this event will prevent the attack and any sounds from being played when attacking. Any damage events will not be called if this is cancelled.
+Examples:
+on attack attempt: if event is cancelled: broadcast "%attacker% failed to attack %victim%!" else: broadcast "%attacker% damaged %victim%!" on attempt to attack an animal: cancel event on attempting to attack an entity: if victim is a creeper: cancel event on attempt to attack a zombie or creeper: attacker isn't holding a diamond sword cancel event
+
+### On Bat Toggle Sleep
+Type: Event
+Patterns: [on] bat toggle sleep
+Since: 2.11
+Patterns:
+- [on] bat toggle sleep
+Description:
+Called when a bat attempts to go to sleep or wakes up.
+Examples:
+on bat toggle sleep:
+
+### On Beacon Change Effect
+Type: Event
+Patterns: [on] beacon change effect [on] beacon effect change [on] player chang(e[s]|ing) [of] beacon effect
+Since: 2.10
+Patterns:
+- [on] beacon change effect
+- [on] beacon effect change
+- [on] player chang(e[s]|ing) [of] beacon effect
+Description:
+Called when a player changes the effects of a beacon.
+Examples:
+on beacon effect change:     broadcast event-player     broadcast event-block     broadcast primary beacon effect     broadcast secondary beacon effect on beacon change effect: on player change beacon effect:
+
+### On Beacon Effect
+Type: Event
+Patterns: [on] [primary|secondary] beacon effect [of %potion effect types%] [on] application of [primary|secondary] beacon effect [of %potion effect types%] [on] [primary|secondary] beacon effect apply [of %potion effect types%]
+Since: 2.10
+Patterns:
+- [on] [primary|secondary] beacon effect [of %potion effect types%]
+- [on] application of [primary|secondary] beacon effect [of %potion effect types%]
+- [on] [primary|secondary] beacon effect apply [of %potion effect types%]
+Description:
+Called when a player gets an effect from a beacon.
+Examples:
+on beacon effect:     broadcast applied effect     broadcast event-player     broadcast event-block on primary beacon effect apply of haste: on application of secondary beacon effect: on beacon effect of speed:
+
+### On Beacon Toggle
+Type: Event
+Patterns: [on] beacon toggle [on] beacon activat(e|ion) [on] beacon deactivat(e|ion)
+Since: 2.10
+Patterns:
+- [on] beacon toggle
+- [on] beacon activat(e|ion)
+- [on] beacon deactivat(e|ion)
+Description:
+Called when a beacon is activated or deactivated.
+Examples:
+on beacon toggle: on beacon activate: on beacon deactivate:
+
+### On Bed Enter
+Type: Event
+Patterns: [on] bed enter[ing] [on] [player] enter[ing] [a] bed
+Since: 1.0
+Patterns:
+- [on] bed enter[ing]
+- [on] [player] enter[ing] [a] bed
+Description:
+Called when a player starts sleeping.
+Examples:
+on bed enter:
+
+### On Bed Leave
+Type: Event
+Patterns: [on] bed leav(e|ing) [on] [player] leav(e|ing) [a] bed
+Since: 1.0
+Patterns:
+- [on] bed leav(e|ing)
+- [on] [player] leav(e|ing) [a] bed
+Description:
+Called when a player leaves a bed.
+Examples:
+on player leaving a bed:
+
+### On Bell Resonate
+Type: Event
+Patterns: [on] bell resonat(e|ing)
+Since: 2.9.0
+Patterns:
+- [on] bell resonat(e|ing)
+Description:
+Called when a bell resonates, highlighting nearby raiders.
+Examples:
+on bell resonate:     send "&lt;red&gt;Raiders are nearby!" to all players in radius 32 around event-block
+
+### On Bell Ring
+Type: Event
+Patterns: [on] bell ring[ing]
+Since: 2.9.0
+Patterns:
+- [on] bell ring[ing]
+Description:
+Called when a bell is rung.
+Examples:
+on bell ring:     send "&lt;gold&gt;Ding-dong!&lt;reset&gt;" to all players in radius 10 of event-block
+
+### On Block Damage
+Type: Event
+Patterns: [on] block damag(ing|e)
+Since: 1.0
+Patterns:
+- [on] block damag(ing|e)
+Description:
+Called when a player starts to break a block. You can usually just use the leftclick event for this.
+Examples:
+on block damaging:     if block is tagged with minecraft tag "logs":         send "You can't break the holy log!"
+
+### On Block Drop
+Type: Event
+Patterns: [on] block drop[ping] [[of] %item types/block datas%]
+Since: 2.10
+Patterns:
+- [on] block drop[ping] [[of] %item types/block datas%]
+Description:
+Called when a block broken by a player drops something.event-player: The player that broke the blockpast event-block: The block that was brokenevent-block: The block after being brokenevent-items (or drops): The drops of the blockevent-entities: The entities of the dropped itemsIf the breaking of the block leads to others being broken, such as torches, they will appearin "event-items" and "event-entities".
+Examples:
+on block drop:     broadcast event-player     broadcast past event-block     broadcast event-block     broadcast event-items     broadcast event-entities on block drop of oak log:
+
+### On Block Fertilize
+Type: Event
+Patterns: [on] [block] fertilize
+Since: 2.5
+Requirements: Minecraft 1.13 or newer
+Patterns:
+- [on] [block] fertilize
+Description:
+Called when a player fertilizes blocks.
+Examples:
+on block fertilize:     send "Fertilized %size of fertilized blocks% blocks got fertilized."
+
+### On Block Growth
+Type: Event
+Patterns: [on] (plant|crop|block) grow[(th|ing)] [[of] %item types%]
+Since: 2.2-Fixes-V10
+Patterns:
+- [on] (plant|crop|block) grow[(th|ing)] [[of] %item types%]
+Description:
+Called when a crop grows. Alternative to new form of generic grow event.
+Examples:
+on crop growth:
+
+### On Book Edit
+Type: Event
+Patterns: [on] book (edit|change|write)
+Since: 2.2-dev31
+Patterns:
+- [on] book (edit|change|write)
+Description:
+Called when a player edits a book.
+Examples:
+on book edit:
+
+### On Book Sign
+Type: Event
+Patterns: [on] book sign[ing]
+Since: 2.2-dev31
+Patterns:
+- [on] book sign[ing]
+Description:
+Called when a player signs a book.
+Examples:
+on book sign:
+
+### On Break / Mine
+Type: Event
+Patterns: [on] [block] (break[ing]|min(e|ing)) [[of] %item types/block datas%]
+Since: 1.0 (break), unknown (mine), 2.6 (BlockData support)
+Patterns:
+- [on] [block] (break[ing]|min(e|ing)) [[of] %item types/block datas%]
+Description:
+Called when a block is broken by a player. If you use 'on mine', only events where the broken block dropped something will call the trigger.
+Examples:
+on mine: on break of stone: on break of chest[facing=north]: on break of potatoes[age=7]:
+
+### On Brewing Complete
+Type: Event
+Patterns: [on] brew[ing] [complet(e[d]|ion)|finish[ed]] [(of|for) %item types/potion effect types%]
+Since: 2.13
+Patterns:
+- [on] brew[ing] [complet(e[d]|ion)|finish[ed]] [(of|for) %item types/potion effect types%]
+Description:
+Called when a brewing stand finishes brewing an ingredient and changes the potions.
+Examples:
+on brew:     broadcast event-item on brewing of speed potion: on brew finished for speed 2 potion:
+
+### On Brewing Fuel
+Type: Event
+Patterns: [on] brew[ing [stand]] consum(e|ing) fuel [of %item types%] [on] brew[ing [stand]] fuel consumption [of %item types%]
+Since: 2.13
+Patterns:
+- [on] brew[ing [stand]] consum(e|ing) fuel [of %item types%]
+- [on] brew[ing [stand]] fuel consumption [of %item types%]
+Description:
+Called when a brewing stand is about to use an item to increase its fuel level.
+Examples:
+on brewing consume fuel:     prevent the brewing stand from consuming fuel on brewing fuel consumption of blaze powder:
+
+### On Brewing Start
+Type: Event
+Patterns: [on] brew[ing] start[ed|ing]
+Since: 2.13
+Patterns:
+- [on] brew[ing] start[ed|ing]
+Description:
+Called when a brewing stand starts brewing.
+Examples:
+on brewing start:     set the brewing time to 1 second
+
+### On Broadcast
+Type: Event
+Patterns: [on] broadcast
+Since: 2.10
+Patterns:
+- [on] broadcast
+Description:
+Called when a message is broadcasted.
+Examples:
+on broadcast:     set broadcast-message to "&amp;c[BROADCAST] %broadcasted message%"
+
+### On Bucket Catch Entity
+Type: Event
+Patterns: [on] bucket (catch[ing]|captur(e|ing)) [[of] %entity types%]
+Since: Unknown
+Patterns:
+- [on] bucket (catch[ing]|captur(e|ing)) [[of] %entity types%]
+Description:
+Missing description.
+Examples:
+Missing examples.
+
+### On Bucket Empty
+Type: Event
+Patterns: [on] bucket empty[ing] [on] [player] empty[ing] [a] bucket
+Since: 1.0
+Patterns:
+- [on] bucket empty[ing]
+- [on] [player] empty[ing] [a] bucket
+Description:
+Called when a player empties a bucket. You can also use the place event with a check for water or lava.
+Examples:
+on bucket empty:
+
+### On Bucket fill
+Type: Event
+Patterns: [on] bucket fill[ing] [on] [player] fill[ing] [a] bucket
+Since: 1.0
+Patterns:
+- [on] bucket fill[ing]
+- [on] [player] fill[ing] [a] bucket
+Description:
+Called when a player fills a bucket.
+Examples:
+on player filling a bucket:
+
+### On Burn
+Type: Event
+Patterns: [on] [block] burn[ing] [[of] %item types/block datas%]
+Since: 1.0, 2.6 (BlockData support)
+Patterns:
+- [on] [block] burn[ing] [[of] %item types/block datas%]
+Description:
+Called when a block is destroyed by fire.
+Examples:
+on burn: on burn of oak wood, oak fences, or chests: on burn of oak_log[axis=y]:
+
+### On Can Build Check
+Type: Event
+Patterns: [on] [block] can build check
+Since: 1.0 (basic), 2.0 ([un]cancellable)
+Patterns:
+- [on] [block] can build check
+Description:
+Called when a player rightclicks on a block while holding a block or a placeable item. You can either cancel the event to prevent the block from being built, or uncancel it to allow it.Please note that the data value of the block to be placed is not available in this event, only its ID.
+Examples:
+on block can build check:     cancel event
+
+### On Chat
+Type: Event
+Patterns: [on] chat
+Since: 1.4.1
+Patterns:
+- [on] chat
+Description:
+Called whenever a player chats.Use chat format to change message format.Use chat recipients to edit chat recipients.
+Examples:
+on chat:     if the player has permission "owner":         set the chat format to "<red>[player]<light gray>: <light red>[message]"     else if the player has permission "admin":         set the chat format to "<light red>[player]<light gray>: <orange>[message]"     else: # default message format         set the chat format to "<orange>[player]<light gray>: <white>[message]"
+
+### On Chunk Generate
+Type: Event
+Patterns: [on] chunk (generat|populat)(e|ing)
+Since: 1.0
+Patterns:
+- [on] chunk (generat|populat)(e|ing)
+Description:
+Called after a new chunk was generated.
+Examples:
+on chunk generate:
+
+### On Chunk Load
+Type: Event
+Patterns: [on] chunk load[ing]
+Since: 1.0
+Patterns:
+- [on] chunk load[ing]
+Description:
+Called when a chunk loads. The chunk might or might not contain mobs when it's loaded.
+Examples:
+on chunk load:
+
+### On Chunk Unload
+Type: Event
+Patterns: [on] chunk unload[ing]
+Since: 1.0
+Patterns:
+- [on] chunk unload[ing]
+Description:
+Called when a chunk is unloaded due to not being near any player.
+Examples:
+on chunk unload:
+
+### On Click
+Type: Event
+Patterns: [on] [(right|left)[( |-)]][mouse[( |-)]]click[ing] [on %entity type/item type/block data%] [(with|using|holding) %item type%] [on] [(right|left)[( |-)]][mouse[( |-)]]click[ing] (with|using|holding) %item type% on %entity type/item type/block data%
+Since: 1.0, 2.10 (blockdata)
+Patterns:
+- [on] [(right|left)[( |-)]][mouse[( |-)]]click[ing] [on %entity type/item type/block data%] [(with|using|holding) %item type%]
+- [on] [(right|left)[( |-)]][mouse[( |-)]]click[ing] (with|using|holding) %item type% on %entity type/item type/block data%
+Description:
+Called when a user clicks on a block, an entity or air with or without an item in their hand.Please note that rightclick events with an empty hand while not looking at a block are not sent to the server, so there's no way to detect them.Also note that a leftclick on an entity is an attack and thus not covered by the 'click' event, but the 'damage' event.
+Examples:
+on click: on rightclick holding a fishing rod: on leftclick on a stone or obsidian: on rightclick on a creeper: on click with a sword: on click on chest[facing=north]: on click on campfire[lit=true]:
+
+### On Combust
+Type: Event
+Patterns: [on] combust[ing]
+Since: 1.0
+Patterns:
+- [on] combust[ing]
+Description:
+Called when an entity is set on fire, e.g. by fire or lava, a fireball, or by standing in direct sunlight (zombies, skeletons).
+Examples:
+on combust:
+
+### On Command
+Type: Event
+Patterns: [on] command [%texts%]
+Since: 2.0
+Patterns:
+- [on] command [%texts%]
+Description:
+Called when a player enters a command (not necessarily a Skript command) but you can check if command is a skript command, see Is a Skript command condition.
+Examples:
+on command: on command "/stop": on command "pm Njol ":
+
+### On Connect
+Type: Event
+Patterns: [on] [player] connect[ing]
+Since: 2.0
+Patterns:
+- [on] [player] connect[ing]
+Description:
+Called when the player connects to the server. This event is called before the player actually joins the server, so if you want to prevent players from joining you should prefer this event over on join.
+Examples:
+on connect:     player doesn't have permission "VIP"     number of players is greater than 15     kick the player due to "The last 5 slots are reserved for VIP players."
+
+### On Consume
+Type: Event
+Patterns: [on] [player] ((eat|drink)[ing]|consum(e|ing)) [[of] %item types%]
+Since: 2.0
+Patterns:
+- [on] [player] ((eat|drink)[ing]|consum(e|ing)) [[of] %item types%]
+Description:
+Called when a player is done eating/drinking something, e.g. an apple, bread, meat, milk or a potion.
+Examples:
+on consume:
+
+### On Craft
+Type: Event
+Patterns: [on] [player] craft[ing] [[of] %item types%]
+Since: unknown (before 2.1)
+Patterns:
+- [on] [player] craft[ing] [[of] %item types%]
+Description:
+Called when a player crafts an item.
+Examples:
+on craft:
+
+### On Creeper Power
+Type: Event
+Patterns: [on] creeper power
+Since: 1.0
+Patterns:
+- [on] creeper power
+Description:
+Called when a creeper is struck by lighting and gets powered. Cancel the event to prevent the creeper from being powered.
+Examples:
+on creeper power:
+
+### On Damage
+Type: Event
+Patterns: [on] damag(e|ing) [of %entity type%] [by %entity type%]
+Since: 1.0, 2.7 (by entity)
+Patterns:
+- [on] damag(e|ing) [of %entity type%] [by %entity type%]
+Description:
+Called when an entity receives damage, e.g. by an attack from another entity, lava, fire, drowning, fall, suffocation, etc.
+Examples:
+on damage: on damage of a player: on damage of player by zombie:
+
+### On Death
+Type: Event
+Patterns: [on] death [of %entity types%]
+Since: 1.0
+Patterns:
+- [on] death [of %entity types%]
+Description:
+Called when a living entity (including players) dies.
+Examples:
+on death: on death of player: on death of a wither or ender dragon:     broadcast "A %entity% has been slain in %world%!"
+
+### On Dispense
+Type: Event
+Patterns: [on] dispens(e|ing) [[of] %item types%]
+Since: unknown (before 2.1)
+Patterns:
+- [on] dispens(e|ing) [[of] %item types%]
+Description:
+Called when a dispenser dispenses an item.
+Examples:
+on dispense of iron block:     send "that'd be 19.99 please!"
+
+### On Drop
+Type: Event
+Patterns: [on] [player|entity] drop[ping] [[of] %item types%]
+Since: unknown (before 2.1), 2.7 (entity)
+Patterns:
+- [on] [player|entity] drop[ping] [[of] %item types%]
+Description:
+Called when a player drops an item from their inventory, or an entity drops an item, such as a chicken laying an egg.
+Examples:
+on drop:     if event-item is compass:         cancel event  on entity drop of an egg:     if event-entity is a chicken:         set item of event-dropped item to a diamond
+
+### On Egg Throw
+Type: Event
+Patterns: [on] throw[ing] [of] [an] egg [on] [player] egg throw
+Since: 1.0
+Patterns:
+- [on] throw[ing] [of] [an] egg
+- [on] [player] egg throw
+Description:
+Called when a player throws an egg and it lands. You can just use the shoot event in most cases. However, this event allows modification of properties like the hatched entity type and the number of entities to hatch.
+Examples:
+on throw of an egg:
+
+### On Elytra Boost
+Type: Event
+Patterns: [on] elytra boost
+Since: 2.10
+Patterns:
+- [on] elytra boost
+Description:
+Called when a player uses a firework to boost their fly speed when flying with an elytra.
+Examples:
+on elytra boost:     if the used firework will be consumed:         prevent the used firework from being consume
+
+### On Enchant
+Type: Event
+Patterns: [on] [item] enchant
+Since: 2.5
+Patterns:
+- [on] [item] enchant
+Description:
+Called when a player successfully enchants an item. To get the enchanted item, see the enchant item expression
+Examples:
+on enchant:     if the clicked button is 1: # offer 1         set the applied enchantments to sharpness 10 and unbreaking 10
+
+### On Enchant Prepare
+Type: Event
+Patterns: [on] [item] enchant prepare
+Since: 2.5
+Patterns:
+- [on] [item] enchant prepare
+Description:
+Called when a player puts an item into enchantment table. This event may be called multiple times. To get the enchant item, see the enchant item expression
+Examples:
+on enchant prepare:     set enchant offer 1 to sharpness 1     set the cost of enchant offer 1 to 10 levels
+
+### On Enderman Enrage
+Type: Event
+Patterns: [on] enderman (enrage|anger)
+Since: 2.9.0
+Patterns:
+- [on] enderman (enrage|anger)
+Description:
+Called when an enderman gets mad because a player looked at them.Note: This does not stop enderman from targeting the player as a result of getting damaged.
+Examples:
+# Stops endermen from getting angry players with the permission "safeFrom.enderman" on enderman enrage:     if player has permission "safeFrom.enderman":         cancel event
+
+### On Enderman/Sheep/Silverfish/Falling Block
+Type: Event
+Patterns: [on] enderman place [on] enderman pickup [on] sheep eat [on] silverfish enter [on] silverfish exit [on] falling block fall[ing] [on] falling block land[ing] [on] (entity|%*-entitydatas%) chang(e|ing) block[s]
+Since: unknown, 2.5.2 (falling block), 2.8.0 (any entity support)
+Patterns:
+- [on] enderman place
+- [on] enderman pickup
+- [on] sheep eat
+- [on] silverfish enter
+- [on] silverfish exit
+- [on] falling block fall[ing]
+- [on] falling block land[ing]
+- [on] (entity|%*-entitydatas%) chang(e|ing) block[s]
+Description:
+Called when an enderman places or picks up a block, a sheep eats grass, a silverfish boops into/out of a block or a falling block lands and turns into a block respectively.event-block represents the old block and event-blockdata represents the new replacement that'll be applied to the block.
+Examples:
+on sheep eat:     kill event-entity     broadcast "A sheep stole some grass!"  on falling block land:     event-entity is a falling dirt     cancel event
+
+### On Entity Breed
+Type: Event
+Patterns: [on] [entity] breed[ing] [of %entity types%]
+Since: 2.10
+Patterns:
+- [on] [entity] breed[ing] [of %entity types%]
+Description:
+Called whenever two animals begin to conceive a child. The type can be specified.
+Examples:
+on breeding of llamas:     send "When a %breeding mother% and %breeding father% love each other very much they make %offspring%" to breeder
+
+### On Entity Dismount
+Type: Event
+Patterns: [on] dismount[ing]
+Since: 2.2-dev13b
+Patterns:
+- [on] dismount[ing]
+Description:
+Called when an entity dismounts.
+Examples:
+on dismount:     kill event-entity
+
+### On Entity Jump
+Type: Event
+Patterns: [on] entity jump[ing]
+Since: 2.7
+Patterns:
+- [on] entity jump[ing]
+Description:
+Called when an entity jumps.
+Examples:
+on entity jump:     if entity is a wither skeleton:         cancel event
+
+### On Entity Mount
+Type: Event
+Patterns: [on] mount[ing]
+Since: 2.2-dev13b
+Patterns:
+- [on] mount[ing]
+Description:
+Called when entity starts riding another.
+Examples:
+on mount:     cancel event
+
+### On Entity Potion Effect
+Type: Event
+Patterns: [on] entity potion effect [modif[y|ication]] [[of] %potion effect types%] [%potion actions%] [due to %potion causes%]
+Since: 2.102.14 (action support)
+Patterns:
+- [on] entity potion effect [modif[y|ication]] [[of] %potion effect types%] [%potion actions%] [due to %potion causes%]
+Description:
+Called when an entity's potion effect is modified.
+Examples:
+on entity potion effect modification:     broadcast "A potion effect was added to %event-entity%!" on entity potion effect of night vision added:     message "You can now see in the dark!" on entity potion effect of strength removed:     message "You're now weaker!"
+
+### On Entity Shoot Bow
+Type: Event
+Patterns: [on] %entity types% shoot[ing] (bow|projectile)
+Since: 2.11
+Patterns:
+- [on] %entity types% shoot[ing] (bow|projectile)
+Description:
+Called when an entity shoots a bow. event-entity refers to the shot projectile/entity.
+Examples:
+on player shoot bow:     chance of 30%:         damage event-slot by 10         send "Your bow has taken increased damage!" to shooter on stray shooting bow:     set {_e} to event-entity     spawn a cow at {_e}:         set velocity of entity to velocity of {_e}     set event-entity to last spawned entity
+
+### On Entity Transform
+Type: Event
+Patterns: [on] (entit(y|ies)|%*-entitydatas%) transform[ing] [due to %transform reasons%]
+Since: 2.8.0
+Patterns:
+- [on] (entit(y|ies)|%*-entitydatas%) transform[ing] [due to %transform reasons%]
+Description:
+Called when an entity is about to be replaced by another entity.Examples when it's called include; when a zombie gets cured and a villager spawns, an entity drowns in water like a zombie that turns to a drown, an entity that gets frozen in powder snow, a mooshroom that when sheared, spawns a new cow.
+Examples:
+on a zombie transforming due to curing: on mooshroom transforming: on zombie, skeleton or slime transform:
+
+### On Experience Change
+Type: Event
+Patterns: [on] [player] (level progress|[e]xp|experience) (change|update|increase|decrease)
+Since: 2.7
+Patterns:
+- [on] [player] (level progress|[e]xp|experience) (change|update|increase|decrease)
+Description:
+Called when a player's experience changes.
+Examples:
+on level progress change:     set {_xp} to event-experience     broadcast "%{_xp}%"
+
+### On Experience Cooldown Change
+Type: Event
+Patterns: [on] player (experience|[e]xp) cooldown change
+Since: 2.10
+Patterns:
+- [on] player (experience|[e]xp) cooldown change
+Description:
+Called when a player's experience cooldown changes.Experience cooldown is how long until a player can pick up another orb of experience.
+Examples:
+on player experience cooldown change:     broadcast event-player     broadcast event-timespan     broadcast past event-timespan     broadcast xp cooldown change reason
+
+### On Experience Spawn
+Type: Event
+Patterns: [on] [e]xp[erience] [orb] spawn [on] spawn of [a[n]] [e]xp[erience] [orb]
+Since: 2.0
+Patterns:
+- [on] [e]xp[erience] [orb] spawn
+- [on] spawn of [a[n]] [e]xp[erience] [orb]
+Description:
+Called whenever experience is about to spawn.Please note that this event will not fire for xp orbs spawned by plugins (including Skript) with Bukkit.
+Examples:
+on xp spawn:     world is "minigame_world"     cancel event
+
+### On Explode
+Type: Event
+Patterns: [on] explo(d(e|ing)|sion)
+Since: 1.0
+Patterns:
+- [on] explo(d(e|ing)|sion)
+Description:
+Called when an entity (a primed TNT or a creeper) explodes.
+Examples:
+on explosion:
+
+### On Explosion Prime
+Type: Event
+Patterns: [on] explosion prime
+Since: 1.0
+Patterns:
+- [on] explosion prime
+Description:
+Called when an explosive is primed, i.e. an entity will explode shortly. Creepers can abort the explosion if the player gets too far away, while TNT will explode for sure after a short time.
+Examples:
+on explosion prime:
+
+### On Fade
+Type: Event
+Patterns: [on] [block] fad(e|ing) [[of] %item types/block datas%]
+Since: 1.0, 2.6 (BlockData support)
+Patterns:
+- [on] [block] fad(e|ing) [[of] %item types/block datas%]
+Description:
+Called when a block 'fades away', e.g. ice or snow melts.
+Examples:
+on fade of snow or blue ice: on fade of snow[layers=2]
+
+### On Firework Explode
+Type: Event
+Patterns: [on] [a] firework explo(d(e|ing)|sion) [colo[u]red %colors%]
+Since: 2.4
+Patterns:
+- [on] [a] firework explo(d(e|ing)|sion) [colo[u]red %colors%]
+Description:
+Called when a firework explodes.
+Examples:
+on firework explode:     if event-colors contains red: on firework exploding colored red, light green and black: on firework explosion colored rgb 0, 255, 0:     broadcast "A firework colored %colors% was exploded at %location%!"
+
+### On First Join
+Type: Event
+Patterns: [on] first (join|login)
+Since: 1.3.7
+Patterns:
+- [on] first (join|login)
+Description:
+Called when a player joins the server for the first time.
+Examples:
+on first join:     broadcast "Welcome %player% to the server!"
+
+### On Fishing
+Type: Event
+Patterns: [on] [fishing] (line|rod) cast [on] fish (caught|catch) [on] entity (hook[ed]|caught|catch) [on] (bobber|hook) (in|hit) ground [on] fish (escape|get away) [on] [fishing] (rod|line) reel in [on] fish bit(e|ing) [on] (fish approach[ing]|(bobber|hook) lure[d]) [on] fishing state change[d]
+Since: 2.102.11 (state change)
+Patterns:
+- [on] [fishing] (line|rod) cast
+- [on] fish (caught|catch)
+- [on] entity (hook[ed]|caught|catch)
+- [on] (bobber|hook) (in|hit) ground
+- [on] fish (escape|get away)
+- [on] [fishing] (rod|line) reel in
+- [on] fish bit(e|ing)
+- [on] (fish approach[ing]|(bobber|hook) lure[d])
+- [on] fishing state change[d]
+Description:
+Called when a player triggers a fishing event.An entity hooked event is triggered when an entity gets caught by a fishing rod.A fish escape event is called when the player fails to click on time, and the fish escapes.A fish approaching event is when the bobber is waiting to be hooked, and a fish is approaching.A fishing state change event is triggered whenever the fishing state changes.
+Examples:
+on fishing line cast:     send "You caught a fish!" to player on entity caught:     push event-entity vector from entity to player on fishing state change:     if event-fishing state is fish caught:         broadcast "A fish has been caught!"
+
+### On Flight Toggle
+Type: Event
+Patterns: [on] [player] flight toggl(e|ing) [on] [player] toggl(e|ing) flight
+Since: 2.2-dev36
+Patterns:
+- [on] [player] flight toggl(e|ing)
+- [on] [player] toggl(e|ing) flight
+Description:
+Called when a players stops/starts flying.
+Examples:
+on flight toggle:     if {game::%player%::playing} exists:         cancel event
+
+### On Flow
+Type: Event
+Patterns: [on] [block] flow[ing] [on] block mov(e|ing)
+Since: 1.0
+Patterns:
+- [on] [block] flow[ing]
+- [on] block mov(e|ing)
+Description:
+Called when a blocks flows or teleports to another block. This not only applies to water and lava, but teleporting dragon eggs as well.
+Examples:
+on block flow:     if event-block is water:         broadcast "Build more dams! It's starting to get wet in here"
+
+### On Form
+Type: Event
+Patterns: [on] [block] form[ing] [[of] %item types/block datas%]
+Since: 1.0, 2.6 (BlockData support)
+Patterns:
+- [on] [block] form[ing] [[of] %item types/block datas%]
+Description:
+Called when a block is created, but not by a player, e.g. snow forms due to snowfall, water freezes in cold biomes. This isn't called when block spreads (mushroom growth, water physics etc.), as it has its own event (see spread event).
+Examples:
+on form of snow:
+
+### On Fuel Burn
+Type: Event
+Patterns: [on] [furnace] fuel burn[ing] [of %item types%]
+Since: 1.0, 2.10 (specific item)
+Patterns:
+- [on] [furnace] fuel burn[ing] [of %item types%]
+Description:
+Called when a furnace burns an item from its fuel slot.
+Examples:
+on fuel burning:     broadcast fuel burned     if burned fuel is coal:         add 20 seconds to burn time
+
+### On Furnace Item Extract
+Type: Event
+Patterns: [on] furnace [item] extract[ion] [of %item types%]
+Since: 2.10
+Patterns:
+- [on] furnace [item] extract[ion] [of %item types%]
+Description:
+Called when a player takes any item out of the furnace.
+Examples:
+on furnace extract:     if event-items is an iron ingot:         remove event-items from event-player's inventory
+
+### On Gamemode Change
+Type: Event
+Patterns: [on] game[ ]mode change [to %gamemode%]
+Since: 1.0
+Patterns:
+- [on] game[ ]mode change [to %gamemode%]
+Description:
+Called when a player's gamemode changes.
+Examples:
+on gamemode change: on gamemode change to adventure:
+
+### On Gliding State Change
+Type: Event
+Patterns: [on] (gliding state change|toggl(e|ing) gliding)
+Since: 2.2-dev21
+Patterns:
+- [on] (gliding state change|toggl(e|ing) gliding)
+Description:
+Called when an entity toggles glider on or off, or when server toggles gliding state of an entity forcibly.
+Examples:
+on toggling gliding:     cancel the event # bad idea, but you CAN do it!
+
+### On Grow
+Type: Event
+Patterns: [on] grow[th] [of (%tree types%|%item types/block datas%)] [on] grow[th] from %item types/block datas% [on] grow[th] [in]to (%tree types%|%item types/block datas%) [on] grow[th] from %item types/block datas% [in]to (%tree types%|%item types/block datas%)
+Since: 1.0, 2.2-dev20 (plants), 2.8.0 (from, into, blockdata)
+Patterns:
+- [on] grow[th] [of (%tree types%|%item types/block datas%)]
+- [on] grow[th] from %item types/block datas%
+- [on] grow[th] [in]to (%tree types%|%item types/block datas%)
+- [on] grow[th] from %item types/block datas% [in]to (%tree types%|%item types/block datas%)
+Description:
+Called when a tree, giant mushroom or plant grows to next stage."of" matches any grow event, "from" matches only the old state, "into" matches only the new state,and "from into" requires matching both the old and new states.Using "and" lists in this event is equivalent to using "or" lists. The event will trigger if any one of the elements is what grew.
+Examples:
+on grow: on grow of tree: on grow of wheat[age=7]: on grow from a sapling: on grow into tree: on grow from a sapling into tree: on grow of wheat, carrots, or potatoes: on grow into tree, giant mushroom, cactus: on grow from wheat[age=0] to wheat[age=1] or wheat[age=2]:
+
+### On Hand Item Swap
+Type: Event
+Patterns: [on] swap[ping of] [(hand|held)] item[s]
+Since: 2.3
+Patterns:
+- [on] swap[ping of] [(hand|held)] item[s]
+Description:
+Called whenever a player swaps the items in their main- and offhand slots.Works also when one or both of the slots are empty.The event is called before the items are actually swapped,so when you use the player's tool or player's offtool expressions,they will return the values before the swap -this enables you to cancel the event before anything happens.
+Examples:
+on swap hand items:     event-player's tool is a diamond sword     cancel event
+
+### On Harvest Block
+Type: Event
+Patterns: [on] [player] [block|crop] harvest[ing] [of %item types/block datas%]
+Since: 2.12
+Patterns:
+- [on] [player] [block|crop] harvest[ing] [of %item types/block datas%]
+Description:
+Called when a player harvests a block. A block being harvested is when a block drops items and the state of the block is changed, but the block is not broken. An example is harvesting berries from a berry bush.
+Examples:
+on player block harvest:     send "You have harvested %event-block% that dropped %event-items% using your %item of event-slot% in your %event-equipment slot%" on crop harvesting of sweet berry bush:     chance 5%:         set drops to a diamond     chance 1%         cancel the drops
+
+### On Heal
+Type: Event
+Patterns: [on] heal[ing] [of %entity types%] [(from|due to|by) %heal reasons%] [on] %entity types% heal[ing] [(from|due to|by) %heal reasons%]
+Since: 1.0, 2.9.0 (by reason)
+Patterns:
+- [on] heal[ing] [of %entity types%] [(from|due to|by) %heal reasons%]
+- [on] %entity types% heal[ing] [(from|due to|by) %heal reasons%]
+Description:
+Called when an entity is healed, e.g. by eating (players), being fed (pets), or by the effect of a potion of healing (overworld mobs) or harm (nether mobs).
+Examples:
+on heal: on player healing from a regeneration potion: on healing of a zombie, cow or a wither:     heal reason is healing potion     cancel event
+
+### On Horse Jump
+Type: Event
+Patterns: [on] horse jump
+Since: 2.5.1
+Patterns:
+- [on] horse jump
+Description:
+Called when a horse jumps.
+Examples:
+on horse jump:     push event-entity upwards at speed 2
+
+### On Hunger Meter Change
+Type: Event
+Patterns: [on] (food|hunger) (level|met(er|re)|bar) chang(e|ing)
+Since: 1.4.4
+Patterns:
+- [on] (food|hunger) (level|met(er|re)|bar) chang(e|ing)
+Description:
+Called when the hunger bar of a player changes, i.e. either increases by eating or decreases over time.
+Examples:
+on food bar change:
+
+### On Ignition
+Type: Event
+Patterns: [on] [block] ignit(e|ion)
+Since: 1.0
+Patterns:
+- [on] [block] ignit(e|ion)
+Description:
+Called when a block starts burning, i.e. a fire block is placed next to it and this block is flammable.The burn event will be called when the block is about do be destroyed by the fire.
+Examples:
+on block ignite:     if event-block is a ladder:         cancel event
+
+### On Inventory Click
+Type: Event
+Patterns: [on] [player] inventory(-| )click[ing] [[at] %item types%]
+Since: 2.2-Fixes-V10
+Patterns:
+- [on] [player] inventory(-| )click[ing] [[at] %item types%]
+Description:
+Called when clicking on inventory slot.
+Examples:
+on inventory click:     if event-item is stone:         give player 1 stone         remove 20$ from player's balance
+
+### On Inventory Close
+Type: Event
+Patterns: [on] inventory clos(ing|e[d])
+Since: 2.2-dev21
+Patterns:
+- [on] inventory clos(ing|e[d])
+Description:
+Called when player's currently viewed inventory is closed.
+Examples:
+on inventory close:     if player's location is {location}:         send "You exited the shop!"
+
+### On Inventory Drag
+Type: Event
+Patterns: [on] inventory drag[ging]
+Since: 2.7
+Patterns:
+- [on] inventory drag[ging]
+Description:
+Called when a player drags an item in their cursor across the inventory.
+Examples:
+on inventory drag:     if player's current inventory is {_gui}:         send "You can't drag your items here!" to player         cancel event
+
+### On Inventory Item Move
+Type: Event
+Patterns: [on] inventory item (move|transport) [on] inventory (mov(e|ing)|transport[ing]) [an] item
+Since: 2.8.0
+Patterns:
+- [on] inventory item (move|transport)
+- [on] inventory (mov(e|ing)|transport[ing]) [an] item
+Description:
+Called when an entity or block (e.g. hopper) tries to move items directly from one inventory to another.When this event is called, the initiator may have already removed the item from the source inventory and is ready to move it into the destination inventory.If this event is cancelled, the items will be returned to the source inventory.
+Examples:
+on inventory item move:     broadcast "%holder of past event-inventory% is transporting %event-item% to %holder of event-inventory%!"
+
+### On Inventory Open
+Type: Event
+Patterns: [on] inventory open[ed]
+Since: 2.2-dev21
+Patterns:
+- [on] inventory open[ed]
+Description:
+Called when an inventory is opened for player.
+Examples:
+on inventory open:     close player's inventory
+
+### On Inventory Pickup
+Type: Event
+Patterns: [on] inventory pick[ ]up
+Since: 2.5.1
+Patterns:
+- [on] inventory pick[ ]up
+Description:
+Called when an inventory (a hopper, a hopper minecart, etc.) picks up an item
+Examples:
+on inventory pickup:
+
+### On Inventory Slot Change
+Type: Event
+Patterns: [on] [player] inventory slot chang(e|ing)
+Since: 2.7
+Patterns:
+- [on] [player] inventory slot chang(e|ing)
+Description:
+Called when a slot in a player's inventory is changed.Warning: setting the event-slot to a new item can result in an infinite loop.
+Examples:
+on inventory slot change:     if event-item is a diamond:         send "You obtained a diamond!" to player
+
+### On Item Break
+Type: Event
+Patterns: [on] [player] tool break[ing] [on] [player] break[ing] [(a|the)] tool
+Since: 2.1.1
+Patterns:
+- [on] [player] tool break[ing]
+- [on] [player] break[ing] [(a|the)] tool
+Description:
+Called when a player breaks their tool because its damage reached the maximum value.This event cannot be cancelled.
+Examples:
+on tool break:
+
+### On Item Damage
+Type: Event
+Patterns: [on] item damag(e|ing)
+Since: 2.5
+Patterns:
+- [on] item damag(e|ing)
+Description:
+Called when an item is damaged. Most tools are damaged by using them; armor is damaged when the wearer takes damage.
+Examples:
+on item damage:     cancel event
+
+### On Item Despawn
+Type: Event
+Patterns: [on] (item[ ][stack]|[item] %item types%) despawn[ing] [on] [item[ ][stack]] despawn[ing] [[of] %item types%]
+Since: 2.2-dev35
+Patterns:
+- [on] (item[ ][stack]|[item] %item types%) despawn[ing]
+- [on] [item[ ][stack]] despawn[ing] [[of] %item types%]
+Description:
+Called when an item is about to be despawned from the world, usually 5 minutes after it was dropped.
+Examples:
+on item despawn of diamond:     send "Not my precious!"     cancel event
+
+### On Item Mend
+Type: Event
+Patterns: [on] item mend[ing]
+Since: 2.5.1
+Requirements: Minecraft 1.13 or newer
+Patterns:
+- [on] item mend[ing]
+Description:
+Called when a player has an item repaired via the Mending enchantment.
+Examples:
+on item mend:     chance of 50%:         cancel the event         send "Oops! Mending failed!" to player
+
+### On Item Merge
+Type: Event
+Patterns: [on] (item[ ][stack]|[item] %item types%) merg(e|ing) [on] item[ ][stack] merg(e|ing) [[of] %item types%]
+Since: 2.2-dev35
+Patterns:
+- [on] (item[ ][stack]|[item] %item types%) merg(e|ing)
+- [on] item[ ][stack] merg(e|ing) [[of] %item types%]
+Description:
+Called when dropped items merge into a single stack. event-entity will be the entity which is trying to merge, and future event-entity will be the entity which is being merged into.
+Examples:
+on item merge of gold blocks:     cancel event
+
+### On Item Spawn
+Type: Event
+Patterns: [on] item spawn[ing] [[of] %item types%]
+Since: unknown (before 2.1)
+Patterns:
+- [on] item spawn[ing] [[of] %item types%]
+Description:
+Called whenever an item stack is spawned in a world, e.g. as drop of a block or mob, a player throwing items out of their inventory, or a dispenser dispensing an item (not shooting it).
+Examples:
+on item spawn of iron sword:     broadcast "Someone dropped an iron sword!"
+
+### On Join
+Type: Event
+Patterns: [on] [player] (login|logging in|join[ing])
+Since: 1.0
+Patterns:
+- [on] [player] (login|logging in|join[ing])
+Description:
+Called when the player joins the server. The player is already in a world when this event is called, so if you want to prevent players from joining you should prefer on connect over this event.
+Examples:
+on join:     message "Welcome on our awesome server!"     broadcast "%player% just joined the server!"
+
+### On Jump
+Type: Event
+Patterns: [on] [player] jump[ing]
+Since: 2.3
+Patterns:
+- [on] [player] jump[ing]
+Description:
+Called whenever a player jumps.This event requires PaperSpigot.
+Examples:
+on jump:     event-player does not have permission "jump"     cancel event
+
+### On Kick
+Type: Event
+Patterns: [on] [player] (kick|being kicked)
+Since: 1.0
+Patterns:
+- [on] [player] (kick|being kicked)
+Description:
+Called when a player is kicked from the server. You can change the kick message or cancel the event entirely.
+Examples:
+on kick:
+
+### On Language Change
+Type: Event
+Patterns: [on] [player] (language|locale) chang(e|ing) [on] [player] chang(e|ing) (language|locale)
+Since: 2.3
+Patterns:
+- [on] [player] (language|locale) chang(e|ing)
+- [on] [player] chang(e|ing) (language|locale)
+Description:
+Called after a player changed their language in the game settings. You can use the language expression to get the current language of the player.
+Examples:
+on language change:     if player's language starts with "en":         send "Hello!"
+
+### On Leash / Unleash
+Type: Event
+Patterns: [on] [player] [un]leash[ing] [of %entity types%]
+Since: 2.10
+Patterns:
+- [on] [player] [un]leash[ing] [of %entity types%]
+Description:
+Called when an entity is leashed or unleashed. Cancelling these events will prevent the leashing or unleashing from occurring.
+Examples:
+on player leash of a sheep:     send "Baaaaa--" to player  on player leash:     send "&lt;%event-entity%&gt; Let me go!" to player  on unleash:     broadcast "&lt;%event-entity%&gt; I'm free"  on player unleash:     send "&lt;%event-entity%&gt; Thanks for freeing me!" to player
+
+### On Leaves Decay
+Type: Event
+Patterns: [on] leaves decay[ing]
+Since: 1.0
+Patterns:
+- [on] leaves decay[ing]
+Description:
+Called when a leaf block decays due to not being connected to a tree.
+Examples:
+on leaves decay:
+
+### On Level Change
+Type: Event
+Patterns: [on] [player] level (change|up|down)
+Since: 1.0, 2.4 (level up/down)
+Patterns:
+- [on] [player] level (change|up|down)
+Description:
+Called when a player's level changes, e.g. by gathering experience or by enchanting something.
+Examples:
+on level change:
+
+### On Lightning Strike
+Type: Event
+Patterns: [on] lightning [strike]
+Since: 1.0
+Patterns:
+- [on] lightning [strike]
+Description:
+Called when lightning strikes.
+Examples:
+on lightning:     spawn a zombie at location of event-entity
+
+### On Loot Generate
+Type: Event
+Patterns: [on] loot generat(e|ing)
+Since: 2.7
+Patterns:
+- [on] loot generat(e|ing)
+Description:
+Called when a loot table of an inventory is generated in the world.For example, when opening a shipwreck chest.
+Examples:
+on loot generate:     chance of 10%     add 64 diamonds to the loot     send "You hit the jackpot at %event-location%!"
+
+### On Love Mode Enter
+Type: Event
+Patterns: [on] [entity] enter[s] love mode [on] [entity] love mode [enter]
+Since: 2.10
+Patterns:
+- [on] [entity] enter[s] love mode
+- [on] [entity] love mode [enter]
+Description:
+Called whenever an entity enters a state of being in love.
+Examples:
+on love mode enter:     cancel event # No one is allowed love here
+
+### On Move / Rotate
+Type: Event
+Patterns: [on] %entity type% (move|walk|step|(turn[ing] around|rotate)) [on] %entity type% (move|walk|step) or (turn[ing] around|rotate) [on] %entity type% (turn[ing] around|rotate) or (move|walk|step)
+Since: 2.6, 2.8.0 (turn around)
+Patterns:
+- [on] %entity type% (move|walk|step|(turn[ing] around|rotate))
+- [on] %entity type% (move|walk|step) or (turn[ing] around|rotate)
+- [on] %entity type% (turn[ing] around|rotate) or (move|walk|step)
+Description:
+Called when a player or entity moves or rotates their head.NOTE: Move event will only be called when the entity/player moves position, keyword 'turn around' is for orientation (ie: looking around), and the combined syntax listens for both.NOTE: These events can be performance heavy as they are called quite often.
+Examples:
+on player move:     if player does not have permission "player.can.move":         cancel event on skeleton move:     if event-entity is not in world "world":         kill event-entity on player turning around:     send action bar "You are currently turning your head around!" to player
+
+### On Move On
+Type: Event
+Patterns: [on] (step|walk)[ing] (on|over) %*item types%
+Since: 2.0
+Patterns:
+- [on] (step|walk)[ing] (on|over) %*item types%
+Description:
+Called when a player moves onto a certain type of block.Please note that using this event can cause lag if there are many players online.
+Examples:
+on walking on dirt or grass: on stepping on stone:
+
+### On Physics
+Type: Event
+Patterns: [on] [block] physics
+Since: 1.4.6
+Patterns:
+- [on] [block] physics
+Description:
+Called when a physics check is done on a block. By cancelling this event you can prevent some things from happening, e.g. sand falling, dirt turning into grass, torches dropping if their supporting block is destroyed, etc.Please note that using this event might cause quite some lag since it gets called extremely often.
+Examples:
+# prevents sand from falling on block physics:     block is sand     cancel event
+
+### On Pick Up
+Type: Event
+Patterns: [on] [(player|entity)] (pick[ ]up|picking up) [[of] %item types%]
+Since: unknown (before 2.1), 2.5 (entity)
+Patterns:
+- [on] [(player|entity)] (pick[ ]up|picking up) [[of] %item types%]
+Description:
+Called when a player/entity picks up an item. Please note that the item is still on the ground when this event is called.
+Examples:
+on pick up: on entity pickup of wheat:
+
+### On Pig Zap
+Type: Event
+Patterns: [on] pig[ ]zap
+Since: 1.0
+Patterns:
+- [on] pig[ ]zap
+Description:
+Called when a pig is stroke by lightning and transformed into a zombie pigman. Cancel the event to prevent the transformation.
+Examples:
+on pig zap:
+
+### On Piglin Barter
+Type: Event
+Patterns: [on] piglin (barter[ing]|trad(e|ing))
+Since: 2.10
+Patterns:
+- [on] piglin (barter[ing]|trad(e|ing))
+Description:
+Called when a piglin finishes bartering. A piglin may start bartering after picking up an item on its bartering list.Cancelling will prevent piglins from dropping items, but will still make them pick up the input.
+Examples:
+on piglin barter:     if barter drops contain diamond:         send "Diamonds belong in the money pit!" to player         cancel event
+
+### On Piston Extend
+Type: Event
+Patterns: [on] piston extend[ing]
+Since: 1.0
+Patterns:
+- [on] piston extend[ing]
+Description:
+Called when a piston is about to extend.
+Examples:
+on piston extend:     broadcast "A piston is extending!"
+
+### On Piston Retract
+Type: Event
+Patterns: [on] piston retract[ing]
+Since: 1.0
+Patterns:
+- [on] piston retract[ing]
+Description:
+Called when a piston is about to retract.
+Examples:
+on piston retract:     broadcast "A piston is retracting!"
+
+### On Place
+Type: Event
+Patterns: [on] [block] (plac(e|ing)|build[ing]) [[of] %item types/block datas%]
+Since: 1.0, 2.6 (BlockData support)
+Patterns:
+- [on] [block] (plac(e|ing)|build[ing]) [[of] %item types/block datas%]
+Description:
+Called when a player places a block.
+Examples:
+on place: on place of a furnace, crafting table or chest: on break of chest[type=right] or chest[type=left]
+
+### On Player Chunk Enter
+Type: Event
+Patterns: [on] [player] (enter[s] [a] chunk|chunk enter[ing])
+Since: 2.7
+Patterns:
+- [on] [player] (enter[s] [a] chunk|chunk enter[ing])
+Description:
+Called when a player enters a chunk. Note that this event is based on 'player move' event, and may be called frequent internally.
+Examples:
+on player enters a chunk:     send "You entered a chunk: %past event-chunk% -&gt; %event-chunk%!" to player
+
+### On Player Deep Sleep
+Type: Event
+Patterns: [on] [player] deep sleep[ing]
+Since: 2.7
+Patterns:
+- [on] [player] deep sleep[ing]
+Description:
+Called when a player has slept long enough to count as passing the night/storm.Cancelling this event will prevent the player from being counted as deeply sleeping unless they exit and re-enter the bed.
+Examples:
+on player deep sleeping:     send "Zzzz.." to player
+
+### On Player Input
+Type: Event
+Patterns: [on] [player] (toggle|toggling|press[ing]|release|releasing) of (%input keys%|(an|any) input key) [on] ([player] %input keys%|[an|player] input key) (toggle|toggling|press[ing]|release|releasing)
+Since: 2.10
+Requirements: Minecraft 1.21.3+
+Patterns:
+- [on] [player] (toggle|toggling|press[ing]|release|releasing) of (%input keys%|(an|any) input key)
+- [on] ([player] %input keys%|[an|player] input key) (toggle|toggling|press[ing]|release|releasing)
+Description:
+Called when a player sends an updated input to the server.Note: The input keys event value is the set of keys the player is currently pressing, not the keys that were pressed or released.
+Examples:
+on input key press:     send "You are pressing: %event-inputkeys%" to player
+
+### On Player Pick Item
+Type: Event
+Note: New
+Patterns: [on] [player] pick[ing] [of] [an|any] item [on] [player] pick[ing] [of] [a|any] block [on] [player] pick[ing] [of] [an|any] entity [on] [player] pick[ing] [of] %entity type/item type/block data%
+Since: 2.15
+Requirements: 1.21.5+
+Patterns:
+- [on] [player] pick[ing] [of] [an|any] item
+- [on] [player] pick[ing] [of] [a|any] block
+- [on] [player] pick[ing] [of] [an|any] entity
+- [on] [player] pick[ing] [of] %entity type/item type/block data%
+Description:
+Called when a player picks an item, block or an entity using the pick block key (default middle mouse button).The past event-slot represents the slot containing the item that will be put into the players hotbar, or nothing, if the item is not in the inventory.The event-slot represents the slot in the hotbar where the picked item will be placed.Both event-slots may be set to new slots.
+Examples:
+on player picking a diamond block:     cancel event     send "You cannot pick diamond blocks!" to the player
+
+### On Player Pickup Arrow
+Type: Event
+Patterns: [on] [player] (pick[ing| ]up [an] arrow|arrow pick[ing| ]up)
+Since: 2.8.0
+Patterns:
+- [on] [player] (pick[ing| ]up [an] arrow|arrow pick[ing| ]up)
+Description:
+Called when a player picks up an arrow from the ground.
+Examples:
+on arrow pickup:     cancel the event     teleport event-projectile to block 5 above event-projectile
+
+### On Player Trade
+Type: Event
+Patterns: [on] player trad(e|ing)
+Since: 2.7
+Patterns:
+- [on] player trad(e|ing)
+Description:
+Called when a player has traded with a villager.
+Examples:
+on player trade:     chance of 50%:         cancel event         send "The trade was somehow denied!" to player
+
+### On Player World Change
+Type: Event
+Patterns: [on] [player] world chang(ing|e[d])
+Since: 2.2-dev28
+Patterns:
+- [on] [player] world chang(ing|e[d])
+Description:
+Called when a player enters a world. Does not work with other entities!
+Examples:
+on player world change:     world is "city"     send "Welcome to the City!"
+
+### On Portal
+Type: Event
+Patterns: [on] [player] portal [on] entity portal
+Since: 1.0, 2.5.3 (entities), 2.13 (location changers)
+Patterns:
+- [on] [player] portal
+- [on] entity portal
+Description:
+Called when a player or an entity uses a nether or end portal. Note that 'on entity portal' event does not apply to players.Cancel the event to prevent the entity from teleporting.
+Examples:
+on portal:     broadcast "%player% has entered a portal!"  on player portal:     player's world is world("wilderness")     set world of event-location to player's world     add 9000 to x-pos of event-location  on entity portal:     broadcast "A %type of event-entity% has entered a portal!
+
+### On Portal Create
+Type: Event
+Patterns: [on] portal creat(e|ion)
+Since: 1.0, 2.5.3 (event-entity support)
+Requirements: Minecraft 1.14+ (event-entity support)
+Patterns:
+- [on] portal creat(e|ion)
+Description:
+Called when a portal is created, either by a player or mob lighting an obsidian frame on fire, or by a nether portal creating its teleportation target in the nether/overworld.In Minecraft 1.14+, you can use the player in this event.Please note that there may not always be a player (or other entity) in this event.
+Examples:
+on portal create:
+
+### On Portal Enter
+Type: Event
+Patterns: [on] portal enter[ing] [on] entering [a] portal
+Since: 1.0
+Patterns:
+- [on] portal enter[ing]
+- [on] entering [a] portal
+Description:
+Called when an entity enters a nether portal or an end portal. Please note that this event will be fired many times for a nether portal.
+Examples:
+on portal enter:
+
+### On Prepare Craft
+Type: Event
+Patterns: [on] [player] (preparing|beginning) craft[ing] [[of] %item types%]
+Since: 2.2-Fixes-V10
+Patterns:
+- [on] [player] (preparing|beginning) craft[ing] [[of] %item types%]
+Description:
+Called just before displaying crafting result to player. Note that setting the result item might or might not work due to Bukkit bugs.
+Examples:
+on preparing craft of torch:
+
+### On Pressure Plate / Trip
+Type: Event
+Patterns: [on] [step[ping] on] [a] [pressure] plate [on] (trip|[step[ping] on] [a] tripwire)
+Since: 1.0 (pressure plate), 1.4.4 (tripwire)
+Patterns:
+- [on] [step[ping] on] [a] [pressure] plate
+- [on] (trip|[step[ping] on] [a] tripwire)
+Description:
+Called when a player steps on a pressure plate or tripwire respectively.
+Examples:
+on step on pressure plate:
+
+### On Projectile Collide
+Type: Event
+Patterns: [on] projectile collide
+Since: 2.5
+Patterns:
+- [on] projectile collide
+Description:
+Called when a projectile collides with an entity.
+Examples:
+on projectile collide:     teleport shooter of event-projectile to event-entity
+
+### On Projectile Hit
+Type: Event
+Patterns: [on] projectile hit
+Since: 1.0
+Patterns:
+- [on] projectile hit
+Description:
+Called when a projectile hits an entity or a block.
+Examples:
+on projectile hit:     if victim's health &lt;= 3:         delete event-projectile
+
+### On Quit
+Type: Event
+Patterns: [on] (quit[ting]|disconnect[ing]|log[ ]out|logging out|leav(e|ing))
+Since: 1.0 (simple disconnection)
+Patterns:
+- [on] (quit[ting]|disconnect[ing]|log[ ]out|logging out|leav(e|ing))
+Description:
+Called when a player leaves the server.
+Examples:
+on quit: on disconnect:
+
+### On Ready Arrow
+Type: Event
+Patterns: [on] [player] ((ready|choose|draw|load) arrow|arrow (choose|draw|load))
+Since: 2.8.0
+Patterns:
+- [on] [player] ((ready|choose|draw|load) arrow|arrow (choose|draw|load))
+Description:
+Called when a player is firing a bow and the server is choosing an arrow to use.Cancelling this event will skip the current arrow item and fire a new event for the next arrow item.The arrow and bow in the event can be accessed with the Readied Arrow/Bow expression.
+Examples:
+on player ready arrow:     selected bow's name is "Spectral Bow"     if selected arrow is not a spectral arrow:         cancel event
+
+### On Redstone
+Type: Event
+Patterns: [on] redstone [current] [chang(e|ing)]
+Since: 1.0
+Patterns:
+- [on] redstone [current] [chang(e|ing)]
+Description:
+Called when the redstone current of a block changes. This event is of not much use yet.
+Examples:
+on redstone change:     send "someone is using redstone" to console
+
+### On Region Enter/Leave
+Type: Event
+Patterns: [on] (enter[ing]|leav(e|ing)|exit[ing]) [of] ([a] region|[[the] region] %regions%) [on] region (enter[ing]|leav(e|ing)|exit[ing])
+Since: 2.1
+Requirements: Supported regions plugin
+Patterns:
+- [on] (enter[ing]|leav(e|ing)|exit[ing]) [of] ([a] region|[[the] region] %regions%)
+- [on] region (enter[ing]|leav(e|ing)|exit[ing])
+Description:
+Called when a player enters or leaves a region.This event requires a supported regions plugin to be installed.
+Examples:
+on region exit:     message "Leaving %region%."
+
+### On Resource Pack Request Response
+Type: Event
+Patterns: [on] resource pack [request] response [on] resource pack [request] %resource pack states%
+Since: 2.4
+Patterns:
+- [on] resource pack [request] response
+- [on] resource pack [request] %resource pack states%
+Description:
+Called when a player takes action on a resource pack request sent via the send resource pack effect. The resource pack condition can be used to check the resource pack state.This event will be triggered once when the player accepts or declines the resource pack request, and once when the resource pack is successfully installed or failed to download.
+Examples:
+on resource pack request response:     if the resource pack was declined or failed to download:  on resource pack deny:     kick the player due to "You have to install the resource pack to play in this server!"
+
+### On Respawn
+Type: Event
+Patterns: [on] [player] respawn[ing]
+Since: 1.0
+Patterns:
+- [on] [player] respawn[ing]
+Description:
+Called when a player respawns via death or entering the end portal in the end. You should prefer this event over the death event as the player is technically alive when this event is called.
+Examples:
+on respawn:
+
+### On Resurrect Attempt
+Type: Event
+Patterns: [on] [entity] resurrect[ion] [attempt]
+Since: 2.2-dev28
+Patterns:
+- [on] [entity] resurrect[ion] [attempt]
+Description:
+Called when an entity dies, always. If they are not holding a totem, this is cancelled - you can, however, uncancel it.
+Examples:
+on resurrect attempt:     entity is player     entity has permission "admin.undying"     uncancel the event
+
+### On Riptide
+Type: Event
+Patterns: [on] [use of] riptide [enchant[ment]]
+Since: 2.5
+Patterns:
+- [on] [use of] riptide [enchant[ment]]
+Description:
+Called when the player activates the riptide enchantment, using their trident to propel them through the air.Note: the riptide action is performed client side, so manipulating the player in this event may have undesired effects.
+Examples:
+on riptide:     send "You are riptiding!"
+
+### On Script Load/Unload
+Type: Event
+Patterns: [on] [async] [script] (load|init|enable) [on] [async] [script] (unload|stop|disable)
+Since: 2.0
+Patterns:
+- [on] [async] [script] (load|init|enable)
+- [on] [async] [script] (unload|stop|disable)
+Description:
+Called directly after the trigger is loaded, or directly before the whole script is unloaded.The keyword 'async' indicates the trigger can be ran asynchronously,
+Examples:
+on load:     set {running::%script%} to true on unload:     set {running::%script%} to false
+
+### On Send Command List
+Type: Event
+Patterns: [on] send[ing] [of [the]] [server] command[s] list [on] [server] command list send
+Since: 2.8.0
+Patterns:
+- [on] send[ing] [of [the]] [server] command[s] list
+- [on] [server] command list send
+Description:
+Called when the server sends a list of commands to the player. This usually happens on join. The sent commands can be modified via the sent commands expression.Modifications will affect what commands show up for the player to tab complete. They will not affect what commands the player can actually run.Adding new commands to the list is illegal behavior and will be ignored.
+Examples:
+on send command list:     set command list to command list where [input does not contain ":"]     remove "help" from command list
+
+### On Server List Ping
+Type: Event
+Patterns: [on] server [list] ping
+Since: 2.3
+Patterns:
+- [on] server [list] ping
+Description:
+Called when a server list ping is coming in, generally when a Minecraft client pings the server to show its information in the server list.The IP expression can be used to get the IP adress of the pinger.This event can be cancelled on PaperSpigot 1.12.2+ only and this means the player will see the server as offline (but still can join).Also you can use MOTD, Max Players, Online Players Count, Protocol Version, Version String, Hover List and Server Icon expressions, and Player Info Visibility and Hide Player from Server List effects to modify the server list.
+Examples:
+on server list ping:     set the motd to "Welcome %{player-by-IP::%ip%}%! Join now!" if {player-by-IP::%ip%} is set, else "Join now!"     set the fake max players count to (online players count + 1)     set the shown icon to a random server icon out of {server-icons::*}
+
+### On Server Start/Stop
+Type: Event
+Patterns: [on] (server|skript) (start|load|enable) [on] (server|skript) (stop|unload|disable)
+Since: 2.0
+Patterns:
+- [on] (server|skript) (start|load|enable)
+- [on] (server|skript) (stop|unload|disable)
+Description:
+Called when the server starts or stops (actually, when Skript starts or stops, so a /reload will trigger these events as well).
+Examples:
+on skript start: on server stop:
+
+### On Sheep Regrow Wool
+Type: Event
+Patterns: [on] sheep [re]grow[ing] wool
+Since: 2.2-dev21
+Patterns:
+- [on] sheep [re]grow[ing] wool
+Description:
+Called when sheep regrows its sheared wool back.
+Examples:
+on sheep grow wool:     cancel event
+
+### On Shoot
+Type: Event
+Patterns: [on] [projectile] (shoot|launch)
+Since: 1.0
+Patterns:
+- [on] [projectile] (shoot|launch)
+Description:
+Called whenever a projectile is shot. Use the shooter expression to get who shot the projectile.
+Examples:
+on shoot:     if projectile is an arrow:         send "you shot an arrow!" to shooter
+
+### On Sign Change
+Type: Event
+Patterns: [on] sign (chang[e]|edit)[ing] [on] [player] (chang[e]|edit)[ing] [a] sign
+Since: 1.0
+Patterns:
+- [on] sign (chang[e]|edit)[ing]
+- [on] [player] (chang[e]|edit)[ing] [a] sign
+Description:
+As signs are placed empty, this event is called when a player is done editing a sign.
+Examples:
+on sign change:     line 2 is empty     set line 1 to "&amp;lt;red&amp;gt;%line 1%"
+
+### On Slime Split
+Type: Event
+Patterns: [on] slime split[ting]
+Since: 2.2-dev26
+Patterns:
+- [on] slime split[ting]
+Description:
+Called when a slime splits. Usually this happens when a big slime dies.
+Examples:
+on slime split:
+
+### On Smelt
+Type: Event
+Patterns: [on] [furnace] [ore] smelt[ed|ing] [of %item types%] [on] [furnace] smelt[ed|ing] of ore
+Since: 1.0, 2.10 (specific item)
+Patterns:
+- [on] [furnace] [ore] smelt[ed|ing] [of %item types%]
+- [on] [furnace] smelt[ed|ing] of ore
+Description:
+Called when a furnace smelts an item in its input slot.
+Examples:
+on smelt:     clear the smelted item on smelt of raw iron:     broadcast smelted item     set the smelted item to iron block
+
+### On Sneak Toggle
+Type: Event
+Patterns: [on] [player] toggl(e|ing) sneak [on] [player] sneak toggl(e|ing)
+Since: 1.0
+Patterns:
+- [on] [player] toggl(e|ing) sneak
+- [on] [player] sneak toggl(e|ing)
+Description:
+Called when a player starts or stops sneaking. Use is sneaking to get whether the player was sneaking before the event was called.
+Examples:
+# make players that stop sneaking jump on sneak toggle:     player is sneaking     push the player upwards at speed 0.5
+
+### On Spawn
+Type: Event
+Patterns: [on] spawn[ing] [of %entity types%]
+Since: 1.0, 2.5.1 (non-living entities)
+Patterns:
+- [on] spawn[ing] [of %entity types%]
+Description:
+Called when an entity spawns (excluding players).
+Examples:
+on spawn of a zombie: on spawn of an ender dragon:     broadcast "A dragon has been sighted in %world%!"
+
+### On Spawn Change
+Type: Event
+Patterns: [on] [world] spawn change
+Since: 1.0
+Patterns:
+- [on] [world] spawn change
+Description:
+Called when the spawn point of a world changes.
+Examples:
+on spawn change:     broadcast "someone changed the spawn!"
+
+### On Spectate
+Type: Event
+Patterns: [on] [player] stop spectating [(of|from) %*entity types%] [on] [player] (swap|switch) spectating [(of|from) %*entity types%] [on] [player] start spectating [of %*entity types%]
+Since: 2.7
+Patterns:
+- [on] [player] stop spectating [(of|from) %*entity types%]
+- [on] [player] (swap|switch) spectating [(of|from) %*entity types%]
+- [on] [player] start spectating [of %*entity types%]
+Description:
+Called with a player starts, stops or swaps spectating an entity.
+Examples:
+on player start spectating of a zombie:
+
+### On Sponge Absorb
+Type: Event
+Patterns: [on] sponge absorb
+Since: 2.5
+Requirements: Minecraft 1.13 or newer
+Patterns:
+- [on] sponge absorb
+Description:
+Called when a sponge absorbs blocks.
+Examples:
+on sponge absorb:     loop absorbed blocks:         broadcast "%loop-block% was absorbed by a sponge"!
+
+### On Spread
+Type: Event
+Patterns: [on] spread[ing]
+Since: 1.0
+Patterns:
+- [on] spread[ing]
+Description:
+Called when a new block forms as a result of a block that can spread, e.g. water or mushrooms.
+Examples:
+on spread:
+
+### On Sprint Toggle
+Type: Event
+Patterns: [on] [player] toggl(e|ing) sprint [on] [player] sprint toggl(e|ing)
+Since: 1.0
+Patterns:
+- [on] [player] toggl(e|ing) sprint
+- [on] [player] sprint toggl(e|ing)
+Description:
+Called when a player starts or stops sprinting. Use is sprinting to get whether the player was sprinting before the event was called.
+Examples:
+on sprint toggle:     player is not sprinting     send "Run!"
+
+### On Start Smelt
+Type: Event
+Patterns: [on] [furnace] start [of] smelt[ing] [[of] %item types%] [on] [furnace] smelt[ing] start [of %item types%]
+Since: 2.10
+Patterns:
+- [on] [furnace] start [of] smelt[ing] [[of] %item types%]
+- [on] [furnace] smelt[ing] start [of %item types%]
+Description:
+Called when a furnace starts smelting an item in its ore slot.
+Examples:
+on smelting start:     if the smelting item is raw iron:         set total cook time to 1 second on smelting start of raw iron:     add 20 seconds to total cook time
+
+### On Stonecutter Recipe Select
+Type: Event
+Patterns: [on] stonecutting [[of] %item types%]
+Since: 2.8.0
+Patterns:
+- [on] stonecutting [[of] %item types%]
+Description:
+Called when a player selects a recipe in a stonecutter.
+Examples:
+on stonecutting stone slabs     cancel the event  on stonecutting:     broadcast "%player% is using stonecutter to craft %event-item%!"
+
+### On Stop Using Item
+Type: Event
+Patterns: [on] [player] (stop|end) (using item|item use)
+Since: 2.8.0
+Patterns:
+- [on] [player] (stop|end) (using item|item use)
+Description:
+Called when a player stops using an item. For example, when the player releases the interact button when holding a bow, an edible item, or a spyglass.Note that event-timespan will return the time the item was used for.
+Examples:
+on player stop using item:     broadcast "%player% used %event-item% for %event-timespan%."
+
+### On Swim Toggle
+Type: Event
+Patterns: [on] [entity] toggl(e|ing) swim [on] [entity] swim toggl(e|ing)
+Since: 2.3
+Requirements: 1.13 or newer
+Patterns:
+- [on] [entity] toggl(e|ing) swim
+- [on] [entity] swim toggl(e|ing)
+Description:
+Called when an entity swims or stops swimming.
+Examples:
+on swim toggle:     event-entity does not have permission "swim"     cancel event
+
+### On System Time
+Type: Event
+Patterns: [on] at %times% [in] real time
+Since: 2.11
+Patterns:
+- [on] at %times% [in] real time
+Description:
+Called when the local time of the system the server is running on reaches the provided real-life time.
+Examples:
+at 14:20 in real time: at 2:30am real time: at 6:10 pm in real time: at 5:00 am and 5:00 pm in real time: at 5:00 and 17:00 in real time:
+
+### On Tame
+Type: Event
+Patterns: [on] [entity] tam(e|ing)
+Since: 1.0
+Patterns:
+- [on] [entity] tam(e|ing)
+Description:
+Called when a player tames a wolf or ocelot. Can be cancelled to prevent the entity from being tamed.
+Examples:
+on tame:
+
+### On Target
+Type: Event
+Patterns: [on] [entity] target [on] [entity] un[-]target
+Since: 1.0
+Patterns:
+- [on] [entity] target
+- [on] [entity] un[-]target
+Description:
+Called when a mob starts/stops following/attacking another entity, usually a player.
+Examples:
+on entity target:     target is a player
+
+### On Teleport
+Type: Event
+Patterns: [on] [%entity types%] teleport[ing]
+Since: 1.0, 2.9.0 (entity teleport)
+Patterns:
+- [on] [%entity types%] teleport[ing]
+Description:
+This event can be used to listen to teleports from non-players or player entities respectively.When teleporting entities, the event may also be called due to a result of natural causes, such as an enderman or shulker teleporting, or wolves teleporting to players.When teleporting players, the event can be called by teleporting through a nether/end portal, or by other means (e.g. plugins).
+Examples:
+on teleport: on player teleport: on creeper teleport:
+
+### On Tool Change
+Type: Event
+Patterns: [on] [player['s]] (tool|item held|held item) chang(e|ing)
+Since: 1.0
+Patterns:
+- [on] [player['s]] (tool|item held|held item) chang(e|ing)
+Description:
+Called whenever a player changes their held item by selecting a different slot (e.g. the keys 1-9 or the mouse wheel), not by dropping or replacing the item in the current slot.
+Examples:
+on player's held item change:
+
+### On Vault Display Item
+Type: Event
+Patterns: [on] vault display[ing] item
+Since: 2.12
+Requirements: Minecraft 1.21.1+
+Patterns:
+- [on] vault display[ing] item
+Description:
+Called when a vault in a trial chamber is about to display an item.
+Examples:
+on vault display item:     set event-item to a netherite ingot
+
+### On Vehicle Collision
+Type: Event
+Patterns: [on] vehicle collision [(with|of) [a[n]] %item types/block datas/entity types%] [on] vehicle block collision [(with|of) [a[n]] %item types/block datas%] [on] vehicle entity collision [(with|of) [a[n]] %entity types%]
+Since: 2.10
+Patterns:
+- [on] vehicle collision [(with|of) [a[n]] %item types/block datas/entity types%]
+- [on] vehicle block collision [(with|of) [a[n]] %item types/block datas%]
+- [on] vehicle entity collision [(with|of) [a[n]] %entity types%]
+Description:
+Called when a vehicle collides with a block or entity.
+Examples:
+on vehicle collision: on vehicle collision with obsidian: on vehicle collision with a zombie:
+
+### On Vehicle Create
+Type: Event
+Patterns: [on] vehicle create [on] creat(e|ing|ion of) [a] vehicle
+Since: 1.0
+Patterns:
+- [on] vehicle create
+- [on] creat(e|ing|ion of) [a] vehicle
+Description:
+Called when a new vehicle is created, e.g. when a player places a boat or minecart.
+Examples:
+on vehicle create:
+
+### On Vehicle Damage
+Type: Event
+Patterns: [on] vehicle damage [on] damag(e|ing) [a] vehicle
+Since: 1.0
+Patterns:
+- [on] vehicle damage
+- [on] damag(e|ing) [a] vehicle
+Description:
+Called when a vehicle gets damage. Too much damage will destroy the vehicle.
+Examples:
+on vehicle damage:
+
+### On Vehicle Destroy
+Type: Event
+Patterns: [on] vehicle destroy [on] destr(oy[ing]|uction of) [a] vehicle
+Since: 1.0
+Patterns:
+- [on] vehicle destroy
+- [on] destr(oy[ing]|uction of) [a] vehicle
+Description:
+Called when a vehicle is destroyed. Any passenger will be ejected and the vehicle might drop some item(s).
+Examples:
+on vehicle destroy:     cancel event
+
+### On Vehicle Enter
+Type: Event
+Patterns: [on] vehicle enter [on] enter[ing] [a] vehicle
+Since: 1.0
+Patterns:
+- [on] vehicle enter
+- [on] enter[ing] [a] vehicle
+Description:
+Called when an entity enters a vehicle, either deliberately (players) or by falling into them (mobs).
+Examples:
+on vehicle enter:     entity is a player     cancel event
+
+### On Vehicle Exit
+Type: Event
+Patterns: [on] vehicle exit [on] exit[ing] [a] vehicle
+Since: 1.0
+Patterns:
+- [on] vehicle exit
+- [on] exit[ing] [a] vehicle
+Description:
+Called when an entity exits a vehicle.
+Examples:
+on vehicle exit:     if event-entity is a spider:         kill event-entity
+
+### On Vehicle Move
+Type: Event
+Patterns: [on] vehicle move
+Since: 2.10
+Patterns:
+- [on] vehicle move
+Description:
+Called when a vehicle moves.Please note that using this event can cause lag if there are multiple vehicle entities, i.e. Horse, Pig, Boat, Minecart
+Examples:
+on vehicle move:     broadcast past event-location     broadcast event-location
+
+### On Villager Career Change
+Type: Event
+Patterns: [on] villager career chang(e[d]|ing)
+Since: 2.12
+Patterns:
+- [on] villager career chang(e[d]|ing)
+Description:
+Called when a villager changes its career. Can be caused by being employed or losing their job.
+Examples:
+on villager career change:     if all:         event-career change reason is employment         event-villager profession is armorer profession     then:         cancel event
+
+### On Weather Change
+Type: Event
+Patterns: [on] weather change [to %weather types%]
+Since: 1.0
+Patterns:
+- [on] weather change [to %weather types%]
+Description:
+Called when a world's weather changes.
+Examples:
+on weather change: on weather change to sunny:
+
+### On World Border Bounds Change
+Type: Event
+Patterns: [on] world[ ]border [bounds] chang(e|ing)
+Since: 2.11
+Patterns:
+- [on] world[ ]border [bounds] chang(e|ing)
+Description:
+Called when a world border changes its bounds, either over time, or instantly.This event does not get called for virtual borders.
+Examples:
+on worldborder bounds change:     broadcast "The diameter of %event-worldborder% is changing from %past event-number% to %event-number% over the next %event-timespan%"
+
+### On World Border Bounds Finish Change
+Type: Event
+Patterns: [on] world[ ]border [bounds] finish chang(e|ing)
+Since: 2.11
+Patterns:
+- [on] world[ ]border [bounds] finish chang(e|ing)
+Description:
+Called when a moving world border has finished its move.This event does not get called for virtual borders.
+Examples:
+on worldborder bounds finish change:     broadcast "Over the past %event-timespan%, the diameter of %event-worldborder% went from %past event-number% to %event-number%"
+
+### On World Border Center Change
+Type: Event
+Patterns: [on] world[ ]border center chang(e|ing)
+Since: 2.11
+Patterns:
+- [on] world[ ]border center chang(e|ing)
+Description:
+Called when a world border's center has changed.This event does not get called for virtual borders.
+Examples:
+on worldborder center change:     broadcast "The center of %event-worldborder% has moved from %past event-location% to %event-location%"
+
+### On World Init
+Type: Event
+Patterns: [on] world init[ialization] [of %worlds%]
+Since: 1.0, 2.8.0 (defining worlds)
+Patterns:
+- [on] world init[ialization] [of %worlds%]
+Description:
+Called when a world is initialized. As all default worlds are initialized beforeany scripts are loaded, this event is only called for newly created worlds.World management plugins might change the behaviour of this event though.
+Examples:
+on world init of "world_the_end":
+
+### On World Load
+Type: Event
+Patterns: [on] world load[ing] [of %worlds%]
+Since: 1.0, 2.8.0 (defining worlds)
+Patterns:
+- [on] world load[ing] [of %worlds%]
+Description:
+Called when a world is loaded. As with the world init event, this event will not be called for the server's default world(s).
+Examples:
+on world load of "world_nether":     broadcast "The world %event-world% has been loaded!"
+
+### On World Save
+Type: Event
+Patterns: [on] world sav(e|ing) [of %worlds%]
+Since: 1.0, 2.8.0 (defining worlds)
+Patterns:
+- [on] world sav(e|ing) [of %worlds%]
+Description:
+Called when a world is saved to disk. Usually all worlds are saved simultaneously, but world management plugins could change this.
+Examples:
+on world save of "world":     broadcast "The world %event-world% has been saved"
+
+### On World Unload
+Type: Event
+Patterns: [on] world unload[ing] [of %worlds%]
+Since: 1.0, 2.8.0 (defining worlds)
+Patterns:
+- [on] world unload[ing] [of %worlds%]
+Description:
+Called when a world is unloaded. This event will never be called if you don't have a world management plugin.
+Examples:
+on world unload:     broadcast "the %event-world% has been unloaded!"
+
+### On Zombie Break Door
+Type: Event
+Patterns: [on] zombie break[ing] [a] [wood[en]] door
+Since: 1.0
+Patterns:
+- [on] zombie break[ing] [a] [wood[en]] door
+Description:
+Called when a zombie is done breaking a wooden door. Can be cancelled to prevent the zombie from breaking the door.
+Examples:
+on zombie breaking a wood door:
+
+### Periodical
+Type: Event
+Patterns: [on] every %time span%
+Since: 1.0
+Patterns:
+- [on] every %time span%
+Description:
+An event that is called periodically.
+Examples:
+every 2 seconds: every minecraft hour: every tick: # can cause lag depending on the code inside the event every minecraft days:
+
+### Periodical
+Type: Event
+Patterns: [on] every %time span% in [world[s]] %worlds%
+Since: 1.0
+Patterns:
+- [on] every %time span% in [world[s]] %worlds%
+Description:
+An event that is called periodically.
+Examples:
+every 2 seconds in "world": every minecraft hour in "flatworld": every tick in "world": # can cause lag depending on the code inside the event every minecraft days in "plots":

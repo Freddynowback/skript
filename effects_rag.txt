@@ -1,0 +1,1837 @@
+Skript Documentation - 2.15.0-pre1
+----------------------------------
+
+### Action Bar
+Type: Effect
+Note: New
+Patterns: send [the] action[ ]bar [with text] %object% [to %audiences%]
+Since: 2.32.15 (support for sending anything)
+Patterns:
+- send [the] action[ ]bar [with text] %object% [to %audiences%]
+Description:
+Sends an action bar message to an audience.
+Examples:
+send action bar "Hello player!" to player
+
+### Allay Duplicate
+Type: Effect
+Patterns: allow %living entities% to (duplicate|clone) prevent %living entities% from (duplicating|cloning)
+Since: 2.11
+Patterns:
+- allow %living entities% to (duplicate|clone)
+- prevent %living entities% from (duplicating|cloning)
+Description:
+Set whether an allay can or cannot duplicate itself.This is not the same as breeding allays.
+Examples:
+allow all allays to duplicateprevent all allays from duplicating
+
+### Allow / Prevent Leash Drop
+Type: Effect
+Patterns: (force|allow) [the] (lead|leash) [item] to drop (block|disallow|prevent) [the] (lead|leash) [item] from dropping
+Since: 2.10
+Usable in events: Leash / Unleash
+Patterns:
+- (force|allow) [the] (lead|leash) [item] to drop
+- (block|disallow|prevent) [the] (lead|leash) [item] from dropping
+Description:
+Allows or prevents the leash from being dropped in an unleash event.
+Examples:
+on unleash:    if player is not set:        prevent the leash from dropping    else if player is op:        allow the leash to drop
+
+### Allow Aging
+Type: Effect
+Patterns: lock age of %living entities% prevent aging of %living entities% prevent %living entities% from aging unlock age of %living entities% allow aging of %living entities% allow %living entities% to age
+Since: 2.10
+Patterns:
+- lock age of %living entities%
+- prevent aging of %living entities%
+- prevent %living entities% from aging
+- unlock age of %living entities%
+- allow aging of %living entities%
+- allow %living entities% to age
+Description:
+Sets whether or not living entities will be able to age.
+Examples:
+on spawn of animal:    allow aging of entity
+
+### Apply Bone Meal
+Type: Effect
+Patterns: apply [%number%] bone[ ]meal[s] [to %blocks%]
+Since: 2.8.0
+Requirements: MC 1.16.2+
+Patterns:
+- apply [%number%] bone[ ]meal[s] [to %blocks%]
+Description:
+Applies bone meal to a crop, sapling, or composter
+Examples:
+apply 3 bone meal to event-block
+
+### Apply Fishing Lure
+Type: Effect
+Patterns: apply [the] lure enchantment bonus remove [the] lure enchantment bonus
+Since: 2.10
+Usable in events: Fishing
+Patterns:
+- apply [the] lure enchantment bonus
+- remove [the] lure enchantment bonus
+Description:
+Sets whether the lure enchantment should be applied, which reduces the wait time.
+Examples:
+on fishing line cast:    apply lure enchantment bonus
+
+### Apply Fishing Lure
+Type: Effect
+Patterns: (reel|pull) in [the] hook[ed] entity
+Since: 2.10
+Usable in events: Fishing
+Patterns:
+- (reel|pull) in [the] hook[ed] entity
+Description:
+Sets whether the lure enchantment should be applied, which reduces the wait time.
+Examples:
+on fishing line cast:    apply lure enchantment bonus
+
+### Apply Potion Effect
+Type: Effect
+Patterns: (apply|grant) %skriptpotioneffects% to %living entities% [for %time span%] (affect|afflict) %living entities% with %skriptpotioneffects% [for %time span%]
+Since: 2.02.14 (syntax rework)
+Patterns:
+- (apply|grant) %skriptpotioneffects% to %living entities% [for %time span%]
+- (affect|afflict) %living entities% with %skriptpotioneffects% [for %time span%]
+Description:
+Applies a potion effect to an entity.
+Examples:
+apply swiftness 2 to the playercommand /strengthboost:    trigger:        apply strength 10 to the player for 5 minutesapply the potion effects of the player's tool to the player
+
+### Ban
+Type: Effect
+Patterns: ban [and kick] %texts/offline players% [(by reason of|because [of]|on account of|due to) %text%] [for %time span%] unban %texts/offline players% ban [and kick] %players% by IP [(by reason of|because [of]|on account of|due to) %text%] [for %time span%] unban %players% by IP IP(-| )ban [and kick] %players% [(by reason of|because [of]|on account of|due to) %text%] [for %time span%] (IP(-| )unban|un[-]IP[-]ban) %players%
+Since: 1.4, 2.1.1 (ban reason), 2.5 (timespan), 2.9.0 (kick)
+Patterns:
+- ban [and kick] %texts/offline players% [(by reason of|because [of]|on account of|due to) %text%] [for %time span%]
+- unban %texts/offline players%
+- ban [and kick] %players% by IP [(by reason of|because [of]|on account of|due to) %text%] [for %time span%]
+- unban %players% by IP
+- IP(-| )ban [and kick] %players% [(by reason of|because [of]|on account of|due to) %text%] [for %time span%]
+- (IP(-| )unban|un[-]IP[-]ban) %players%
+Description:
+Bans or unbans a player or an IP address.If a reason is given, it will be shown to the player when they try to join the server while banned.A length of ban may also be given to apply a temporary ban. If it is absent for any reason, a permanent ban will be used instead.We recommend that you test your scripts so that no accidental permanent bans are applied.Note that banning people does not kick them from the server.You can optionally use 'and kick' or consider using the kick effect after applying a ban.
+Examples:
+unban playerban "127.0.0.1"IP-ban the player because "he is an idiot"ban player due to "inappropriate language" for 2 daysban and kick player due to "inappropriate language" for 2 days
+
+### Break Block
+Type: Effect
+Patterns: break %blocks% [naturally] [using %item type%]
+Since: 2.4
+Patterns:
+- break %blocks% [naturally] [using %item type%]
+Description:
+Breaks the block and spawns items as if a player had mined it You can add a tool, which will spawn items based on how that tool would break the block (ie: When using a hand to break stone, it drops nothing, whereas with a pickaxe it drops cobblestone)
+Examples:
+on right click:    break clicked block naturallyloop blocks in radius 10 around player:    break loop-block using player's toolloop blocks in radius 10 around player:    break loop-block naturally using diamond pickaxe
+
+### Broadcast
+Type: Effect
+Patterns: broadcast %objects% [(to|in) %worlds%]
+Since: 1.02.6 (support for broadcasting anything)2.6.1 (using advanced formatting)
+Patterns:
+- broadcast %objects% [(to|in) %worlds%]
+Description:
+Broadcasts a message to the server.
+Examples:
+broadcast "Welcome %player% to the server!"broadcast "Woah! It's a message!"
+
+### Cancel Active Item
+Type: Effect
+Patterns: (cancel|interrupt) [the] us[ag]e of %living entities%'[s] [active|current] item
+Since: 2.8.0
+Patterns:
+- (cancel|interrupt) [the] us[ag]e of %living entities%'[s] [active|current] item
+Description:
+Interrupts the action entities may be trying to complete.For example, interrupting eating, or drawing back a bow.
+Examples:
+on damage of player:    if the victim's active tool is a bow:        interrupt the usage of the player's active item
+
+### Cancel Command Cooldown
+Type: Effect
+Patterns: (cancel|ignore) [the] [current] [command] cooldown un(cancel|ignore) [the] [current] [command] cooldown
+Since: 2.2-dev34
+Patterns:
+- (cancel|ignore) [the] [current] [command] cooldown
+- un(cancel|ignore) [the] [current] [command] cooldown
+Description:
+Only usable in commands. Makes it so the current command usage isn't counted towards the cooldown.
+Examples:
+command /nick <text>:    executable by: players    cooldown: 10 seconds    trigger:        if length of arg-1 is more than 16:            # Makes it so that invalid arguments don't make you wait for the cooldown again            cancel the cooldown            send "Your nickname may be at most 16 characters."            stop        set the player's display name to arg-1
+
+### Cancel Drops
+Type: Effect
+Patterns: (cancel|clear|delete) [the] drops [of (items|[e]xp[erience][s])] (cancel|clear|delete) [the] (item|[e]xp[erience]) drops
+Since: 2.4, 2.12 (harvest event)
+Usable in events: death, break / mine, block drop, harvest block
+Requirements: 1.12.2 or newer (cancelling item drops of blocks)
+Patterns:
+- (cancel|clear|delete) [the] drops [of (items|[e]xp[erience][s])]
+- (cancel|clear|delete) [the] (item|[e]xp[erience]) drops
+Description:
+Cancels drops of items in a death, block break, block drop, and block harvest events.The dropped experience can be cancelled in a death and block break events.Please note that using this in a death event doesn't keep items or experience of a dead player. If you want to do that, use the Keep Inventory / Experience effect.
+Examples:
+on death of a zombie:    if name of the entity is "&cSpecial":        cancel drops of itemson break of a coal ore:    cancel the experience dropson player block harvest:    cancel the item drops
+
+### Cancel Event
+Type: Effect
+Patterns: cancel [the] event uncancel [the] event
+Since: 1.0
+Patterns:
+- cancel [the] event
+- uncancel [the] event
+Description:
+Cancels the event (e.g. prevent blocks from being placed, or damage being taken).
+Examples:
+on damage:    victim is a player    victim has the permission "skript.god"    cancel the event
+
+### Change: Set/Add/Remove/Remove All/Delete/Reset
+Type: Effect
+Patterns: (add|give) %objects% to %~objects% increase %~objects% by %objects% give %~objects% %objects% set %~objects% to %objects% remove (all|every) %objects% from %~objects% (remove|subtract) %objects% from %~objects% (reduce|decrease) %~objects% by %objects% (delete|clear) %~objects% reset %~objects%
+Since: 1.0 (set, add, remove, delete), 2.0 (remove all)
+Patterns:
+- (add|give) %objects% to %~objects%
+- increase %~objects% by %objects%
+- give %~objects% %objects%
+- set %~objects% to %objects%
+- remove (all|every) %objects% from %~objects%
+- (remove|subtract) %objects% from %~objects%
+- (reduce|decrease) %~objects% by %objects%
+- (delete|clear) %~objects%
+- reset %~objects%
+Description:
+A general effect that can be used for changing many expressions.Some expressions can only be set and/or deleted, while others can also have things added to or removed from them.
+Examples:
+set the player's display name to "<red>%name of player%"set the block above the victim to lavaadd 2 to the player's health # preferably use '<a href='#EffHealth'>heal</a>' for thisadd argument to {blacklist::*}give a diamond pickaxe of efficiency 5 to the playerincrease the data value of the clicked block by 1remove 2 pickaxes from the victimsubtract 2.5 from {points::%uuid of player%}remove every iron tool from the playerremove all minecarts from {entitylist::*}delete the block below the playerclear dropsdelete {variable}reset walk speed of playerreset chunk at the targeted block
+
+### Charge Entity
+Type: Effect
+Patterns: make %entities% [(un|not |non[-| ])](charged|powered) [un](charge|power) %entities%
+Since: 2.5, 2.10 (wither skulls)
+Patterns:
+- make %entities% [(un|not |non[-| ])](charged|powered)
+- [un](charge|power) %entities%
+Description:
+Charges or uncharges a creeper or wither skull. A creeper is charged when it has been struck by lightning.
+Examples:
+on spawn of creeper:    charge the event-entity
+
+### Clear Entity Storage
+Type: Effect
+Patterns: (clear|empty) the (stored entities|entity storage) of %blocks%
+Since: 2.11
+Patterns:
+- (clear|empty) the (stored entities|entity storage) of %blocks%
+Description:
+Clear the stored entities of an entity block storage (i.e. beehive).
+Examples:
+clear the stored entities of {_beehive}
+
+### Color Items
+Type: Effect
+Patterns: (dye|colo[u]r|paint) %item types% %color% (dye|colo[u]r|paint) %item types% \(%number%, %number%, %number%\)
+Since: 2.0, 2.2-dev26 (maps and potions)
+Patterns:
+- (dye|colo[u]r|paint) %item types% %color%
+- (dye|colo[u]r|paint) %item types% \(%number%, %number%, %number%\)
+Description:
+Colors items in a given color. You can also use RGB codes if you feel limited with the 16 default colors. RGB codes are three numbers from 0 to 255 in the order (red, green, blue), where (0,0,0) is black and (255,255,255) is white. Armor is colorable for all Minecraft versions. With Minecraft 1.11 or newer you can also color potions and maps. Note that the colors might not look exactly how you'd expect.
+Examples:
+dye player's helmet bluecolor the player's tool red
+
+### Command
+Type: Effect
+Patterns: [execute] [the] [bungee[cord]] command[s] %texts% [by %command senders%] [execute] [the] %command senders% [bungee[cord]] command[s] %texts% (let|make) %command senders% execute [[the] [bungee[cord]] command[s]] %texts%
+Since: 1.0, 2.8.0 (bungeecord command)
+Patterns:
+- [execute] [the] [bungee[cord]] command[s] %texts% [by %command senders%]
+- [execute] [the] %command senders% [bungee[cord]] command[s] %texts%
+- (let|make) %command senders% execute [[the] [bungee[cord]] command[s]] %texts%
+Description:
+Executes a command. This can be useful to use other plugins in triggers.If the command is a bungeecord side command, you can use the [bungeecord] option to execute command on the proxy.
+Examples:
+make player execute command "/home"execute console command "/say Hello everyone!"execute player bungeecord command "/alert &6Testing Announcement!"
+
+### Conditional / Unconditional
+Type: Effect
+Patterns: make command block[s] %blocks% [(un|not )]conditional
+Since: 2.10
+Patterns:
+- make command block[s] %blocks% [(un|not )]conditional
+Description:
+Sets whether the provided command blocks are conditional or not.
+Examples:
+make command block {_block} conditionalmake command block {_block} unconditional if {_block} is conditional
+
+### Connect
+Type: Effect
+Patterns: connect %players% to [proxy|bungeecord] [server] %text% send %players% to [proxy|bungeecord] server %text% transfer %players% to server %text% [on port %number%]
+Since: 2.3, 2.10 (transfer)
+Patterns:
+- connect %players% to [proxy|bungeecord] [server] %text%
+- send %players% to [proxy|bungeecord] server %text%
+- transfer %players% to server %text% [on port %number%]
+Description:
+Connect a player to a server running on your proxy, or any server supporting transfers. Read below for more information.If the server is running Minecraft 1.20.5 or above, you may specify an IP and Port to transfer a player over to that server.When transferring players using an IP, the transfer will not complete if the `accepts-transfers` option isn't enabled in `server.properties` for the server specified.If the port is not provided, it will default to `25565`.
+Examples:
+connect all players to proxy server "hub"transfer player to server "my.server.com"transfer player to server "localhost" on port 25566
+
+### Consume Boosting Firework
+Type: Effect
+Patterns: (prevent|disallow) [the] (boosting|used) firework from being consumed allow [the] (boosting|used) firework to be consumed
+Since: 2.10
+Patterns:
+- (prevent|disallow) [the] (boosting|used) firework from being consumed
+- allow [the] (boosting|used) firework to be consumed
+Description:
+Prevent the firework used in an 'elytra boost' event to be consumed.
+Examples:
+on elytra boost:    if the used firework will be consumed:        prevent the used firework from being consume
+
+### Consume Brewing Fuel
+Type: Effect
+Patterns: make [the] brewing stand consume [its|the] fuel prevent [the] brewing stand from consuming [its|the] fuel
+Since: 2.13
+Usable in events: Brewing Fuel
+Patterns:
+- make [the] brewing stand consume [its|the] fuel
+- prevent [the] brewing stand from consuming [its|the] fuel
+Description:
+Makes the brewing stand in a brewing fuel event consume its fuel. Preventing the fuel from being consumed will keep the fuel item and still add to the fuel level of the brewing stand.
+Examples:
+on brewing fuel consumption:    prevent the brewing stand from consuming the fuel
+
+### Continue
+Type: Effect
+Patterns: continue [this loop|[the] [current] loop] continue [the] <-?\d+(_\d+)*>(st|nd|rd|th) loop
+Since: 2.2-dev37, 2.7 (while loops), 2.8.0 (outer loops)
+Patterns:
+- continue [this loop|[the] [current] loop]
+- continue [the] <-?\d+(_\d+)*>(st|nd|rd|th) loop
+Description:
+Moves the loop to the next iteration. You may also continue an outer loop from an inner one. The loops are labelled from 1 until the current loop, starting with the outermost one.
+Examples:
+# Broadcast online moderatorsloop all players:    if loop-value does not have permission "moderator":        continue # filter out non moderators    broadcast "%loop-player% is a moderator!" # Only moderators get broadcast# Game starting counterset {_counter} to 11while {_counter} > 0:    remove 1 from {_counter}    wait a second    if {_counter} != 1, 2, 3, 5 or 10:        continue # only print when counter is 1, 2, 3, 5 or 10    broadcast "Game starting in %{_counter}% second(s)"
+
+### Copy Into Variable
+Type: Effect
+Patterns: copy %~objects% [in]to %~objects%
+Since: 2.8.0
+Patterns:
+- copy %~objects% [in]to %~objects%
+Description:
+Copies objects into a variable. When copying a list over to another list, the source list and its sublists are also copied over.Note: Copying a value into a variable/list will overwrite the existing data.
+Examples:
+set {_foo::bar} to 1set {_foo::sublist::foobar} to "hey"copy {_foo::*} to {_copy::*}broadcast indices of {_copy::*} # bar, sublistbroadcast {_copy::bar} # 1broadcast {_copy::sublist::foobar} # "hey!"
+
+### Damage/Heal/Repair
+Type: Effect
+Patterns: damage %living entities/item types/slots% by %number% [heart[s]] damage %living entities% by %number% [heart[s]] with [fake] [damage] cause %damage cause% damage %living entities% by %number% [heart[s]] (using|with) %damage source% [as the source] heal %living entities% [by %number% [heart[s]]] repair %item types/slots% [by %number%]
+Since: 1.0, 2.10 (damage cause)
+Requirements: Spigot 1.20.4+ (for damage cause)
+Patterns:
+- damage %living entities/item types/slots% by %number% [heart[s]]
+- damage %living entities% by %number% [heart[s]] with [fake] [damage] cause %damage cause%
+- damage %living entities% by %number% [heart[s]] (using|with) %damage source% [as the source]
+- heal %living entities% [by %number% [heart[s]]]
+- repair %item types/slots% [by %number%]
+Description:
+Damage, heal, or repair an entity or item.Servers running Spigot 1.20.4+ can optionally choose to specify a fake damage cause.
+Examples:
+damage player by 5 heartsdamage player by 3 hearts with fake cause fallheal the playerrepair tool of player
+
+### Dance
+Type: Effect
+Patterns: make %living entities% (start dancing|dance) [%direction% %location%] [for %time span%] make %living entities% (stop dancing|not dance)
+Since: 2.11
+Patterns:
+- make %living entities% (start dancing|dance) [%direction% %location%] [for %time span%]
+- make %living entities% (stop dancing|not dance)
+Description:
+Make an allay or piglin start or stop dancing.Providing a location only applies to allays. They will check to see if the the block at the location is a jukebox and playing music. If it isn't, they will stop dancing. If no location is provided, the allay will dance indefinitely.Providing a timespan only applies for piglins. It determines the length of time they will dance for. If no timespan is provided, they will dance indefinitely.
+Examples:
+if last spawned allay is not dancing:    make last spawned allay start dancingif block at location(0, 0, 0) is a jukebox:    make all allays dance at location(0, 0, 0)make last spawned piglin start dancingmake all piglins dance for 5 hours
+
+### Delay
+Type: Effect
+Patterns: (wait|halt) [for] %time span%
+Since: 1.4
+Patterns:
+- (wait|halt) [for] %time span%
+Description:
+Delays the script's execution by a given timespan. Please note that delays are not persistent, e.g. trying to create a tempban script with ban player → wait 7 days → unban player will not work if you restart your server anytime within these 7 days. You also have to be careful even when using small delays!
+Examples:
+wait 2 minuteshalt for 5 minecraft hourswait a tick
+
+### Detonate Entities
+Type: Effect
+Patterns: detonate %entities%
+Since: 2.10
+Patterns:
+- detonate %entities%
+Description:
+Immediately detonates an entity. Accepted entities are fireworks, TNT minecarts, primed TNT, wind charges and creepers.
+Examples:
+detonate last launched firework
+
+### Do If
+Type: Effect
+Patterns: <.+> if <.+>
+Since: 2.3
+Patterns:
+- <.+> if <.+>
+Description:
+Execute an effect if a condition is true.
+Examples:
+on join:    give a diamond to the player if the player has permission "rank.vip"
+
+### Drop
+Type: Effect
+Patterns: drop %item types/experience points% [%directions% %locations%] [without velocity]
+Since: 1.0
+Patterns:
+- drop %item types/experience points% [%directions% %locations%] [without velocity]
+Description:
+Drops one or more items.
+Examples:
+on death of creeper:    drop 1 TNT
+
+### Enable/Disable/Unload/Reload Script
+Type: Effect
+Patterns: ((enable|load)|reload|disable|unload) script [file|named] %text% [with errors] ((enable|load)|reload|disable|unload) skript file %text% [with errors] ((enable|load)|reload|disable|unload) %scripts% [with errors]
+Since: 2.4, 2.10 (unloading)
+Patterns:
+- ((enable|load)|reload|disable|unload) script [file|named] %text% [with errors]
+- ((enable|load)|reload|disable|unload) skript file %text% [with errors]
+- ((enable|load)|reload|disable|unload) %scripts% [with errors]
+Description:
+Enables, disables, unloads, or reloads a script.Disabling a script unloads it and prepends - to its name so it will not be loaded the next time the server restarts. If the script reflection experiment is enabled: unloading a script terminates it and removes it from memory, but does not alter the file.
+Examples:
+reload script "test"enable script file "testing"unload script file "script.sk"set {_script} to the script "MyScript.sk"reload {_script}
+
+### Enchant/Disenchant
+Type: Effect
+Patterns: enchant %~item types% with %enchantment types% [naturally|randomly] enchant %~item types% at level %number%[[,] allowing treasure enchant[ment]s] disenchant %~item types%
+Since: 2.0, 2.13 (at level)
+Patterns:
+- enchant %~item types% with %enchantment types%
+- [naturally|randomly] enchant %~item types% at level %number%[[,] allowing treasure enchant[ment]s]
+- disenchant %~item types%
+Description:
+Enchant or disenchant an existing item. Enchanting at a specific level will act as if an enchanting table was used, and will apply the enchantments randomly chosen at that level. Treasure enchantments, like mending, can optionally be allowed. Note that enchanting a book at a specific level will turn it into an enchanted book, rather than a book with enchantments.
+Examples:
+enchant the player's tool with sharpness 5enchant the player's tool at level 30disenchant the player's tool
+
+### Enderman Teleport
+Type: Effect
+Patterns: make %living entities% (randomly teleport|teleport randomly) force %living entities% to (randomly teleport|teleport randomly) make %living entities% teleport [randomly] towards %entity% force %living entities% to teleport [randomly] towards %entity%
+Since: 2.11
+Requirements: Minecraft 1.20.1+
+Patterns:
+- make %living entities% (randomly teleport|teleport randomly)
+- force %living entities% to (randomly teleport|teleport randomly)
+- make %living entities% teleport [randomly] towards %entity%
+- force %living entities% to teleport [randomly] towards %entity%
+Description:
+Make an enderman teleport randomly or towards an entity.Teleporting towards an entity teleports in the direction to the entity and not to them.
+Examples:
+make last spawned enderman teleport randomlyloop 10 times:    make all endermen teleport towards player
+
+### Enforce Whitelist
+Type: Effect
+Patterns: [un]enforce [the] [server] white[ ]list
+Since: 2.9.0
+Requirements: MC 1.17+
+Patterns:
+- [un]enforce [the] [server] white[ ]list
+Description:
+Enforces or un-enforce a server's whitelist.All non-whitelisted players will be kicked upon enforcing the whitelist.
+Examples:
+enforce the whitelistunenforce the whitelist
+
+### Entity Despawn
+Type: Effect
+Patterns: make %living entities% despawn[able] (on chunk unload|when far away) force %living entities% to despawn (on chunk unload|when far away) prevent %living entities% from despawning [on chunk unload|when far away]
+Since: 2.11
+Patterns:
+- make %living entities% despawn[able] (on chunk unload|when far away)
+- force %living entities% to despawn (on chunk unload|when far away)
+- prevent %living entities% from despawning [on chunk unload|when far away]
+Description:
+Make a living entity despawn when the chunk they're located at is unloaded.Setting a custom name on a living entity automatically makes it not despawnable.More information on what and when entities despawn can be found at reference.
+Examples:
+make all entities not despawnable on chunk unloadspawn zombie at location(0, 0, 0):    force event-entity to not despawn when far away
+
+### Entity Visibility
+Type: Effect
+Patterns: hide %entities% [(from|for) %players%] reveal %entities% [(to|for|from) %players%]
+Since: 2.3, 2.10 (entities)
+Requirements: Minecraft 1.19+ (entities)
+Patterns:
+- hide %entities% [(from|for) %players%]
+- reveal %entities% [(to|for|from) %players%]
+Description:
+Change visibility of the given entities for the given players.If no players are given, will hide the entities from all online players.When reveal is used in combination of the hidden players expression and the viewers are not specified, this will default it to the given player in the hidden players expression.Note: all previously hidden entities (including players) will be visible when a player leaves and rejoins.
+Examples:
+on spawn:    if event-entity is a chicken:        hide event-entityreveal hidden players of players
+
+### Equip
+Type: Effect
+Patterns: equip [%living entities%] with %item types% make %living entities% wear %item types% unequip %item types% [from %living entities%] unequip %living entities%'[s] (armo[u]r|equipment)
+Since: 1.0, 2.7 (multiple entities, unequip), 2.10 (wolves)2.12.1 (happy ghasts)
+Patterns:
+- equip [%living entities%] with %item types%
+- make %living entities% wear %item types%
+- unequip %item types% [from %living entities%]
+- unequip %living entities%'[s] (armo[u]r|equipment)
+Description:
+Equips or unequips an entity with the given itemtypes (usually armor).This effect will replace any armor that the entity is already wearing.
+Examples:
+equip player with diamond helmetequip player with diamond leggings, diamond chestplate, and diamond bootsunequip diamond chestplate from playerunequip player's armor
+
+### Equippable Component - Dispense
+Type: Effect
+Patterns: allow %equippable components% to be dispensed make %equippable components% dispensable let %equippable components% be dispensed (block|prevent|disallow) %equippable components% from being dispensed make %equippable components% not dispensable
+Since: 2.13
+Requirements: Minecraft 1.21.2+
+Patterns:
+- allow %equippable components% to be dispensed
+- make %equippable components% dispensable
+- let %equippable components% be dispensed
+- (block|prevent|disallow) %equippable components% from being dispensed
+- make %equippable components% not dispensable
+Description:
+Whether the item can be dispensed by a dispenser. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+allow {_item} to be dispensedset {_component} to the equippable component of {_item}prevent {_component} from being dispensed
+
+### Equippable Component - Equip On Entities
+Type: Effect
+Patterns: allow %equippable components% to be equipped on[to] entities make %equippable components% equippable on[to] entities let %equippable components% be equipped on[to] entities (block|prevent|disallow) %equippable components% from being equipped on[to] entities make %equippable components% not equippable on[to] entities
+Since: 2.13
+Requirements: Minecraft 1.21.5+
+Patterns:
+- allow %equippable components% to be equipped on[to] entities
+- make %equippable components% equippable on[to] entities
+- let %equippable components% be equipped on[to] entities
+- (block|prevent|disallow) %equippable components% from being equipped on[to] entities
+- make %equippable components% not equippable on[to] entities
+Description:
+Whether an entity should equip the item when right clicking on the entity with the item. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+allow {_item} to be equipped onto entities
+
+### Equippable Component - Lose Durability
+Type: Effect
+Patterns: (make|let) %equippable components% (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged)) (allow|force) %equippable components% to (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged)) make %equippable components% not (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged)) (disallow|prevent) %equippable components% from (lose durability|being damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged))
+Since: 2.13
+Requirements: Minecraft 1.21.2+
+Patterns:
+- (make|let) %equippable components% (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged))
+- (allow|force) %equippable components% to (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged))
+- make %equippable components% not (lose durability|be damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged))
+- (disallow|prevent) %equippable components% from (lose durability|being damaged) (on [wearer['s]] injury|when [[the] wearer [is]] (hurt|injured|damaged))
+Description:
+Whether the item should take damage when the wearer gets injured. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+make {_item} lose durability when hurtset {_component} to the equippable component of {_item}if {_component} will lose durability when injured:    make {_component} lose durability on injury
+
+### Equippable Component - Shear Off
+Type: Effect
+Patterns: allow %equippable components% to be sheared off [of entities] (disallow|prevent) %equippable components% from being sheared off [of entities]
+Since: 2.13
+Requirements: Minecraft 1.21.6+
+Patterns:
+- allow %equippable components% to be sheared off [of entities]
+- (disallow|prevent) %equippable components% from being sheared off [of entities]
+Description:
+Whether the item can be sheared off of entities. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+allow {_item} to be sheared offset {_component} to the equippable component of {_item}if {_component} can be sheared off of entities:    prevent {_component} from being sheared off of entities
+
+### Equippable Component - Swap Equipment
+Type: Effect
+Patterns: (allow|force) %equippable components% to swap equipment [on right click|when right clicked] (make|let) %equippable components% swap equipment [on right click|when right clicked] (block|prevent|disallow) %equippable components% from swapping equipment [on right click|when right clicked] make %equippable components% not swap equipment [on right click|when right clicked]
+Since: 2.13
+Requirements: Minecraft 1.21.2+
+Patterns:
+- (allow|force) %equippable components% to swap equipment [on right click|when right clicked]
+- (make|let) %equippable components% swap equipment [on right click|when right clicked]
+- (block|prevent|disallow) %equippable components% from swapping equipment [on right click|when right clicked]
+- make %equippable components% not swap equipment [on right click|when right clicked]
+Description:
+Whether the item can be swapped by right clicking with it in your hand. NOTE: Equippable component elements are experimental. Thus, they are subject to change and may not work as intended.
+Examples:
+allow {_item} to swap equipmentset {_component} to the equippable component of {_item}prevent {_component} from swapping equipment on right click
+
+### Exit
+Type: Effect
+Patterns: (exit|stop) [trigger] (exit|stop) [1|a|the|this] (section|loop|conditional) (exit|stop) <-?\d+(_\d+)*> (section|loop|conditional)s (exit|stop) all (section|loop|conditional)s
+Since: unknown (before 2.1)
+Patterns:
+- (exit|stop) [trigger]
+- (exit|stop) [1|a|the|this] (section|loop|conditional)
+- (exit|stop) <-?\d+(_\d+)*> (section|loop|conditional)s
+- (exit|stop) all (section|loop|conditional)s
+Description:
+Exits a given amount of loops and conditionals, or the entire trigger.
+Examples:
+loop blocks above the player:    loop-block is not air:        exit 2 sections    set loop-block to water
+
+### Expand/Shrink World Border
+Type: Effect
+Patterns: (expand|grow) [[the] (diameter|radius) of] %worldborders% (by|to) %number% [over [a period of] %time span%] (expand|grow) %worldborders%['s (diameter|radius)] (by|to) %number% [over [a period of] %time span%] (contract|shrink) [[the] (diameter|radius) of] %worldborders% (by|to) %number% [over [a period of] %time span%] (contract|shrink) %worldborders%['s (diameter|radius)] (by|to) %number% [over [a period of] %time span%]
+Since: 2.11
+Patterns:
+- (expand|grow) [[the] (diameter|radius) of] %worldborders% (by|to) %number% [over [a period of] %time span%]
+- (expand|grow) %worldborders%['s (diameter|radius)] (by|to) %number% [over [a period of] %time span%]
+- (contract|shrink) [[the] (diameter|radius) of] %worldborders% (by|to) %number% [over [a period of] %time span%]
+- (contract|shrink) %worldborders%['s (diameter|radius)] (by|to) %number% [over [a period of] %time span%]
+Description:
+Expand or shrink the size of a world border.Using `by` adds/subtracts from the current size of the world border.Using `to` sets to the specified size.
+Examples:
+expand world border of player by 100 over 5 secondsshrink world border of world "world" to 100 over 10 seconds
+
+### Explode Creeper
+Type: Effect
+Patterns: instantly explode [creeper[s]] %living entities% explode [creeper[s]] %living entities% instantly ignite creeper[s] %living entities% start (ignition|explosion) [process] of [creeper[s]] %living entities% stop (ignition|explosion) [process] of [creeper[s]] %living entities%
+Since: 2.5
+Patterns:
+- instantly explode [creeper[s]] %living entities%
+- explode [creeper[s]] %living entities% instantly
+- ignite creeper[s] %living entities%
+- start (ignition|explosion) [process] of [creeper[s]] %living entities%
+- stop (ignition|explosion) [process] of [creeper[s]] %living entities%
+Description:
+Starts the explosion process of a creeper or instantly explodes it.
+Examples:
+start explosion of the last spawned creeperstop ignition of the last spawned creeper
+
+### Explosion
+Type: Effect
+Patterns: [(create|make)] [an] explosion (of|with) (force|strength|power) %number% [%directions% %locations%] [with fire] [(create|make)] [a] safe explosion (of|with) (force|strength|power) %number% [%directions% %locations%] [(create|make)] [a] fake explosion [%directions% %locations%] [(create|make)] [an] explosion[ ]effect [%directions% %locations%]
+Since: 1.0
+Patterns:
+- [(create|make)] [an] explosion (of|with) (force|strength|power) %number% [%directions% %locations%] [with fire]
+- [(create|make)] [a] safe explosion (of|with) (force|strength|power) %number% [%directions% %locations%]
+- [(create|make)] [a] fake explosion [%directions% %locations%]
+- [(create|make)] [an] explosion[ ]effect [%directions% %locations%]
+Description:
+Creates an explosion of a given force. The Minecraft Wiki has an article on explosions which lists the explosion forces of TNT, creepers, etc.Hint: use a force of 0 to create a fake explosion that does no damage whatsoever, or use the explosion effect introduced in Skript 2.0.Starting with Bukkit 1.4.5 and Skript 2.0 you can use safe explosions which will damage entities but won't destroy any blocks.
+Examples:
+create an explosion of force 10 at the playercreate an explosion of force 0 at the victim
+
+### Feed
+Type: Effect
+Patterns: feed [the] %players% [by %number% [beef[s]]]
+Since: 2.2-dev34
+Patterns:
+- feed [the] %players% [by %number% [beef[s]]]
+Description:
+Feeds the specified players.
+Examples:
+feed all playersfeed the player by 5 beefs
+
+### Force Attack
+Type: Effect
+Patterns: make %living entities% attack %entities% force %living entities% to attack %entities% make %living entities% damage %entities% by %number% [heart[s]] force %living entities% to damage %entities% by %number% [heart[s]]
+Since: 2.5.1, 2.13 (multiple, amount)
+Requirements: Minecraft 1.15.2+
+Patterns:
+- make %living entities% attack %entities%
+- force %living entities% to attack %entities%
+- make %living entities% damage %entities% by %number% [heart[s]]
+- force %living entities% to damage %entities% by %number% [heart[s]]
+Description:
+Makes a living entity attack an entity with a melee attack.Using 'attack' will make the attacker use the item in their main hand and will apply extra data from the item, including enchantments and attributes.Using 'damage' with a number of hearts will not account for the item in the main hand and will always be the number provided.
+Examples:
+spawn a wolf at location(0, 0, 0)make last spawned wolf attack all playersspawn a zombie at location(0, 0, 0)make player damage last spawned zombie by 2
+
+### Force Eating
+Type: Effect
+Patterns: make %living entities% (start|stop) eating force %living entities% to (start|stop) eating
+Since: 2.11
+Patterns:
+- make %living entities% (start|stop) eating
+- force %living entities% to (start|stop) eating
+Description:
+Make a panda or horse type (horse, camel, donkey, llama, mule) start/stop eating.
+Examples:
+if last spawned panda is eating:    make last spawned panda stop eating
+
+### Force Enchantment Glint
+Type: Effect
+Patterns: (force|make) %item types% [to] [start] glint[ing] (force|make) %item types% [to] (not|stop) glint[ing] (clear|delete|reset) [the] enchantment glint override of %item types% (clear|delete|reset) %item types%'s enchantment glint override
+Since: 2.10
+Requirements: Spigot 1.20.5+
+Patterns:
+- (force|make) %item types% [to] [start] glint[ing]
+- (force|make) %item types% [to] (not|stop) glint[ing]
+- (clear|delete|reset) [the] enchantment glint override of %item types%
+- (clear|delete|reset) %item types%'s enchantment glint override
+Description:
+Forces the items to glint or not, or removes its existing enchantment glint enforcement.
+Examples:
+force {_items::*} to glintforce the player's tool to stop glinting
+
+### Force Panda On Back
+Type: Effect
+Patterns: make %living entities% get (on|off) (its|their) back[s] force %living entities% to get (on|off) (its|their) back[s]
+Since: 2.11
+Patterns:
+- make %living entities% get (on|off) (its|their) back[s]
+- force %living entities% to get (on|off) (its|their) back[s]
+Description:
+Make a panda get on/off its back.
+Examples:
+if last spawned panda is on its back:    make last spawned panda get off its back
+
+### Force Respawn
+Type: Effect
+Patterns: force %players% to respawn
+Since: 2.2-dev21
+Patterns:
+- force %players% to respawn
+Description:
+Forces player(s) to respawn if they are dead. If this is called without delay from death event, one tick is waited before respawn attempt.
+Examples:
+on death of player:    force event-player to respawn
+
+### Generate Loot
+Type: Effect
+Patterns: generate [the] loot (of|using) %loot table% [(with|using) %loot context%] in %inventories%
+Since: 2.10
+Patterns:
+- generate [the] loot (of|using) %loot table% [(with|using) %loot context%] in %inventories%
+Description:
+Generates the loot in the specified inventories from a loot table using a loot context. Not specifying a loot context will use a loot context with a location at the world's origin.Note that if the inventory is full, it will cause warnings in the console due to over-filling the inventory.
+Examples:
+generate loot of loot table "minecraft:chests/simple_dungeon" using loot context at player in {_inventory}generate loot using "minecraft:chests/shipwreck_supply" in {_inventory}
+
+### Goat Horns
+Type: Effect
+Patterns: remove [the] (left horn[s]|right horn[s]|both horns) of %living entities% remove %living entities%'[s] (left horn[s]|right horn[s]|horns) (regrow|replace) [the] (left horn[s]|right horn[s]|both horns) of %living entities% (regrow|replace) %living entities%'[s] (left horn[s]|right horn[s]|horns)
+Since: 2.11
+Patterns:
+- remove [the] (left horn[s]|right horn[s]|both horns) of %living entities%
+- remove %living entities%'[s] (left horn[s]|right horn[s]|horns)
+- (regrow|replace) [the] (left horn[s]|right horn[s]|both horns) of %living entities%
+- (regrow|replace) %living entities%'[s] (left horn[s]|right horn[s]|horns)
+Description:
+Make a goat have or not have a left, right, or both horns.
+Examples:
+remove the left horn of last spawned goatregrow {_goat}'s hornsremove both horns of all goats
+
+### Handedness
+Type: Effect
+Patterns: make %living entities% (left|right)( |-)handed
+Since: 2.8.0
+Patterns:
+- make %living entities% (left|right)( |-)handed
+Description:
+Make mobs left or right-handed. This does not affect players.
+Examples:
+spawn skeleton at spawn of world "world":    make entity left handedmake all zombies in radius 10 of player right handed
+
+### Hide Player from Server List
+Type: Effect
+Patterns: hide %players% (in|on|from) [the] server list hide %players%'[s] info[rmation] (in|on|from) [the] server list
+Since: 2.3
+Patterns:
+- hide %players% (in|on|from) [the] server list
+- hide %players%'[s] info[rmation] (in|on|from) [the] server list
+Description:
+Hides a player from the hover list and decreases the online players count (only if the player count wasn't changed before).
+Examples:
+on server list ping:    hide {vanished::*} from the server list
+
+### Ignite/Extinguish
+Type: Effect
+Patterns: (ignite|set fire to) %entities% [for %time span%] (set|light) %entities% on fire [for %time span%] extinguish %entities%
+Since: 1.4
+Patterns:
+- (ignite|set fire to) %entities% [for %time span%]
+- (set|light) %entities% on fire [for %time span%]
+- extinguish %entities%
+Description:
+Lights entities on fire or extinguishes them.
+Examples:
+ignite the playerextinguish the player
+
+### Insert Entity Storage
+Type: Effect
+Patterns: (add|insert) %living entities% [in[ ]]to [the] (stored entities|entity storage) of %block%
+Since: 2.11
+Requirements: Minecraft 1.21+
+Patterns:
+- (add|insert) %living entities% [in[ ]]to [the] (stored entities|entity storage) of %block%
+Description:
+Add an entity into the entity storage of a block (e.g. beehive).The entity must be of the right type for the block (e.g. bee for beehive).Due to unstable behavior on older versions, adding entities to an entity storage requires Minecraft version 1.21+.
+Examples:
+add last spawned bee into the entity storage of {_beehive}
+
+### Item Despawn
+Type: Effect
+Patterns: (prevent|disallow) %itementities% from (naturally despawning|despawning naturally) allow natural despawning of %itementities% allow %itementities% to (naturally despawn|despawn naturally)
+Since: 2.11
+Patterns:
+- (prevent|disallow) %itementities% from (naturally despawning|despawning naturally)
+- allow natural despawning of %itementities%
+- allow %itementities% to (naturally despawn|despawn naturally)
+Description:
+Prevent a dropped item from naturally despawning through Minecraft's timer.
+Examples:
+prevent all dropped items from naturally despawningallow all dropped items to naturally despawn
+
+### Item Tooltips
+Type: Effect
+Patterns: (show|reveal|hide) %item types%'[s] [entire|additional] tool[ ]tip (show|reveal|hide) [the] [entire|additional] tool[ ]tip of %item types%
+Since: 2.9.0
+Requirements: Spigot 1.20.5+
+Patterns:
+- (show|reveal|hide) %item types%'[s] [entire|additional] tool[ ]tip
+- (show|reveal|hide) [the] [entire|additional] tool[ ]tip of %item types%
+Description:
+Show or hide the tooltip of an item.If changing the 'entire' tooltip of an item, nothing will show up when a player hovers over it.If changing the 'additional' tooltip, only specific parts (which change per item) will be hidden.
+Examples:
+hide the entire tooltip of player's toolhide {_item}'s additional tool tip
+
+### Keep Inventory / Experience
+Type: Effect
+Patterns: keep [the] (inventory|items) [(and [e]xp[erience][s] [point[s]])] keep [the] [e]xp[erience][s] [point[s]] [(and (inventory|items))]
+Since: 2.4
+Usable in events: death
+Patterns:
+- keep [the] (inventory|items) [(and [e]xp[erience][s] [point[s]])]
+- keep [the] [e]xp[erience][s] [point[s]] [(and (inventory|items))]
+Description:
+Keeps the inventory or/and experiences of the dead player in a death event.
+Examples:
+on death of a player:    if the victim is an op:        keep the inventory and experiences
+
+### Kick
+Type: Effect
+Patterns: kick %players% [(by reason of|because [of]|on account of|due to) %text%]
+Since: 1.0
+Patterns:
+- kick %players% [(by reason of|because [of]|on account of|due to) %text%]
+Description:
+Kicks a player from the server.
+Examples:
+on place of TNT, lava, or obsidian:    kick the player due to "You may not place %block%!"    cancel the event
+
+### Kill
+Type: Effect
+Patterns: kill %entities%
+Since: 1.0, 2.10 (ignoring totem of undying)
+Patterns:
+- kill %entities%
+Description:
+Kills an entity.
+Examples:
+kill the playerkill all creepers in the player's worldkill all endermen, witches and bats
+
+### Knockback
+Type: Effect
+Patterns: (apply knockback to|knock[back]) %living entities% [%direction%] [with (strength|force) %number%]
+Since: 2.7
+Patterns:
+- (apply knockback to|knock[back]) %living entities% [%direction%] [with (strength|force) %number%]
+Description:
+Apply the same velocity as a knockback to living entities in a direction. Mechanics such as knockback resistance will be factored in.
+Examples:
+knockback player northknock victim (vector from attacker to victim) with strength 10
+
+### Launch firework
+Type: Effect
+Patterns: (launch|deploy) [[a] firework [with effect[s]]] %firework effects% at %locations% [([with] (duration|power)|timed) %number%]
+Since: 2.4
+Patterns:
+- (launch|deploy) [[a] firework [with effect[s]]] %firework effects% at %locations% [([with] (duration|power)|timed) %number%]
+Description:
+Launch firework effects at the given location(s).
+Examples:
+launch ball large colored red, purple and white fading to light green and black at player's location with duration 1
+
+### Leash entities
+Type: Effect
+Patterns: (leash|lead) %living entities% to %entity% make %entity% (leash|lead) %living entities% un(leash|lead) [holder of] %living entities%
+Since: 2.3
+Patterns:
+- (leash|lead) %living entities% to %entity%
+- make %entity% (leash|lead) %living entities%
+- un(leash|lead) [holder of] %living entities%
+Description:
+Leash living entities to other entities. When trying to leash an Ender Dragon, Wither, Player, or a Bat, this effect will not work.See Spigot's Javadocs for more info.
+Examples:
+on right click:    leash event-entity to player    send "&aYou leashed &2%event-entity%!" to player
+
+### Lightning
+Type: Effect
+Patterns: (create|strike) lightning[([ ]effect)] %directions% %locations%
+Since: 1.4
+Patterns:
+- (create|strike) lightning[([ ]effect)] %directions% %locations%
+Description:
+Strike lightning at a given location. Can use 'lightning effect' to create a lightning that does not harm entities or start fires.
+Examples:
+strike lightning at the playerstrike lightning effect at the victim
+
+### Load Server Icon
+Type: Effect
+Patterns: load [the] server icon (from|of) [the] [image] [file] %text%
+Since: 2.3
+Patterns:
+- load [the] server icon (from|of) [the] [image] [file] %text%
+Description:
+Loads server icons from the given files. You can get the loaded icon using thelast loaded server icon expression.Please note that the image must be 64x64 and the file path starts from the server folder.
+Examples:
+on load:    clear {server-icons::*}    loop 5 times:        load server icon from file "icons/%loop-number%.png"        add the last loaded server icon to {server-icons::*}on server list ping:    set the icon to a random server icon out of {server-icons::*}
+
+### Load World
+Type: Effect
+Patterns: load [the] world[s] %texts% [with environment %environment%] unload [[the] world[s]] %worlds% [without saving]
+Since: 2.8.0
+Patterns:
+- load [the] world[s] %texts% [with environment %environment%]
+- unload [[the] world[s]] %worlds% [without saving]
+Description:
+Load your worlds or unload your worldsThe load effect will create a new world if world doesn't already exist.When attempting to load a normal vanilla world you must define it's environment i.e "world_nether" must be loaded with nether environment
+Examples:
+load world "world_nether" with environment netherload the world "myCustomWorld"unload "world_nether"unload "world_the_end" without savingunload all worlds
+
+### Locally Suppress Warning
+Type: Effect
+Patterns: [local[ly]] suppress [the] (conflict|variable save|[missing] conjunction|starting [with] expression[s]|variable[ name][s] contain[s|ing] colon[s]|deprecated syntax|unreachable code|constant condition[s]) warning[s]
+Since: 2.3
+Patterns:
+- [local[ly]] suppress [the] (conflict|variable save|[missing] conjunction|starting [with] expression[s]|variable[ name][s] contain[s|ing] colon[s]|deprecated syntax|unreachable code|constant condition[s]) warning[s]
+Description:
+Suppresses target warnings from the current script.
+Examples:
+locally suppress missing conjunction warningssuppress the variable save warnings
+
+### Log
+Type: Effect
+Patterns: log %texts% [(to|in) [file[s]] %texts%] [with [the|a] severity [of] (warning|severe)]
+Since: 2.0, 2.9.0 (severities)
+Patterns:
+- log %texts% [(to|in) [file[s]] %texts%] [with [the|a] severity [of] (warning|severe)]
+Description:
+Writes text into a .log file. Skript will write these files to /plugins/Skript/logs.NB: Using 'server.log' as the log file will write to the default server log. Omitting the log file altogether will log the message as '[Skript] [<script>.sk] <message>' in the server log.
+Examples:
+on join:    log "%player% has just joined the server!"on world change:    log "Someone just went to %event-world%!" to file "worldlog/worlds.log"on command:    log "%player% just executed %full command%!" to file "server/commands.log" with a severity of warning
+
+### Look At
+Type: Effect
+Patterns: (force|make) %living entities% [to] (face [towards]|look [(at|towards)]) %entity%'s (feet|eyes) [(at|with) [head] [rotation] speed %number%] [[and] max[imum] [head] pitch %number%] (force|make) %living entities% [to] (face [towards]|look [(at|towards)]) [the] (feet|eyes) of %entity% [(at|with) [head] [rotation] speed %number%] [[and] max[imum] [head] pitch %number%] (force|make) %living entities% [to] (face [towards]|look [(at|towards)]) %vector/location/entity% [(at|with) [head] [rotation] speed %number%] [[and] max[imum] [head] pitch %number%]
+Since: 2.7
+Patterns:
+- (force|make) %living entities% [to] (face [towards]|look [(at|towards)]) %entity%'s (feet|eyes) [(at|with) [head] [rotation] speed %number%] [[and] max[imum] [head] pitch %number%]
+- (force|make) %living entities% [to] (face [towards]|look [(at|towards)]) [the] (feet|eyes) of %entity% [(at|with) [head] [rotation] speed %number%] [[and] max[imum] [head] pitch %number%]
+- (force|make) %living entities% [to] (face [towards]|look [(at|towards)]) %vector/location/entity% [(at|with) [head] [rotation] speed %number%] [[and] max[imum] [head] pitch %number%]
+Description:
+Forces the mob(s) or player(s) to look at an entity, vector or location. Vanilla max head pitches range from 10 to 50.
+Examples:
+force the player to look towards event-entity's feeton entity explosion:    set {_player} to the nearest player    {_player} is set    distance between {_player} and the event-location is less than 15    make {_player} look towards vector from the {_player} to location of the event-entityforce {_enderman} to face the block 3 meters above {_location} at head rotation speed 100.5 and max head pitch -40
+
+### Make Adult/Baby
+Type: Effect
+Patterns: make %living entities% [a[n]] (adult|baby|child) force %living entities% to be[come] a[n] (adult|baby|child)
+Since: 2.10
+Patterns:
+- make %living entities% [a[n]] (adult|baby|child)
+- force %living entities% to be[come] a[n] (adult|baby|child)
+Description:
+Force a animal to become an adult or baby.
+Examples:
+on spawn of mob:    entity is not an adult    make entity an adult
+
+### Make Allay Duplicate
+Type: Effect
+Patterns: make %living entities% (duplicate|clone)
+Since: 2.11
+Patterns:
+- make %living entities% (duplicate|clone)
+Description:
+Make an allay duplicate itself.This effect will always make an allay duplicate regardless of whether the duplicate attribute is disabled.
+Examples:
+make all allays duplicate
+
+### Make Breedable
+Type: Effect
+Patterns: make %living entities% breedable unsterilize %living entities% make %living entities% (not |non(-| )|un)breedable sterilize %living entities%
+Since: 2.10
+Patterns:
+- make %living entities% breedable
+- unsterilize %living entities%
+- make %living entities% (not |non(-| )|un)breedable
+- sterilize %living entities%
+Description:
+Sets whether or not entities will be able to breed. Only works on animals.
+Examples:
+on spawn of animal:    make entity unbreedable
+
+### Make Disturbance
+Type: Effect
+Patterns: make %living entities% sense [a] disturbance %direction% %location%
+Since: 2.11
+Patterns:
+- make %living entities% sense [a] disturbance %direction% %location%
+Description:
+Make a warden sense a disturbance at a location, causing the warden to investigate that area.The warden will not investigate if the warden is aggressive towards an entity.This effect does not add anger to the warden.
+Examples:
+make last spawned warden sense a disturbance at location(0, 0, 0)
+
+### Make Egg Hatch
+Type: Effect
+Patterns: make [the] egg [not] hatch
+Since: 2.7
+Usable in events: Egg Throw
+Patterns:
+- make [the] egg [not] hatch
+Description:
+Makes the egg hatch in a Player Egg Throw event.
+Examples:
+on player egg throw:    # EGGS FOR DAYZ!    make the egg hatch
+
+### Make Entity Scream
+Type: Effect
+Patterns: make %living entities% (start screaming|scream) force %living entities% to (start screaming|scream) make %living entities% stop screaming force %living entities% to stop screaming
+Since: 2.11
+Patterns:
+- make %living entities% (start screaming|scream)
+- force %living entities% to (start screaming|scream)
+- make %living entities% stop screaming
+- force %living entities% to stop screaming
+Description:
+Make a goat or enderman start or stop screaming.
+Examples:
+    make last spawned goat start screaming    force last spawned goat to stop screaming    make {_enderman} scream    force {_enderman} to stop screaming
+
+### Make Fire Resistant
+Type: Effect
+Patterns: make %item types% [not] (fire resistant|resistant to fire)
+Since: 2.9.0
+Requirements: Spigot 1.20.5+
+Patterns:
+- make %item types% [not] (fire resistant|resistant to fire)
+Description:
+Makes items fire resistant.
+Examples:
+make player's tool fire resistantmake {_items::*} not resistant to fire
+
+### Make Fly
+Type: Effect
+Patterns: force %players% to [(start|stop)] fly[ing] make %players% (start|stop) flying make %players% fly
+Since: 2.2-dev34
+Patterns:
+- force %players% to [(start|stop)] fly[ing]
+- make %players% (start|stop) flying
+- make %players% fly
+Description:
+Forces a player to start/stop flying.
+Examples:
+make player flyforce all players to stop flying
+
+### Make Goat Ram
+Type: Effect
+Patterns: make %living entities% ram %living entity% force %living entities% to ram %living entity%
+Since: 2.11
+Patterns:
+- make %living entities% ram %living entity%
+- force %living entities% to ram %living entity%
+Description:
+Make a goat ram an entity.Ramming does have a cooldown and currently no way to change it.
+Examples:
+make all goats ram player
+
+### Make Incendiary
+Type: Effect
+Patterns: make %entities% [not] incendiary make %entities%'[s] explosion [not] (incendiary|fiery) make [the] [event(-| )]explosion [not] (incendiary|fiery)
+Since: 2.5
+Patterns:
+- make %entities% [not] incendiary
+- make %entities%'[s] explosion [not] (incendiary|fiery)
+- make [the] [event(-| )]explosion [not] (incendiary|fiery)
+Description:
+Sets if an entity's explosion will leave behind fire. This effect is also usable in an explosion prime event.
+Examples:
+on explosion prime:    make the explosion fiery
+
+### Make Interaction Responsive
+Type: Effect
+Patterns: make %entities% responsive make %entities% (not |un)responsive
+Since: 2.14
+Patterns:
+- make %entities% responsive
+- make %entities% (not |un)responsive
+Description:
+Makes an interaction either responsive or unresponsive. This determines whether clicking the entity will cause the clicker's arm to swing. Interactions default to unresponsive.
+Examples:
+make last spawned interaction responsive
+
+### Make Invisible
+Type: Effect
+Patterns: make %living entities% (invisible|not visible) make %living entities% (visible|not invisible)
+Since: 2.7
+Patterns:
+- make %living entities% (invisible|not visible)
+- make %living entities% (visible|not invisible)
+Description:
+Makes a living entity visible/invisible. This is not a potion and therefore does not have features such as a time limit or particles.When setting an entity to invisible while using an invisibility potion on it, the potion will be overridden and when it runs out the entity keeps its invisibility.
+Examples:
+make target entity invisible
+
+### Make Invulnerable
+Type: Effect
+Patterns: make %entities% (invulnerable|invincible) make %entities% (not (invulnerable|invincible)|vulnerable|vincible)
+Since: 2.5
+Patterns:
+- make %entities% (invulnerable|invincible)
+- make %entities% (not (invulnerable|invincible)|vulnerable|vincible)
+Description:
+Makes an entity invulnerable/not invulnerable.
+Examples:
+make target entity invulnerable
+
+### Make Panda Roll
+Type: Effect
+Patterns: make %living entities% ((start rolling|roll)|stop rolling) force %living entities% to (start|stop) rolling
+Since: 2.11
+Patterns:
+- make %living entities% ((start rolling|roll)|stop rolling)
+- force %living entities% to (start|stop) rolling
+Description:
+Make a panda start/stop rolling.
+Examples:
+if last spawned panda is not rolling:    make last spawned panda start rolling
+
+### Make Panda Sneeze
+Type: Effect
+Patterns: make %living entities% ((start sneezing|sneeze)|stop sneezing) force %living entities% to (start|stop) sneezing
+Since: 2.11
+Patterns:
+- make %living entities% ((start sneezing|sneeze)|stop sneezing)
+- force %living entities% to (start|stop) sneezing
+Description:
+Make a panda start/stop sneezing.
+Examples:
+if last spawned panda is not sneezing:    make last spawned panda start sneezing
+
+### Make Say
+Type: Effect
+Patterns: make %players% (say|send [the] message[s]) %texts% force %players% to (say|send [the] message[s]) %texts%
+Since: 2.3
+Patterns:
+- make %players% (say|send [the] message[s]) %texts%
+- force %players% to (say|send [the] message[s]) %texts%
+Description:
+Forces a player to send a message to the chat. If the message starts with a slash it will force the player to use command.
+Examples:
+make the player say "Hello."force all players to send the message "I love this server"
+
+### Make Sign Glow
+Type: Effect
+Patterns: make %blocks/item types% have glowing text make %blocks/item types% have (normal|non[-| ]glowing) text
+Since: 2.8.0
+Patterns:
+- make %blocks/item types% have glowing text
+- make %blocks/item types% have (normal|non[-| ]glowing) text
+Description:
+Makes a sign (either a block or item) have glowing text or normal text
+Examples:
+make target block of player have glowing text
+
+### Message
+Type: Effect
+Patterns: (message|send [message[s]]) %objects% [to %audiences%]
+Since: 1.02.2-dev26 (advanced features)2.6 (support for sending anything)
+Patterns:
+- (message|send [message[s]]) %objects% [to %audiences%]
+Description:
+Sends a message to an audience, such as a player or the console.Only styles written in given string or in formatted expressions will be parsed.
+Examples:
+message "A wild %player% appeared!"message "This message is a distraction. Mwahaha!"send "Your kill streak is %{kill streak::%uuid of player%}%." to playerif the targeted entity exists:    message "You're currently looking at a %type of the targeted entity%!"
+
+### Open Book
+Type: Effect
+Patterns: (open|show) book %item type% (to|for) %players%
+Since: 2.5.1
+Requirements: Minecraft 1.14.2+
+Patterns:
+- (open|show) book %item type% (to|for) %players%
+Description:
+Opens a written book to a player.
+Examples:
+open book player's tool to player
+
+### Open/Close Inventory
+Type: Effect
+Patterns: close %players%'[s] inventory [view] close [the] inventory [view] (to|of|for) %players% open %inventory/inventory type% (to|for) %players% open [a] (crafting table|workbench) (to|for) %players% open [a] chest (to|for) %players% open [a[n]] anvil (to|for) %players% open [a] hopper (to|for) %players% open [a] dropper (to|for) %players% open [a] dispenser (to|for) %players%
+Since: 2.0, 2.1.1 (closing), 2.2-Fixes-V10 (anvil), 2.4 (hopper, dropper, dispenser)
+Patterns:
+- close %players%'[s] inventory [view]
+- close [the] inventory [view] (to|of|for) %players%
+- open %inventory/inventory type% (to|for) %players%
+- open [a] (crafting table|workbench) (to|for) %players%
+- open [a] chest (to|for) %players%
+- open [a[n]] anvil (to|for) %players%
+- open [a] hopper (to|for) %players%
+- open [a] dropper (to|for) %players%
+- open [a] dispenser (to|for) %players%
+Description:
+Opens an inventory to a player. The player can then access and modify the inventory as if it was a chest that they just opened.Please note that currently 'show' and 'open' have the same effect, but 'show' will eventually show an unmodifiable view of the inventory in the future.
+Examples:
+show the victim's inventory to the playeropen the player's inventory for the player
+
+### Open/Close Lid
+Type: Effect
+Patterns: (open|close) [the] lid[s] (of|for) %blocks% (open|close) %blocks%'[s] lid[s]
+Since: 2.10
+Patterns:
+- (open|close) [the] lid[s] (of|for) %blocks%
+- (open|close) %blocks%'[s] lid[s]
+Description:
+Open or close the lid of the block(s).
+Examples:
+open the lid of {_chest}close the lid of {_blocks::*}
+
+### Pathfind
+Type: Effect
+Patterns: make %living entities% (pathfind|move) to[wards] %living entity/location% [at speed %number%] make %living entities% stop (pathfinding|moving)
+Since: 2.7
+Patterns:
+- make %living entities% (pathfind|move) to[wards] %living entity/location% [at speed %number%]
+- make %living entities% stop (pathfinding|moving)
+Description:
+Make an entity pathfind towards a location or another entity. Not all entities can pathfind. If the pathfinding target is another entity, the entities may or may not continuously follow the target.
+Examples:
+make all creepers pathfind towards playermake all cows stop pathfindingmake event-entity pathfind towards player at speed 1
+
+### Persistent
+Type: Effect
+Patterns: make %entities/blocks% [not] persist[ent] force %entities/blocks% to [not] persist prevent %entities/blocks% from persisting
+Since: 2.11
+Patterns:
+- make %entities/blocks% [not] persist[ent]
+- force %entities/blocks% to [not] persist
+- prevent %entities/blocks% from persisting
+Description:
+Make entities, players, or leaves be persistent.Persistence of entities is whether they are retained through server restarts.Persistence of leaves is whether they should decay when not connected to a log block within 6 meters.Persistence of players is if the player's playerdata should be saved when they leave the server. Players' persistence is reset back to 'true' when they join the server.Passengers inherit the persistence of their vehicle, meaning a persistent zombie put on a non-persistent chicken will become non-persistent. This does not apply to players.By default, all entities are persistent.
+Examples:
+prevent all entities from persistingforce {_leaves} to persistcommand /kickcheater <cheater: player>:    permission: op    trigger:        prevent {_cheater} from persisting        kick {_cheater}
+
+### Play Dead
+Type: Effect
+Patterns: make %living entities% (start playing|play) dead force %living entities% to (start playing|play) dead make %living entities% (stop playing|not play) dead force %living entities% to (stop playing|not play) dead
+Since: 2.11
+Patterns:
+- make %living entities% (start playing|play) dead
+- force %living entities% to (start playing|play) dead
+- make %living entities% (stop playing|not play) dead
+- force %living entities% to (stop playing|not play) dead
+Description:
+Make an axolotl start or stop playing dead.
+Examples:
+make last spawned axolotl play dead
+
+### Play Sound
+Type: Effect
+Patterns: play sound[s] %texts% [[with] seed %number%] [(in|from) %sound category%] [(at|with) volume %number%] [(and|at|with) pitch %number%] (at|on|from) %locations/entities% [(to|for) %players%] play sound[s] %texts% [[with] seed %number%] [(in|from) %sound category%] [(at|with) volume %number%] [(and|at|with) pitch %number%] [(to|for) %players%] [(at|on|from) %locations/entities%]
+Since: 2.2-dev28, 2.4 (sound categories), 2.9 (sound seed & entity emitter)
+Patterns:
+- play sound[s] %texts% [[with] seed %number%] [(in|from) %sound category%] [(at|with) volume %number%] [(and|at|with) pitch %number%] (at|on|from) %locations/entities% [(to|for) %players%]
+- play sound[s] %texts% [[with] seed %number%] [(in|from) %sound category%] [(at|with) volume %number%] [(and|at|with) pitch %number%] [(to|for) %players%] [(at|on|from) %locations/entities%]
+Description:
+Plays a sound at given location for everyone or just for given players, or plays a sound to specified players. Both Minecraft sound names and Spigot sound names are supported. Playing resource pack sounds are supported too. The sound category is 'master' by default. When running 1.19+, playing a sound from an entity directly will result in the sound coming from said entity, even while moving.If the sound is custom, a location emitter will follow the entity. Do note that pitch and volume are reflected based on the entity, and Minecraft may not use the values from this syntax.Minecraft sometimes has a set of sounds under one sound ID that will randomly play. To counter this, you can directly state which seed to use.Please note that sound names can get changed in any Minecraft or Spigot version, or even removed from Minecraft itself.
+Examples:
+play sound "block.note_block.pling"play sound "entity.experience_orb.pickup" with volume 0.5 to the playerplay sound "custom.music.1" in jukebox category at {speakerBlock}play sound "BLOCK_AMETHYST_BLOCK_RESONATE" with seed 1 on target entity for the player
+
+### Play or Draw an Effect
+Type: Effect
+Patterns: [force] (play|show|draw) %game effects/particles% [%directions% %locations%] [as %player%] [force] (play|draw) %game effects/particles% [%directions% %locations%] (for|to) %players% [as %player%] (play|show|draw) %game effects% [%directions% %locations%] (in|with) [a] [view] (radius|range) [of] %number% (play|show|draw) %entity effects% on %entities%
+Since: 2.14
+Patterns:
+- [force] (play|show|draw) %game effects/particles% [%directions% %locations%] [as %player%]
+- [force] (play|draw) %game effects/particles% [%directions% %locations%] (for|to) %players% [as %player%]
+- (play|show|draw) %game effects% [%directions% %locations%] (in|with) [a] [view] (radius|range) [of] %number%
+- (play|show|draw) %entity effects% on %entities%
+Description:
+Plays or draws a specific effect at a location, to a player, or on an entity. Effects can be: * Particles. * Game effects, which consist of combinations of particles and sounds, like the bone meal particles, the sound of footsteps on a specific block, or the particles and sound of breaking a splash potion. * Entity effects, which are particles or animations that are entity-specific and can only be played on a compatible entity. For example, the ravager attack animation can be played with this effect.All effects vary significantly in availability from version to version, and some may simply not function on your version of Minecraft. Some effects, like the death animation entity effect, may cause client glitches and should be used carefully!
+Examples:
+draw 2 smoke particles at playerforce draw 10 red dust particles of size 3 for playerplay blue instant splash potion break effect with a view radius of 10play ravager attack animation on player's target
+
+### Player Info Visibility
+Type: Effect
+Patterns: hide [all] player [related] info[rmation] [(in|on|from) [the] server list] (show|reveal) [all] player [related] info[rmation] [(in|to|on|from) [the] server list]
+Since: 2.3
+Usable in events: server list ping
+Patterns:
+- hide [all] player [related] info[rmation] [(in|on|from) [the] server list]
+- (show|reveal) [all] player [related] info[rmation] [(in|to|on|from) [the] server list]
+Description:
+Sets whether all player related information is hidden in the server list.The Vanilla Minecraft client will display ??? (dark gray) instead of player counts and will not show thehover hist when hiding player info.The version string can override the ???.Also the Online Players Count andMax Players expressions will return -1 when hiding player info.
+Examples:
+hide player infohide player related information in the server listreveal all player related info
+
+### Poison/Cure
+Type: Effect
+Patterns: poison %living entities% [for %time span%] (cure|unpoison) %living entities% [(from|of) poison]
+Since: 1.3.2
+Patterns:
+- poison %living entities% [for %time span%]
+- (cure|unpoison) %living entities% [(from|of) poison]
+Description:
+Poison or cure an entity. If the entity is already poisoned, the duration may be overwritten.
+Examples:
+poison the playerpoison the victim for 20 secondscure the player from of poison
+
+### Potion Effect - Ambient
+Type: Effect
+Patterns: make %skriptpotioneffects% [not] ambient
+Since: 2.14
+Patterns:
+- make %skriptpotioneffects% [not] ambient
+Description:
+Modify whether a potion effect is ambient.That is, whether the potion effect produces more, translucent, particles.
+Examples:
+make the player's potion effects ambient
+
+### Potion Effect - Icon
+Type: Effect
+Patterns: (show|hide) [the] [potion] icon[s] [(of|for) %skriptpotioneffects%] (show|hide) %skriptpotioneffects%'[s] icon[s]
+Since: 2.14
+Patterns:
+- (show|hide) [the] [potion] icon[s] [(of|for) %skriptpotioneffects%]
+- (show|hide) %skriptpotioneffects%'[s] icon[s]
+Description:
+Modify whether a potion effect shows an icon.
+Examples:
+hide the icon for the player's potion effects
+
+### Potion Effect - Infinite
+Type: Effect
+Patterns: make %skriptpotioneffects% [not] (infinite|permanent)
+Since: 2.14
+Patterns:
+- make %skriptpotioneffects% [not] (infinite|permanent)
+Description:
+Modify whether a potion effect is infinite.That is, whether the potion effect will ever expire.
+Examples:
+make the player's potion effects infinite
+
+### Potion Effect - Particles
+Type: Effect
+Patterns: (show|hide) [the] [potion] particles [(of|for) %skriptpotioneffects%] (show|hide) %skriptpotioneffects%'[s] particles
+Since: 2.14
+Patterns:
+- (show|hide) [the] [potion] particles [(of|for) %skriptpotioneffects%]
+- (show|hide) %skriptpotioneffects%'[s] particles
+Description:
+Modify whether a potion effect shows particles.
+Examples:
+hide the particles for the player's potion effects
+
+### Push
+Type: Effect
+Patterns: (push|thrust|pull) %entities% [along] %direction% [(at|with) [a] (speed|velocity|force) [of] %number%] (push|thrust|pull) %entities% (towards|away from) %location% [(at|with) [a] (speed|velocity|force) [of] %number%]
+Since: 1.4.62.12 (push towards)
+Patterns:
+- (push|thrust|pull) %entities% [along] %direction% [(at|with) [a] (speed|velocity|force) [of] %number%]
+- (push|thrust|pull) %entities% (towards|away from) %location% [(at|with) [a] (speed|velocity|force) [of] %number%]
+Description:
+Push entities in a given direction or towards a specific location.
+Examples:
+push the player upwardspush the victim downwards at speed 0.5push player towards player's target at speed 2pull player along vector(1,1,1) at speed 1.5
+
+### PvP
+Type: Effect
+Patterns: enable PvP [in %worlds%] disable PVP [in %worlds%]
+Since: 1.3.4
+Patterns:
+- enable PvP [in %worlds%]
+- disable PVP [in %worlds%]
+Description:
+Set the PvP state for a given world.
+Examples:
+enable PvP #(current world only)disable PvP in all worlds
+
+### Register Tag
+Type: Effect
+Patterns: register [a[n]] [custom] (item|block|entity [type]) tag named %text% (containing|using) %entity types/item types%
+Since: 2.10
+Patterns:
+- register [a[n]] [custom] (item|block|entity [type]) tag named %text% (containing|using) %entity types/item types%
+Description:
+Registers a new tag containing either items or entity datas. Note that items will NOT keep any information other than their type, so adding `diamond sword named "test"` to a tag is the same as adding `diamond sword`Item tags should be used for contexts where the item is not placed down, while block tags should be used for contexts where the item is placed. For example, and item tag could be "skript:edible", while a block tag would be "skript:needs_water_above".All custom tags will be given the namespace "skript", followed by the name you give it. The name must only include the characters A to Z, 0 to 9, and '/', '.', '_', and '-'. Otherwise, the tag will not register.Please note that two tags can share a name if they are of different types. Registering a new tag of the same name and type will overwrite the existing tag. Tags will reset on server shutdown.
+Examples:
+register a new custom entity tag named "fish" using cod, salmon, tropical fish, and pufferfishregister an item tag named "skript:wasp_weapons/swords" containing diamond sword and netherite swordregister block tag named "pokey" containing sweet berry bush and bamboo saplingon player move:    block at player is tagged as tag "skript:pokey"    damage the player by 1 heart
+
+### Release From Entity Storage
+Type: Effect
+Patterns: (release|evict) [the] (stored entities|entity storage) of %blocks% [for %time span%]
+Since: 2.11
+Requirements: Minecraft 1.21
+Patterns:
+- (release|evict) [the] (stored entities|entity storage) of %blocks% [for %time span%]
+Description:
+Releases the stored entities in an entity block storage (i.e. beehive).When using beehives, providing a timespan will prevent the released bees from re-entering the beehive for that amount of time.Due to unstable behaviour on older versions, this effect requires Minecraft version 1.21+.
+Examples:
+release the stored entities of {_beehive}release the entity storage of {_hive} for 5 seconds
+
+### Replace
+Type: Effect
+Patterns: replace [(all|every)|[the] first] %texts% in %texts% with %text% [with case sensitivity] replace [(all|every)|[the] first] %texts% with %text% in %texts% [with case sensitivity] (replace [with|using] regex|regex replace) %texts% in %texts% with %text% (replace [with|using] regex|regex replace) %texts% with %text% in %texts% replace [all|every] %item types% in %inventories% with %item type% replace [all|every] %item types% with %item type% in %inventories%
+Since: 2.0, 2.2-dev24 (multiple strings, items in inventory), 2.5 (replace first, case sensitivity), 2.10 (regex)
+Patterns:
+- replace [(all|every)|[the] first] %texts% in %texts% with %text% [with case sensitivity]
+- replace [(all|every)|[the] first] %texts% with %text% in %texts% [with case sensitivity]
+- (replace [with|using] regex|regex replace) %texts% in %texts% with %text%
+- (replace [with|using] regex|regex replace) %texts% with %text% in %texts%
+- replace [all|every] %item types% in %inventories% with %item type%
+- replace [all|every] %item types% with %item type% in %inventories%
+Description:
+Replaces all occurrences of a given text or regex with another text. Please note that you can only change variables and a few expressions, e.g. a message or a line of a sign.
+Examples:
+replace "<item>" in {_msg} with "[%name of player's tool%]"replace every "&" with "§" in line 1 of targeted block# Very simple chat censoron chat:    replace all "idiot" and "noob" with "****" in the message    regex replace "(idiot|noob)" with "****" in the message # Regex version using word boundaries for better resultsreplace all stone and dirt in player's inventory and player's top inventory with diamond
+
+### Return
+Type: Effect
+Patterns: return %objects%
+Since: 2.2, 2.8.0 (returns aliases)
+Patterns:
+- return %objects%
+Description:
+Makes a trigger or a section (e.g. a function) return a value
+Examples:
+function double(i: number) :: number:    return 2 * {_i}function divide(i: number) returns number:    return {_i} / 2
+
+### Ring Bell
+Type: Effect
+Patterns: ring %blocks% [from [the]] [%direction%] (make|let) %entity% ring %blocks% [from [the]] [%direction%]
+Since: 2.9.0
+Patterns:
+- ring %blocks% [from [the]] [%direction%]
+- (make|let) %entity% ring %blocks% [from [the]] [%direction%]
+Description:
+Causes a bell to ring.Optionally, the entity that rang the bell and the direction the bell should ring can be specified.A bell can only ring in two directions, and the direction is determined by which way the bell is facing.By default, the bell will ring in the direction it is facing.
+Examples:
+make player ring target-block
+
+### Rotate
+Type: Effect
+Patterns: rotate %vectors/quaternions/displays% around [the] [global] (x|y|z)(-| )axis by %number% rotate %quaternions/displays% around [the|its|their] local (x|y|z)(-| )ax(i|e)s by %number% rotate %vectors/quaternions/displays% around [the] %vector% by %number% rotate %quaternions/displays% by x %number%, y %number%(, [and]| and) z %number%
+Since: 2.2-dev28, 2.10 (quaternions, displays)
+Patterns:
+- rotate %vectors/quaternions/displays% around [the] [global] (x|y|z)(-| )axis by %number%
+- rotate %quaternions/displays% around [the|its|their] local (x|y|z)(-| )ax(i|e)s by %number%
+- rotate %vectors/quaternions/displays% around [the] %vector% by %number%
+- rotate %quaternions/displays% by x %number%, y %number%(, [and]| and) z %number%
+Description:
+Rotates displays, quaternions, or vectors around an axis a set amount of degrees, or around all 3 axes at once.Vectors can only be rotated around the global X/Y/Z axes, or an arbitrary vector axis.Quaternions are more flexible, allowing rotation around the global or local X/Y/Z axes, arbitrary vectors, or all 3 local axes at once.Global axes are the ones in the Minecraft world. Local axes are relative to how the quaternion is already oriented.Rotating a display is a shortcut for rotating its left rotation. If the right rotation needs to be modified, it should be acquired, rotated, and re-set.Note that rotating a quaternion/display around a vector results in a rotation around the local vector, so results may not be what you expect. For example, rotating quaternions/displays around vector(1, 0, 0) is the same as rotating around the local X axis.The same applies to rotations by all three axes at once. In addition, rotating around all three axes of a quaternion/display at once will rotate in ZYX order, meaning the Z rotation will be applied first and the X rotation last.
+Examples:
+rotate {_quaternion} around x axis by 10 degreesrotate last spawned block display around y axis by 10 degreesrotate {_vector} around vector(1, 1, 1) by 45rotate {_quaternion} by x 45, y 90, z 135
+
+### Run
+Type: Effect
+Patterns: run %executable% [with arg[ument]s %objects%] execute %executable% [with arg[ument]s %objects%]
+Since: 2.10
+Patterns:
+- run %executable% [with arg[ument]s %objects%]
+- execute %executable% [with arg[ument]s %objects%]
+Description:
+Executes a task (a function). Any returned result is discarded.
+Examples:
+set {_function} to the function named "myFunction"run {_function}run {_function} with arguments {_things::*}
+
+### Save World
+Type: Effect
+Patterns: save [[the] world[s]] %worlds%
+Since: 2.8.0
+Patterns:
+- save [[the] world[s]] %worlds%
+Description:
+Save all worlds or a given world manually.Note: saving many worlds at once may possibly cause the server to freeze.
+Examples:
+save "world_nether"save all worlds
+
+### Send Block Change
+Type: Effect
+Patterns: make %players% see %locations% as %item type/block data% make %players% see %locations% as [the|its] (original|normal|actual) [block]
+Since: 2.2-dev37c, 2.5.1 (block data support), 2.12 (as original)
+Patterns:
+- make %players% see %locations% as %item type/block data%
+- make %players% see %locations% as [the|its] (original|normal|actual) [block]
+Description:
+Makes a player see a block as something else or as the original.
+Examples:
+make player see block at player as dirtmake player see player's target block as campfire[facing=south]make all players see (blocks in radius 5 of location(0, 0, 0)) as bedrockmake all players see (blocks in radius 5 of location(0, 0, 0)) as original
+
+### Send Resource Pack
+Type: Effect
+Patterns: send [the] resource pack [from [[the] URL]] %text% to %players% send [the] resource pack [from [[the] URL]] %text% with hash %text% to %players%
+Since: 2.4
+Patterns:
+- send [the] resource pack [from [[the] URL]] %text% to %players%
+- send [the] resource pack [from [[the] URL]] %text% with hash %text% to %players%
+Description:
+Request that the player's client download and switch resource packs. The client will download the resource pack in the background, and will automatically switch to it once the download is complete. The URL must be a direct download link.The hash is used for caching, the player won't have to re-download the resource pack that way. The hash must be SHA-1, you can get SHA-1 hash of your resource pack using this online tool.The resource pack request action can be used to check status of the sent resource pack request.
+Examples:
+on join:    send the resource pack from "URL" with hash "hash" to the player
+
+### Shear
+Type: Effect
+Patterns: [force] shear %living entities% un[-]shear %living entities%
+Since: 2.0 (cows, sheep & snowmen), 2.8.0 (all shearable entities)
+Patterns:
+- [force] shear %living entities%
+- un[-]shear %living entities%
+Description:
+Shears or un-shears a shearable entity with drops by shearing and a 'sheared' sound. Using with 'force' will force this effect despite the entity's 'shear state'. Please note that..: - Force-shearing or un-shearing on a sheared mushroom cow is not possible
+Examples:
+on rightclick on a sheep holding a sword:    shear the clicked sheep    chance of 10%    force shear the clicked sheep
+
+### Silence Entity
+Type: Effect
+Patterns: silence %entities% unsilence %entities% make %entities% silent make %entities% not silent
+Since: 2.5
+Patterns:
+- silence %entities%
+- unsilence %entities%
+- make %entities% silent
+- make %entities% not silent
+Description:
+Controls whether or not an entity is silent.
+Examples:
+make target entity silent
+
+### Sort
+Type: Effect
+Patterns: sort %~objects% [in (descending|ascending) order] [(by|based on) <.+>]
+Since: 2.9.0, 2.10 (sort order)
+Patterns:
+- sort %~objects% [in (descending|ascending) order] [(by|based on) <.+>]
+Description:
+Sorts a list variable using either the natural ordering of the contents or the results of the given expression. Be warned, this will overwrite the indices of the list variable.When using the full sort %~objects% (by|based on) <expression> pattern, the input expression can be used to refer to the current item being sorted. (See input expression for more information.)
+Examples:
+set {_words::*} to "pineapple", "banana", "yoghurt", and "apple"sort {_words::*} # alphabetical sortsort {_words::*} by length of input # shortest to longestsort {_words::*} in descending order by length of input # longest to shortestsort {_words::*} based on {tastiness::%input%} # sort based on custom value
+
+### Sprinting
+Type: Effect
+Patterns: make %players% (start sprinting|sprint) force %players% to (start sprinting|sprint) make %players% (stop sprinting|not sprint) force %players% to (stop sprinting|not sprint)
+Since: 2.11
+Patterns:
+- make %players% (start sprinting|sprint)
+- force %players% to (start sprinting|sprint)
+- make %players% (stop sprinting|not sprint)
+- force %players% to (stop sprinting|not sprint)
+Description:
+Make a player start or stop sprinting.If the player is not moving when this effect is used, they will be put in sprint mode for a tick and then stopped (this causes the FOV to change). Using it a second time, without the player manually sprinting in between, causes the player to stay in sprint mode, with some quirks. - Particles may not be produced under the player's feet. - The player will not exit the sprinting state if they stop moving. - Restrictions like low hunger will not prevent the player from sprinting - The player pressing shift will stop them sprinting, and pressing sprint will re-assert normal sprinting behaviorUsing this effect two or more consecutive times on a stationary player produces undefined behavior and should not be relied on.
+Examples:
+make player start sprintingforce player to start sprinting
+
+### Stop Server
+Type: Effect
+Patterns: (stop|shut[ ]down) [the] server restart [the] server
+Since: 2.5
+Patterns:
+- (stop|shut[ ]down) [the] server
+- restart [the] server
+Description:
+Stops or restarts the server. If restart is used when the restart-script spigot.yml option isn't defined, the server will stop instead.
+Examples:
+stop the serverrestart server
+
+### Stop Sound
+Type: Effect
+Patterns: stop (all sound[s]|sound[s] %texts%) [(in [the]|from) %sound category%] [(from playing to|for) %players%] stop playing sound[s] %texts% [(in [the]|from) %sound category%] [(to|for) %players%]
+Since: 2.4, 2.7 (stop all sounds)
+Patterns:
+- stop (all sound[s]|sound[s] %texts%) [(in [the]|from) %sound category%] [(from playing to|for) %players%]
+- stop playing sound[s] %texts% [(in [the]|from) %sound category%] [(to|for) %players%]
+Description:
+Stops specific or all sounds from playing to a group of players. Both Minecraft sound names and Spigot sound names are supported. Resource pack sounds are supported too. The sound category is 'master' by default. A sound can't be stopped from a different category. Please note that sound names can get changed in any Minecraft or Spigot version, or even removed from Minecraft itself.
+Examples:
+stop sound "block.chest.open" for the playerstop playing sounds "ambient.underwater.loop" and "ambient.underwater.loop.additions" to the playerstop all sounds for all playersstop sound in the record category
+
+### Strider Shivering
+Type: Effect
+Patterns: make %living entities% start shivering force %living entities% to start shivering make %living entities% stop shivering force %living entities% to stop shivering
+Since: 2.12
+Patterns:
+- make %living entities% start shivering
+- force %living entities% to start shivering
+- make %living entities% stop shivering
+- force %living entities% to stop shivering
+Description:
+Make a strider start/stop shivering.
+Examples:
+if last spawned strider is shivering:    make last spawned strider stop shivering
+
+### Suppress Type Hints (Experimental)
+Type: Effect
+Patterns: [un]suppress [local variable] type hints (start|stop) suppressing [local variable] type hints
+Since: 2.12
+Patterns:
+- [un]suppress [local variable] type hints
+- (start|stop) suppressing [local variable] type hints
+Description:
+An effect to suppress local variable type hint errors for the syntax lines that follow this effect.NOTE: Suppressing type hints also prevents syntax from providing new type hints. For example, with type hints suppressed, 'set {_x} to true' would not provide 'boolean' as a type hint for '{_x}'
+Examples:
+    start suppressing local variable type hints    # potentially unsafe code goes here    stop suppressing local variable type hints
+
+### Swing Hand
+Type: Effect
+Patterns: make %living entities% swing [their] [main] hand make %living entities% swing [their] off[ ]hand
+Since: 2.5.1
+Requirements: Minecraft 1.15.2+
+Patterns:
+- make %living entities% swing [their] [main] hand
+- make %living entities% swing [their] off[ ]hand
+Description:
+Makes an entity swing their hand. This does nothing if the entity does not have an animation for swinging their hand.
+Examples:
+make player swing their main hand
+
+### Tame / Untame
+Type: Effect
+Patterns: [un](tame|domesticate) %entities%
+Since: 2.10
+Patterns:
+- [un](tame|domesticate) %entities%
+Description:
+Tame a tameable entity (horse, parrot, cat, etc.).
+Examples:
+tame {_horse}untame {_horse}
+
+### Teleport
+Type: Effect
+Patterns: [force] teleport %entities% (to|%direction%) %location% [[while] retaining %teleport flags%]
+Since: 1.0, 2.10 (flags)
+Patterns:
+- [force] teleport %entities% (to|%direction%) %location% [[while] retaining %teleport flags%]
+Description:
+Teleport an entity to a specific location. This effect is delayed by default on Paper, meaning certain syntax such as the return effect for functions cannot be used after this effect.The keyword 'force' indicates this effect will not be delayed, which may cause lag spikes or server crashes when using this effect to teleport entities to unloaded chunks.Teleport flags are settings to retain during a teleport. Such as direction, passengers, x coordinate, etc.
+Examples:
+teleport the player to {home::%uuid of player%}teleport the attacker to the victimon dismount:    cancel event    teleport the player to {server::spawn} retaining vehicle and passengers
+
+### Text Display Drop Shadow
+Type: Effect
+Patterns: (apply|add) (drop|text) shadow to [[the] text of] %displays% (apply|add) (drop|text) shadow to %displays%'[s] text (remove|clear) (drop|text) shadow from [[the] text of] %displays% (remove|clear) (drop|text) shadow from %displays%'[s] text
+Since: 2.10
+Patterns:
+- (apply|add) (drop|text) shadow to [[the] text of] %displays%
+- (apply|add) (drop|text) shadow to %displays%'[s] text
+- (remove|clear) (drop|text) shadow from [[the] text of] %displays%
+- (remove|clear) (drop|text) shadow from %displays%'[s] text
+Description:
+Applies or removes drop shadow from the displayed text on a text display.
+Examples:
+apply drop shadow to last spawned text displayif {_display} has drop shadow:    remove drop shadow from the text of {_display}
+
+### Text Display See Through Blocks
+Type: Effect
+Patterns: make %displays% visible through (blocks|walls) force %displays% to be visible through (blocks|walls) (prevent|block) %displays% from being (visible|seen) through (blocks|walls)
+Since: 2.10
+Patterns:
+- make %displays% visible through (blocks|walls)
+- force %displays% to be visible through (blocks|walls)
+- (prevent|block) %displays% from being (visible|seen) through (blocks|walls)
+Description:
+Forces a text display to either be or not be visible through blocks.
+Examples:
+force last spawned text display to be visible through wallsprevent all text displays from being visible through walls
+
+### Title - Clear/Reset
+Type: Effect
+Note: New
+Patterns: (clear|delete|reset) [the] title[s] [of %audiences%] (clear|delete|reset) [the] %audiences%'[s] title[s]
+Since: 2.3, 2.15 (clearing the title)
+Patterns:
+- (clear|delete|reset) [the] title[s] [of %audiences%]
+- (clear|delete|reset) [the] %audiences%'[s] title[s]
+Description:
+Clears or resets the title of an audience to the default values.While both actions remove the title being displayed, reset will also reset the title timings.
+Examples:
+reset the titles of all playersclear the title
+
+### Title - Send
+Type: Effect
+Note: New
+Patterns: send title %object% [with subtitle %object%] [to %audiences%] [for %time span%] [with fade[(-| )]in %time span%] [[and] [with] fade[(-| )]out %time span%] send subtitle %object% [to %audiences%] [for %time span%] [with fade[(-| )]in %time span%] [[and] [with] fade[(-| )]out %time span%]
+Since: 2.32.15 (support for showing anything)
+Patterns:
+- send title %object% [with subtitle %object%] [to %audiences%] [for %time span%] [with fade[(-| )]in %time span%] [[and] [with] fade[(-| )]out %time span%]
+- send subtitle %object% [to %audiences%] [for %time span%] [with fade[(-| )]in %time span%] [[and] [with] fade[(-| )]out %time span%]
+Description:
+Sends a title and/or subtitle to an audience with an optional fade in, stay, and/or fade out time.If sending only the subtitle, it will only be shown if the audience currently has a title displayed. Otherwise, it will be shown when the audience is next shown a title.Additionally, if no input is given for the times, the previous times of the last sent title will be used (or default values). Use the reset title effect to restore the default values for the times.
+Examples:
+send title "Competition Started" with subtitle "Have fun, Stay safe!" to player for 5 secondssend title "Hi %player%" to playersend title "Loot Drop" with subtitle "starts in 3 minutes" to all playerssend title "Hello %player%!" with subtitle "Welcome to our server" to player for 5 seconds with fadein 1 second and fade out 1 secondsend subtitle "Party!" to all players
+
+### Toggle
+Type: Effect
+Patterns: (open|turn on|activate) %blocks% (close|turn off|de[-]activate) %blocks% (toggle|switch) [[the] state of] %blocks/booleans (yes/no)%
+Since: 1.4, 2.12 (booleans)
+Patterns:
+- (open|turn on|activate) %blocks%
+- (close|turn off|de[-]activate) %blocks%
+- (toggle|switch) [[the] state of] %blocks/booleans (yes/no)%
+Description:
+Toggle the state of a block or boolean.
+Examples:
+# use arrows to toggle switches, doors, etc.on projectile hit:    projectile is arrow    toggle the block at the arrow# With booleanstoggle gravity of player
+
+### Toggle Custom Name Visibility
+Type: Effect
+Patterns: (show|hide) [the] (custom|display)[ ]name of %entities% (show|hide) %entities%'[s] (custom|display)[ ]name
+Since: 2.10
+Patterns:
+- (show|hide) [the] (custom|display)[ ]name of %entities%
+- (show|hide) %entities%'[s] (custom|display)[ ]name
+Description:
+Toggles the custom name visibility of an entity.
+Examples:
+show the custom name of event-entityhide target's display name
+
+### Toggle Flight
+Type: Effect
+Patterns: (allow|enable) (fly|flight) (for|to) %players% (disallow|disable) (fly|flight) (for|to) %players%
+Since: 2.3
+Patterns:
+- (allow|enable) (fly|flight) (for|to) %players%
+- (disallow|disable) (fly|flight) (for|to) %players%
+Description:
+Toggle the flight mode of a player.
+Examples:
+allow flight to event-player
+
+### Toggle Picking Up Items
+Type: Effect
+Patterns: allow %living entities% to pick([ ]up items| items up) (forbid|disallow) %living entities% (from|to) pick([ing | ]up items|[ing] items up)
+Since: 2.8.0
+Patterns:
+- allow %living entities% to pick([ ]up items| items up)
+- (forbid|disallow) %living entities% (from|to) pick([ing | ]up items|[ing] items up)
+Description:
+Determines whether living entities are able to pick up items or not
+Examples:
+forbid player from picking up itemssend "You can no longer pick up items!" to playeron drop:    if player can't pick up items:        allow player to pick up items
+
+### Transform List
+Type: Effect
+Patterns: (transform|map) %~objects% (using|with) <.+>
+Since: 2.10
+Patterns:
+- (transform|map) %~objects% (using|with) <.+>
+Description:
+Transforms (or 'maps') a list's values using a given expression. This is akin to looping over the list and setting each value to a modified version of itself.Evaluates the given expression for each element in the list, replacing the original element with the expression's result.If the given expression returns a single value, the indices of the list will not change. If the expression returns multiple values, then then indices will be reset as a single index cannot contain multiple values.Only variable lists can be transformed with this effect. For other lists, see the transform expression.
+Examples:
+set {_a::*} to 1, 2, and 3transform {_a::*} using input * 2# {_a::*} is now 2, 4, and 6# get a list of the sizes of all clans without manually loopingset {_clan-sizes::*} to indices of {clans::*}transform {_clan-sizes::*} using {clans::%input%::size}# set all existing values of a list to 0:transform {_list::*} with 0
+
+### Tree
+Type: Effect
+Patterns: (grow|create|generate) tree [of type %tree type%] %directions% %locations% (grow|create|generate) %tree type% %directions% %locations%
+Since: 1.0
+Patterns:
+- (grow|create|generate) tree [of type %tree type%] %directions% %locations%
+- (grow|create|generate) %tree type% %directions% %locations%
+Description:
+Creates a tree.This may require that there is enough space above the given location and that the block below is dirt/grass, but it is possible that the tree will just grow anyways, possibly replacing every block in its path.
+Examples:
+grow a tall redwood tree above the clicked block
+
+### Update Block
+Type: Effect
+Patterns: update %blocks% (as|to be) %block data% [without [neighbo[u]r[ing]|adjacent] [physics] update[s]]
+Since: 2.10
+Patterns:
+- update %blocks% (as|to be) %block data% [without [neighbo[u]r[ing]|adjacent] [physics] update[s]]
+Description:
+Updates the blocks by setting them to a selected blockUsing 'without physics' will not send updates to the surrounding blocks of the blocks being set.Example: Updating a block next to a sand block in the air 'without physics' will not cause the sand block to fall.
+Examples:
+update {_blocks::*} as gravelupdate {_blocks::*} to be sand without physics updatesupdate {_blocks::*} as stone without neighbouring updates
+
+### Vehicle
+Type: Effect
+Patterns: (make|let|force) %entities% [to] (ride|mount) [(in|on)] %entity/entity type% (make|let|force) %entities% [to] (dismount|(dismount|leave) [(from|of)] [(any|the[ir]|his|her)] vehicle[s]) (eject|dismount) [(any|the)] passenger[s] (of|from) %entities%
+Since: 2.0
+Patterns:
+- (make|let|force) %entities% [to] (ride|mount) [(in|on)] %entity/entity type%
+- (make|let|force) %entities% [to] (dismount|(dismount|leave) [(from|of)] [(any|the[ir]|his|her)] vehicle[s])
+- (eject|dismount) [(any|the)] passenger[s] (of|from) %entities%
+Description:
+Makes an entity ride another entity, e.g. a minecart, a saddled pig, an arrow, etc.
+Examples:
+make the player ride a saddled pigmake the attacker ride the victim
+
+### Wake And Sleep
+Type: Effect
+Patterns: make %living entities% (start sleeping|[go to] sleep) [%direction% %location%] force %living entities% to (start sleeping|[go to] sleep) [%direction% %location%] make %players% (start sleeping|[go to] sleep) %direction% %location% (with force) force %players% to (start sleeping|[go to] sleep) %direction% %location% (with force) make %living entities% (stop sleeping|wake up) force %living entities% to (stop sleeping|wake up) make %players% (stop sleeping|wake up) (without spawn [location] update) force %players% to (stop sleeping|wake up) (without spawn [location] update)
+Since: 2.11
+Patterns:
+- make %living entities% (start sleeping|[go to] sleep) [%direction% %location%]
+- force %living entities% to (start sleeping|[go to] sleep) [%direction% %location%]
+- make %players% (start sleeping|[go to] sleep) %direction% %location% (with force)
+- force %players% to (start sleeping|[go to] sleep) %direction% %location% (with force)
+- make %living entities% (stop sleeping|wake up)
+- force %living entities% to (stop sleeping|wake up)
+- make %players% (stop sleeping|wake up) (without spawn [location] update)
+- force %players% to (stop sleeping|wake up) (without spawn [location] update)
+Description:
+Make bats and foxes sleep or wake up.Make villagers sleep by providing a location of a bed.Make players sleep by providing a location of a bed. Using 'with force' will bypass "nearby monsters" ,the max distance, allowing players to sleep even if the bed is far away, and lets players sleep in the nether and end. Does not work if the location of the bed is not in the world the player is currently in.Using 'without spawn location update' will make players wake up without setting their spawn location to the bed.
+Examples:
+make {_fox} go to sleepmake {_bat} stop sleepingmake {_villager} start sleeping at location(0, 0, 0)make player go to sleep at location(0, 0, 0) with forcemake player wake up without spawn location update
+
+### Zombify Villager
+Type: Effect
+Patterns: zombify %living entities% unzombify %living entities% [(in|after) %time span%]
+Since: 2.11
+Patterns:
+- zombify %living entities%
+- unzombify %living entities% [(in|after) %time span%]
+Description:
+Turn a villager into a zombie villager. Cure a zombie villager immediately or after specified amount of time.This effect removes the old entity and creates a new entity.Zombifying a villager stored in a variable will update the variable to the new zombie villager.Curing a zombie villager does not update the variable.
+Examples:
+zombify last spawned villagerset {_villager} to last spawned villagerzombify {_villager}if {_villager} is a zombie villager:    # This will pass because '{_villager}' gets changed to the new zombie villagerset {_villager} to last spawned villagerzombify last spawned villagerif {_villager} is a zombie villager:    # This will fail because the variable was not provided when zombifyingunzombify {_zombieVillager}unzombify {_zombieVillager} after 2 seconds
+
+### op/deop
+Type: Effect
+Patterns: [de[-]]op %offline players%
+Since: 1.0
+Patterns:
+- [de[-]]op %offline players%
+Description:
+Grant/revoke a user operator state.
+Examples:
+op the playerdeop all players
+
+### Shoot
+Type: EffectSection
+Patterns: shoot %entity types% [from %living entities/locations%] [(at|with) (speed|velocity) %number%] [%direction%] (make|let) %living entities/locations% shoot %entity types% [(at|with) (speed|velocity) %number%] [%direction%]
+Since: 2.10
+Patterns:
+- shoot %entity types% [from %living entities/locations%] [(at|with) (speed|velocity) %number%] [%direction%]
+- (make|let) %living entities/locations% shoot %entity types% [(at|with) (speed|velocity) %number%] [%direction%]
+Description:
+Shoots a projectile (or any other entity) from a given entity or location.
+Examples:
+shoot arrow from all players at speed 2shoot a pig from all players:    add event-entity to {_projectiles::*}
+
+### Spawn
+Type: EffectSection
+Patterns: (spawn|summon) %entity types/entity snapshots% [%directions% %locations%] (spawn|summon) %number% of %entity types/entity snapshots% [%directions% %locations%]
+Since: 1.0, 2.6.1 (with section), 2.8.6 (dropped items), 2.10 (entity snapshots)
+Requirements: Minecraft 1.20.2+ (entity snapshots)
+Patterns:
+- (spawn|summon) %entity types/entity snapshots% [%directions% %locations%]
+- (spawn|summon) %number% of %entity types/entity snapshots% [%directions% %locations%]
+Description:
+Spawns entities. This can be used as an effect and as a section.If it is used as a section, the section is run before the entity is added to the world.You can modify the entity in this section, using for example 'event-entity' or 'cow'. Do note that other event values, such as 'player', won't work in this section.If you're spawning a display and want it to be empty on initialization, like not having a block display be stone, set hidden config node 'spawn empty displays' to true.Note that when spawning an entity via entity snapshots, the code within the section will not run instantaneously as compared to spawning normally (via 'a zombie').
+Examples:
+spawn 3 creepers at the targeted blockspawn a ghast 5 meters above the playerspawn a zombie at the player:    set name of the zombie to ""spawn a block display of a ladder[waterlogged=true] at location above player:    set billboard of event-display to center # allows the display to rotate around the center axis
