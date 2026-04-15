@@ -1,0 +1,3 @@
+on join:
+    send "&a¡Bienvenido al servidor, %player%!" to player
+    broadcast "&e%player% ha entrado al servidor"
