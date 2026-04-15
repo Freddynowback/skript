@@ -1,0 +1,218 @@
+# =========================================
+# ⚔️ SISTEMA DE HABILIDADES AVANZADAS PvP
+# =========================================
+
+# =========================================
+# 🔥 FURIA (BAJA VIDA)
+# Da fuerza y velocidad al estar bajo de vida
+# =========================================
+on damage:
+    victim is a player
+    if health of victim <= 6:
+        apply strength 2 to victim for 3 seconds
+        apply speed 1 to victim for 3 seconds
+        send action bar "&c¡Furia!" to victim
+
+# =========================================
+# ⚡ REFLEJO PERFECTO (PARRY)
+# Shift en timing cancela daño y contraataca
+# =========================================
+on sneak toggle:
+    if player is sneaking:
+        set {parry::%uuid of player%} to now
+
+on damage:
+    victim is a player
+    attacker is a player
+    if difference between now and {parry::%uuid of victim%} < 0.5 seconds:
+        cancel event
+        damage attacker by 4
+        send action bar "&a¡Parry!" to victim
+
+# =========================================
+# 🔄 GIRO DEFENSIVO
+# Girar rápido da resistencia
+# =========================================
+on move:
+    if difference between yaw of player and {lastyaw::%uuid of player%} > 100:
+        if {spinCD::%uuid of player%} is not set:
+            set {spinCD::%uuid of player%} to true
+            apply resistance 2 to player for 2 seconds
+            send action bar "&b¡Giro defensivo!" to player
+            wait 6 seconds
+            delete {spinCD::%uuid of player%}
+    set {lastyaw::%uuid of player%} to yaw of player
+
+# =========================================
+# 🌫️ SIGILO (QUIETO)
+# Estar quieto te vuelve invisible
+# =========================================
+on move:
+    if player is not moving:
+        add 1 to {still::%uuid of player%}
+        if {still::%uuid of player%} >= 40:
+            apply invisibility 1 to player for 2 seconds
+            send action bar "&8Sigilo..."
+            set {still::%uuid of player%} to 0
+    else:
+        set {still::%uuid of player%} to 0
+
+# =========================================
+# ⚔️ GOLPE CARGADO
+# Estar quieto aumenta daño
+# =========================================
+on damage:
+    attacker is a player
+    victim is a player
+    if attacker is not moving:
+        if chance of 35%:
+            apply strength 3 to attacker for 1 second
+            send action bar "&c¡Golpe cargado!" to attacker
+
+# =========================================
+# 💥 IMPACTO AL CAER
+# Empuja enemigos al aterrizar
+# =========================================
+on damage:
+    victim is a player
+    if damage cause is fall:
+        loop all players in radius 3 around victim:
+            if loop-player is not victim:
+                push loop-player away from victim at speed 1.2
+        send action bar "&6¡Impacto!" to victim
+
+# =========================================
+# 🧱 PISOTÓN (CAER AGACHADO)
+# Versión mejorada del impacto
+# =========================================
+on damage:
+    victim is a player
+    if damage cause is fall:
+        if victim is sneaking:
+            loop all players in radius 4 around victim:
+                if loop-player is not victim:
+                    push loop-player upwards at speed 0.8
+            send action bar "&6¡Pisotón!" to victim
+
+# =========================================
+# 🧲 ENGANCHE AÉREO
+# Golpear en el aire te acerca al enemigo
+# =========================================
+on damage:
+    attacker is a player
+    victim is a player
+    if attacker is falling:
+        pull attacker towards victim
+        send action bar "&5¡Enganche!" to attacker
+
+# =========================================
+# ⚔️ COMBO
+# Golpes seguidos activan buff
+# =========================================
+on damage:
+    attacker is a player
+    if difference between now and {lastHit::%uuid of attacker%} < 1 second:
+        add 1 to {combo::%uuid of attacker%}
+    else:
+        set {combo::%uuid of attacker%} to 1
+
+    set {lastHit::%uuid of attacker%} to now
+
+    if {combo::%uuid of attacker%} = 3:
+        apply strength 2 to attacker for 2 seconds
+        send action bar "&6¡Combo x3!" to attacker
+
+# =========================================
+# 🩸 SANGRADO
+# Crits aplican daño en el tiempo
+# =========================================
+on damage:
+    attacker is a player
+    victim is a player
+    if attacker is falling:
+        if chance of 30%:
+            loop 5 times:
+                wait 1 second
+                damage victim by 1
+            send action bar "&c¡Sangrado!" to victim
+
+# =========================================
+# 🧠 DEFENSA (AGACHADO)
+# Reduce daño al agacharse
+# =========================================
+on damage:
+    victim is a player
+    if victim is sneaking:
+        reduce damage by 30%
+        send action bar "&7¡Defensa!" to victim
+
+# =========================================
+# ⚡ DASH (SPRINT)
+# Sprint activa impulso
+# =========================================
+on toggle sprint:
+    if player is sprinting:
+        if {dash::%uuid of player%} is set:
+            stop
+        set {dash::%uuid of player%} to true
+        push player forward at speed 1.8
+        apply speed 2 to player for 2 seconds
+        send action bar "&e¡Dash!" to player
+        wait 4 seconds
+        delete {dash::%uuid of player%}
+
+# =========================================
+# 💨 SLIDE (SPRINT + SHIFT)
+# Deslizamiento rápido
+# =========================================
+on sneak toggle:
+    if player is sneaking:
+        if player is sprinting:
+            if {slidecd::%uuid of player%} is set:
+                stop
+            set {slidecd::%uuid of player%} to true
+            push player forward at speed 2
+            apply speed 3 to player for 1 second
+            send action bar "&f¡Slide!" to player
+            wait 5 seconds
+            delete {slidecd::%uuid of player%}
+
+# =========================================
+# 🌀 ESQUIVE (DOBLE SHIFT)
+# Dodge lateral con timing
+# =========================================
+on sneak toggle:
+    if player is sneaking:
+        if difference between now and {lastshift::%uuid of player%} < 1 second:
+            if {rollcd::%uuid of player%} is set:
+                stop
+            set {rollcd::%uuid of player%} to true
+            push player sideways at speed 1.5
+            apply invisibility 1 to player for 1 second
+            send action bar "&7¡Esquive!" to player
+            wait 5 seconds
+            delete {rollcd::%uuid of player%}
+        set {lastshift::%uuid of player%} to now
+
+# =========================================
+# ⚡ SALTO POTENCIADO
+# Saltar corriendo impulsa más alto
+# =========================================
+on jump:
+    if player is sprinting:
+        push player upwards at speed 0.8
+        send action bar "&aSalto potenciado" to player
+
+# =========================================
+# 🔥 VELOCIDAD PROGRESIVA
+# Sprint acumulativo
+# =========================================
+on move:
+    if player is sprinting:
+        add 1 to {speedstack::%uuid of player%}
+        if {speedstack::%uuid of player%} >= 20:
+            apply speed 1 to player for 2 seconds
+        if {speedstack::%uuid of player%} >= 40:
+            apply speed 2 to player for 2 seconds
+    else:
+        set {speedstack::%uuid of player%} to 0
